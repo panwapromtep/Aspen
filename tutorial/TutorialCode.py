@@ -1,4 +1,12 @@
 #from ast import AugAssign
+import sys
+import os
+
+# Add the parent directory to sys.path
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(parent_dir)
+
+print("current path: ", sys.path)
 from CodeLibrary import Simulation
 
 
