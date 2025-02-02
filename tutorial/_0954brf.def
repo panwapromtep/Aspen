@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _0954brf.inm
+MODNAME: apmain
+RUNID: _0954brf
+NEW_RUNID: _0954brf
+OLD_RUNID: _0954brf
+PDF: _0954brf.appdf
+USERNAME: ppromte1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:

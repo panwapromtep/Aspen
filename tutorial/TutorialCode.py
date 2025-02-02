@@ -55,7 +55,7 @@ print("\nThe Library ran without any Syntax Error \n")
 
 #1. instanciate the class and set the aspen name, file path and visibilty
 input("To open Aspen and instanciate the Simulation Class: Press any Enter to continue  \n")
-sim = Simulation(AspenFileName= "AspenTutorial.bkp", WorkingDirectoryPath= r"c:/Users/s2371014/Desktop/AspenPythonInterface" ,VISIBILITY=True)
+sim = Simulation(AspenFileName= "AspenTutorial.bkp", WorkingDirectoryPath= r"c:/Users/ppromte1\\Documents\\AspenProj\\Aspen\\tutorial\\" ,VISIBILITY=True)
 
 #Look at aspen
 print("Aspen should have opened now. Please take a look at it  \n \n")

@@ -1,0 +1,10 @@
+INPUT: AspenTutorial.inm
+MODNAME: apmain
+RUNID: AspenTutorial
+NEW_RUNID: AspenTutorial
+OLD_RUNID: AspenTutorial
+PDF: AspenTutorial.appdf
+USERNAME: ppromte1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:
+DBCONN: _3151pom.ads
