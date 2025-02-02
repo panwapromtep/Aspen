@@ -1,0 +1,358 @@
+
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + +                                                                         + +
+ + +                      ASPEN PLUS CALCULATION HISTORY                     + +
+ + +                                                                         + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+ ASPEN PLUS IS A TRADEMARK OF           HOTLINE:
+ ASPEN TECHNOLOGY, INC.                 U.S.A. 888/996-7100
+ 781/221-6400                           EUROPE (44) 1189-226555
+
+ PLATFORM: WIN-X64                                       FEBRUARY 2, 2025    
+ VERSION: 40.0   Build 359                               SUNDAY      
+ INSTALLATION:                                           10:11:21 A.M.       
+
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+
+
+      ASPEN PLUS (R) IS A PROPRIETARY PRODUCT OF ASPEN TECHNOLOGY, INC.
+      (ASPENTECH), AND MAY BE USED ONLY UNDER AGREEMENT WITH ASPENTECH.
+      RESTRICTED RIGHTS LEGEND:  USE, REPRODUCTION, OR DISCLOSURE BY THE
+      U.S. GOVERNMENT IS SUBJECT TO RESTRICTIONS SET FORTH IN 
+      (i) FAR 52.227-14, Alt. III, (ii) FAR 52.227-19, (iii) DFARS 
+      252.227-7013(c)(1)(ii), or (iv) THE ACCOMPANYING LICENSE AGREEMENT,
+      AS APPLICABLE. FOR PURPOSES OF THE FAR, THIS SOFTWARE SHALL BE DEEMED
+      TO BE "UNPUBLISHED" AND LICENSED WITH DISCLOSURE PROHIBITIONS.
+      CONTRACTOR/SUBCONTRACTOR: ASPEN TECHNOLOGY, INC. 20 CROSBY DRIVE,
+      BEDFORD, MA 01730.
+ *** INPUT SUMMARY ***
+
+ >>CURRENT RUN
+
+   ORIGINAL RUN                           FEBRUARY 2, 2025    
+   10:11:21 A.M.                          SUNDAY      
+   INPUT FILE: _0446uhg.inm
+   RUN ID : _0446uhg
+          1    ;
+          2    ;Input file created by Aspen Plus Rel. 40.0 at 10:11:20 Sun Feb 2, 2025
+          3    ;Directory C:\Users\conno\OneDrive\Documents\AspenTech\Aspen Plus V14.0  Runid _UNNAMED
+          4    ;
+          5
+          6
+          7    DYNAMICS
+          8        DYNAMICS RESULTS=ON
+          9
+         10    IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         11            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         12
+         13    DEF-STREAMS CONVEN ALL
+         14
+         15    DATABANKS 'APV140 PURE40' / 'APV140 AQUEOUS' / 'APV140 SOLIDS' &
+         16             / 'APV140 INORGANIC' / 'APESV140 AP-EOS' /  &
+         17            'NISTV140 NIST-TRC' / NOASPENPCD
+         18
+         19    PROP-SOURCES 'APV140 PURE40' / 'APV140 AQUEOUS' /  &
+         20            'APV140 SOLIDS' / 'APV140 INORGANIC' / 'APESV140 AP-EOS' &
+         21             / 'NISTV140 NIST-TRC'
+         22
+         23    COMPONENTS
+         24        BENZENE C6H6 /
+         25        TOLUENE C7H8
+         26
+         27    SOLVE
+         28        RUN-MODE MODE=SIM
+         29
+         30    FLOWSHEET
+         31        BLOCK B1 IN=S1 OUT=S3 S2
+         32
+         33    PROPERTIES PENG-ROB
+         34
+         35    STREAM S1
+         36        SUBSTREAM MIXED TEMP=100. PRES=5.
+         37        MOLE-FLOW BENZENE 50. / TOLUENE 50.
+         38
+         39    BLOCK B1 FLASH2
+         40        PARAM PRES=1. DUTY=0.
+         41
+         42    EO-CONV-OPTI
+         43
+         44    STREAM-REPOR MOLEFLOW
+         45    ;
+         46    ;
+         47    ;
+         48    ;
+         49    ;
+ *** INPUT TRANSLATOR MESSAGES ***
+
+  *** THIS RUN USES THE PROPERTIES ENTERPRISE DATABASE ***
+      SQLLOCALDB.APESV140 : (DATAVERSION - 40.0.0.13)                         
+      SQLLOCALDB.APV140 : (DATAVERSION - 40.0.0.13)                           
+      SQLLOCALDB.FACTV140 : (DATAVERSION - 40.0.0.12)                         
+      SQLLOCALDB.NISTV140 : (DATAVERSION - 40.0.0.12)                         
+ 
+ 
+
+ PDF updated                                                                      TIME =      0.46
+
+ *** CALCULATION TRACE ***
+
+
+ *** FLOWSHEET ANALYSIS MESSAGES ***
+
+ FLOWSHEET CONNECTIVITY BY STREAMS       
+
+   STREAM     SOURCE     DEST           STREAM     SOURCE     DEST
+   S1         ----       B1             S3         B1         ----    
+   S2         B1         ----                                         
+
+ FLOWSHEET CONNECTIVITY BY BLOCKS        
+
+   BLOCK        INLETS                         OUTLETS
+   B1           S1                             S3 S2                       
+
+      COMPUTATION ORDER FOR THE FLOWSHEET IS:
+      B1 
+
+Calculations begin                                                              time      0.02
+
+
+ SIMULATION CALCULATIONS BEGIN                                                    TIME =      0.02
+
+      ENTHALPY CALCULATION FOR INLET STREAM S1 OF BLOCK B1                        TIME =      0.02
+      KODE = 2  NTRIAL =   2  T = 373.1500  P =  500000.      V =  0.00000      Q =  0.00000    
+
+      UOS BLOCK B1       MODEL: FLASH2                                            TIME =      0.02
+      KODE = 1  NTRIAL =   5  T = 365.6547  P =  100000.      V = 3.898314E-02  Q =  0.00000    
+
+ Report Writer entered                                                            Time =      0.03
+
+ Results generated                                                                Time =      0.04
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ STREAM       FEED     IS NEW 02/02/2025   10:12:22:99 
+ STREAM FEED
+     SUBSTREAM MIXED TEMP=100. PRES=200.
+     MOLE-FLOW BENZENE 50. / TOLUENE 50.
+
+ RENAME       IS  NEW 02/02/2025   10:12:22:99 
+ RENAME
+     STREAM  &
+         "S3" "VAP" /  &
+         "S2" "LIQ" /  &
+         "S1" "FEED"
+
+ PDF updated                                                                      TIME =     61.08
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     61.09
+
+
+      ENTHALPY CALCULATION FOR INLET STREAM FEED OF BLOCK B1                      TIME =     61.09
+      KODE = 2  NTRIAL =   2  T = 373.1500  P = 2.000000E+07  V =  0.00000      Q =  0.00000    
+
+      UOS BLOCK B1       MODEL: FLASH2                                            TIME =     61.09
+      KODE = 1  NTRIAL =   2  T = 365.8977  P =  100000.      V = 7.533557E-02  Q =  0.00000    
+
+ Report Writer entered                                                            Time =     61.10
+
+ Results generated                                                                Time =     61.11
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO STREAM       FEED     02/02/2025   10:12:45:99 
+ STREAM FEED
+     SUBSTREAM MIXED TEMP=200. PRES=200.
+     MOLE-FLOW BENZENE 50. / TOLUENE 50.
+
+ PDF updated                                                                      TIME =     83.67
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     83.68
+
+
+      ENTHALPY CALCULATION FOR INLET STREAM FEED OF BLOCK B1                      TIME =     83.68
+      KODE = 2  NTRIAL =   3  T = 473.1500  P = 2.000000E+07  V =  0.00000      Q =  0.00000    
+
+      UOS BLOCK B1       MODEL: FLASH2                                            TIME =     83.68
+      KODE = 1  NTRIAL =   3  T = 369.6938  P =  100000.      V = 0.602396      Q =  0.00000    
+
+ Report Writer entered                                                            Time =     83.69
+
+ Results generated                                                                Time =     83.70
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ MODEL-OPTION IS  NEW 02/02/2025   10:16:53:99 
+ MODEL-OPTION
+
+ BLOCK        B2       IS NEW 02/02/2025   10:16:53:99 
+ BLOCK B2 HEATER
+     PARAM TEMP=400. PRES=1. DPPARMOPT=NO
+     UTILITY UTILITY-ID=U-1
+
+ UTILITY      U-1      IS NEW 02/02/2025   10:16:53:99 
+ UTILITY U-1 GENERAL
+     DESCRIPTION 'Electrical Utility'
+     COST ELEC-PRICE=0.0775 <$/kWhr>
+     PARAM UTILITY-TYPE=ELECTRICITY CALCCO2=YES FACTORSOURCE= &
+         "US-Title40-Part98" FUELSOURCE="Natural_gas"  &
+         CO2FACTOR=2.10554172E-7 EFFICIENCY=0.58
+
+ FLOWSHEET    IS  NEW 02/02/2025   10:16:53:99 
+ FLOWSHEET
+     BLOCK B1 IN=S4 OUT=VAP LIQ
+     BLOCK B2 IN=FEED OUT=S4
+
+ PDF updated                                                                      TIME =    332.27
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+ *** FLOWSHEET ANALYSIS MESSAGES ***
+
+ FLOWSHEET CONNECTIVITY BY STREAMS       
+
+   STREAM     SOURCE     DEST           STREAM     SOURCE     DEST
+   FEED       ----       B2             VAP        B1         ----    
+   LIQ        B1         ----           S4         B2         B1      
+
+ FLOWSHEET CONNECTIVITY BY BLOCKS        
+
+   BLOCK        INLETS                         OUTLETS
+   B1           S4                             VAP LIQ                     
+   B2           FEED                           S4                          
+
+      COMPUTATION ORDER FOR THE FLOWSHEET IS:
+      U-1 B2 B1 
+
+
+Calculations begin                                                              time    332.40
+
+
+      UTILITY BLOCK U-1      MODEL: GENERAL                                       TIME =    332.40
+
+      UOS BLOCK B2       MODEL: HEATER                                            TIME =    332.40
+      KODE = 2  NTRIAL =   0  T = 673.1500  P =  100000.      V =  1.00000      Q = 1.698316E+06
+
+      UOS BLOCK B1       MODEL: FLASH2                                            TIME =    332.40
+      NO. TEMP ITER =    4     TEMP =  673.150    
+      KODE = 1  NTRIAL =   0  T = 673.1500  P =  100000.      V =  1.00000      Q =  0.00000    
+
+      GENERATING RESULTS FOR UOS BLOCK B2       MODEL: HEATER                     TIME =    332.40
+
+ Report Writer entered                                                            Time =    332.41
+
+ Results generated                                                                Time =    332.42
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        B2       02/02/2025   10:17:37:99 
+ BLOCK B2 HEATER
+     PARAM TEMP=400. PRES=200. DPPARMOPT=NO
+     UTILITY UTILITY-ID=U-1
+
+ PDF updated                                                                      TIME =    376.42
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time    376.43
+
+
+      UOS BLOCK B2       MODEL: HEATER                                            TIME =    376.43
+      KODE = 2  NTRIAL =   0  T = 673.1500  P = 2.000000E+07  V =  1.00000      Q = 1.211590E+06
+
+      UOS BLOCK B1       MODEL: FLASH2                                            TIME =    376.43
+      NO. TEMP ITER =    6     TEMP =  577.452    
+      KODE = 1  NTRIAL =   4  T = 577.4519  P =  100000.      V =  1.00000      Q =  0.00000    
+
+      GENERATING RESULTS FOR UOS BLOCK B2       MODEL: HEATER                     TIME =    376.43
+
+ Report Writer entered                                                            Time =    376.45
+
+ Results generated                                                                Time =    376.46
+<reset scope>
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO STREAM       FEED     02/02/2025   10:19:14:99 
+ STREAM FEED
+     SUBSTREAM MIXED TEMP=25. PRES=10.
+     MOLE-FLOW BENZENE 50. / TOLUENE 50.
+
+ BLOCK        B1       IS GENERATED BECAUSE OF OTHER CHANGES 02/02/2025   10:19:14:99 
+ BLOCK B1 FLASH2
+     PARAM PRES=1. DUTY=0.
+
+ CHANGES WERE MADE TO BLOCK        B2       02/02/2025   10:19:14:99 
+ BLOCK B2 HEATER
+     PARAM TEMP=100. PRES=10. DPPARMOPT=NO
+     UTILITY UTILITY-ID=U-1
+
+ STREAM       S4       IS NEW 02/02/2025   10:19:14:99 
+ STREAM S4
+     SUBSTREAM MIXED TEMP=100. PRES=10.
+
+ PDF updated                                                                      TIME =    472.97
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time    472.98
+
+
+      ENTHALPY CALCULATION FOR INLET STREAM FEED OF BLOCK B2                      TIME =    472.98
+      KODE = 2  NTRIAL =   3  T = 298.1500  P = 1.000000E+06  V =  0.00000      Q =  0.00000    
+
+      UOS BLOCK B2       MODEL: HEATER                                            TIME =    472.98
+      KODE = 2  NTRIAL =   3  T = 373.1500  P = 1.000000E+06  V =  0.00000      Q =  303735.    
+
+      UOS BLOCK B1       MODEL: FLASH2                                            TIME =    472.98
+      KODE = 1  NTRIAL =   5  T = 365.6602  P =  100000.      V = 3.981025E-02  Q =  0.00000    
+
+      GENERATING RESULTS FOR UOS BLOCK B2       MODEL: HEATER                     TIME =    472.98
+
+ Report Writer entered                                                            Time =    473.01
+
+ Results generated                                                                Time =    473.02
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+<reset scope>
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED

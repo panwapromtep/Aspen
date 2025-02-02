@@ -1,0 +1,10 @@
+INPUT: Flash_Toluene_Benzene.inm
+MODNAME: apmain
+RUNID: Flash_Toluene_Benzene
+NEW_RUNID: Flash_Toluene_Benzene
+OLD_RUNID: Flash_Toluene_Benzene
+PDF: Flash_Toluene_Benzene.appdf
+USERNAME: conno
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:
+DBCONN: _0446uhg.ads
