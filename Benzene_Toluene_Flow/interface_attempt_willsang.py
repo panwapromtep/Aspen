@@ -21,7 +21,7 @@ from CodeLibrary import Simulation
 
 print("Opening ASPEN file \n \n")
 
-sim = Simulation(AspenFileName= "Flash_Toluene_Benzene.bkp", WorkingDirectoryPath= r"C:\Users\wsangpa1\OneDrive - Johns Hopkins\ASPEN\Aspen-main\Benzene_Toluene_Flow" ,VISIBILITY=True)
+sim = Simulation(AspenFileName= "Flash_Toluene_Benzene.bkp", WorkingDirectoryPath= "" ,VISIBILITY=True)
 
 print("Aspen is now open \n \n")
 

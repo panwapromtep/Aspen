@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _4628pwp.inm
+MODNAME: apmain
+RUNID: _4628pwp
+NEW_RUNID: _4628pwp
+OLD_RUNID: _4628pwp
+PDF: _4628pwp.appdf
+USERNAME: ppromte1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:

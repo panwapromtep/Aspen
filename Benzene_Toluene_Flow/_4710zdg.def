@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _4710zdg.inm
+MODNAME: apmain
+RUNID: _4710zdg
+NEW_RUNID: _4710zdg
+OLD_RUNID: _4710zdg
+PDF: _4710zdg.appdf
+USERNAME: ppromte1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:
