@@ -1857,8 +1857,8 @@ class Simulation():
         Pressure = self.BLK.Elements(Blockname).Elements("Input").Elements("PRES").Value
         Duty = self.BLK.Elements(Blockname).Elements("Input").Elements("DUTY").Value 
         Vapor_fraction = self.BLK.Elements(Blockname).Elements("Input").Elements("VFRAC").Value
-        Phase = self.BLK.Elements(Blockname).Elements("Input").Elements("Phase").Value #This can be V L
-        Phasenumber = self.BLK.Elements(Blockname).Elements("Input").Elements("NPhase").Value #This can be 1,2,3    
+        Phase = self.BLK.Elements(Blockname).Elements("Input").Elements("PHASE").Value #This can be V L, 1
+        Phasenumber = self.BLK.Elements(Blockname).Elements("Input").Elements("NPHASE").Value #This can be 1,2,3    
         TemperatureEstimation = self.BLK.Elements(Blockname).Elements("Input").Elements("T_EST").Value 
         PressureEstimation = self.BLK.Elements(Blockname).Elements("Input").Elements("P_EST").Value
         MaximumIteration = self.BLK.Elements(Blockname).Elements("Input").Elements("MAXIT").Value
