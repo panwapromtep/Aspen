@@ -681,12 +681,13 @@ class Simulation():
         Duty =self.BLK.Elements(Blockname).Elements("Input").Elements("DUTY").Value 
         Vaporfraction =self.BLK.Elements(Blockname).Elements("Input").Elements("VFRAC").Value 
         PressureDropCorrelation =self.BLK.Elements(Blockname).Elements("Input").Elements("DPPARM").Value 
-        Phase =self.BLK.Elements(Blockname).Elements("Input").Elements("Phase").Value  #This can be V L or S
-        Phasenumber =self.BLK.Elements(Blockname).Elements("Input").Elements("NPhase").Value    #This can be 1,2,3
+        Phase =self.BLK.Elements(Blockname).Elements("Input").Elements("PHASE").Value  #This can be V L or S
+        Phasenumber =self.BLK.Elements(Blockname).Elements("Input").Elements("NPHASE").Value    #This can be 1,2,3
         TemperatureEstimation =self.BLK.Elements(Blockname).Elements("Input").Elements("T_EST").Value 
         PressureEstimation =self.BLK.Elements(Blockname).Elements("Input").Elements("P_EST").Value 
         MaximumIteration =self.BLK.Elements(Blockname).Elements("Input").Elements("MAXIT").Value 
         ErrorTolerance = self.BLK.Elements(Blockname).Elements("Input").Elements("TOL").Value 
+        
 
         Dictionary = {
         "FlashTypeOption": FlashTypeOption    ,
@@ -769,8 +770,6 @@ class Simulation():
         self.BLK.Elements(Blockname).Elements("Input").Elements("MAXIT").Value = MaximumIteration
     def BLK_HEATER_Set_ErrorTolerance(self, Blockname, ErrorTolerance):           #OPTIONAL
         self.BLK.Elements(Blockname).Elements("Input").Elements("TOL").Value = ErrorTolerance
-
-
 
 
 
