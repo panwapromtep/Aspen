@@ -410,52 +410,52 @@ class Simulation():
             Blockname: String which gives the name of Block.         
         """
         
-        StageRefluxOption = self.BLK.Elements(Blockname).Elements("Input").Elements("OPT_NTRR").Value
+        #StageRefluxOption = self.BLK.Elements(Blockname).Elements("Input").Elements("OPT_NTRR").Value
         NumberOfStages = self.BLK.Elements(Blockname).Elements("Input").Elements("NSTAGE").Value
         RefluxRatio = self.BLK.Elements(Blockname).Elements("Input").Elements("RR").Value
         CondenserPressure = self.BLK.Elements(Blockname).Elements("Input").Elements("PTOP").Value
         ReboilerPressure = self.BLK.Elements(Blockname).Elements("Input").Elements("PBOT").Value
-        LightkeyComponent = self.BLK.Elements(Blockname).Elements("Input").Elements("LIGHTKEY").Value
-        HeavykeyComponent = self.BLK.Elements(Blockname).Elements("Input").Elements("HEAVYKEY").Value
-        LightkeyRecovery = self.BLK.Elements(Blockname).Elements("Input").Elements("RECOVL").Value
-        HeavykeyRecovery = self.BLK.Elements(Blockname).Elements("Input").Elements("RECOVH").Value
-        CondenserOption = self.BLK.Elements(Blockname).Elements("Input").Elements("OPT_RDV").Value
-        DestillVaporFraction = self.BLK.Elements(Blockname).Elements("Input").Elements("RDV").Value
-        GenerateTableOption = self.BLK.Elements(Blockname).Elements("Input").Elements("PLOT").Value
-        GenerateTable_FirstStage = self.BLK.Elements(Blockname).Elements("Input").Elements("LOWER").Value
-        GenerateTable_LastStage = self.BLK.Elements(Blockname).Elements("Input").Elements("UPPER").Value
-        GenerateTable_StageNumber = self.BLK.Elements(Blockname).Elements("Input").Elements("NPOINT").Value
-        CalculateHeightequivalentHETP_Option = self.BLK.Elements(Blockname).Elements("Input").Elements("OPT_CALHETP").Value
-        CalculateHeightequivalentHETP_PackedHeight = self.BLK.Elements(Blockname).Elements("Input").Elements("PACK_HEIGHT").Value
+        #LightkeyComponent = self.BLK.Elements(Blockname).Elements("Input").Elements("LIGHTKEY").Value
+        #HeavykeyComponent = self.BLK.Elements(Blockname).Elements("Input").Elements("HEAVYKEY").Value
+        #LightkeyRecovery = self.BLK.Elements(Blockname).Elements("Input").Elements("RECOVL").Value
+        #HeavykeyRecovery = self.BLK.Elements(Blockname).Elements("Input").Elements("RECOVH").Value
+        #CondenserOption = self.BLK.Elements(Blockname).Elements("Input").Elements("OPT_RDV").Value
+        #DestillVaporFraction = self.BLK.Elements(Blockname).Elements("Input").Elements("RDV").Value
+        #GenerateTableOption = self.BLK.Elements(Blockname).Elements("Input").Elements("PLOT").Value
+        #GenerateTable_FirstStage = self.BLK.Elements(Blockname).Elements("Input").Elements("LOWER").Value
+        #GenerateTable_LastStage = self.BLK.Elements(Blockname).Elements("Input").Elements("UPPER").Value
+        #GenerateTable_StageNumber = self.BLK.Elements(Blockname).Elements("Input").Elements("NPOINT").Value
+        #CalculateHeightequivalentHETP_Option = self.BLK.Elements(Blockname).Elements("Input").Elements("OPT_CALHETP").Value
+        #CalculateHeightequivalentHETP_PackedHeight = self.BLK.Elements(Blockname).Elements("Input").Elements("PACK_HEIGHT").Value
         FreewaterOption = self.BLK.Elements(Blockname).Elements("Input").Elements("BLKOPFREWAT").Value
         MaxNumberFlashIterations = self.BLK.Elements(Blockname).Elements("Input").Elements("MAXIT").Value
         FlashConvergenceTolerance =self.BLK.Elements(Blockname).Elements("Input").Elements("FLASH_TOL").Value
         MaxNumberMinStageIterations = self.BLK.Elements(Blockname).Elements("Input").Elements("MAXIT").Value
-        KvalueTolerance = self.BLK.Elements(Blockname).Elements("Input").Elements("K_TOL").Value
+       # KvalueTolerance = self.BLK.Elements(Blockname).Elements("Input").Elements("K_TOL").Value
         ProductTempTolerance = self.BLK.Elements(Blockname).Elements("Input").Elements("TEMP_TOL").Value
         Dictionary = {
-        "StageRefluxOption": StageRefluxOption,
+        #"StageRefluxOption": StageRefluxOption,
         "NumberOfStages" : NumberOfStages,
         "RefluxRatio":RefluxRatio,
         "CondenserPressure":CondenserPressure,
         "ReboilerPressure":ReboilerPressure,
-        "LightkeyComponent":LightkeyComponent,
-        "HeavykeyComponent":HeavykeyComponent,
-        "LightkeyRecovery":LightkeyRecovery,
-        "HeavykeyRecovery":HeavykeyRecovery,
-        "CondenserOption":CondenserOption,
-        "DestillVaporFraction":DestillVaporFraction,
-        "GenerateTableOption":GenerateTableOption,
-        "GenerateTable_FirstStage":GenerateTable_FirstStage,
-        "GenerateTable_LastStage":GenerateTable_LastStage,
-        "GenerateTable_StageNumber":GenerateTable_StageNumber,
-        "CalculateHeightequivalentHETP_Option" : CalculateHeightequivalentHETP_Option,
-        "alculateHeightequivalentHETP_CPackedHeight":CalculateHeightequivalentHETP_PackedHeight,
+        #"LightkeyComponent":LightkeyComponent,
+        #"HeavykeyComponent":HeavykeyComponent,
+        #"LightkeyRecovery":LightkeyRecovery,
+        #"HeavykeyRecovery":HeavykeyRecovery,
+        #"CondenserOption":CondenserOption,
+        #"DestillVaporFraction":DestillVaporFraction,
+        #"GenerateTableOption":GenerateTableOption,
+        #"GenerateTable_FirstStage":GenerateTable_FirstStage,
+        #"GenerateTable_LastStage":GenerateTable_LastStage,
+        #"GenerateTable_StageNumber":GenerateTable_StageNumber,
+        #"CalculateHeightequivalentHETP_Option" : CalculateHeightequivalentHETP_Option,
+      #  "CalculateHeightequivalentHETP_CPackedHeight":CalculateHeightequivalentHETP_PackedHeight,
         "FreewaterOption":FreewaterOption,
         "MaxNumberFlashIterations":MaxNumberFlashIterations,
         "FlashConvergenceTolerance":FlashConvergenceTolerance,
         "MaxNumberMinStageIterations":MaxNumberMinStageIterations,
-        "KvalueTolerance":KvalueTolerance,
+        #"KvalueTolerance":KvalueTolerance,
         "ProductTempTolerance":ProductTempTolerance,
         }
         return Dictionary
