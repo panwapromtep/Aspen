@@ -1,0 +1,10 @@
+INPUT: test.inm
+MODNAME: apmain
+RUNID: test
+NEW_RUNID: test
+OLD_RUNID: test
+PDF: test.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:
+DBCONN: _0934psb.ads

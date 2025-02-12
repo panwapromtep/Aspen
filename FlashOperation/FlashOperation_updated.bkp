@@ -1,4 +1,4 @@
-MM "40.0" FLAVOR "NO" VERSION "40.0" DATETIME "Wed Feb 12 00:58:44 2025" 
+MM "40.0" FLAVOR "NO" VERSION "40.0" DATETIME "Wed Feb 12 00:59:04 2025" 
 MACHINE "WIN-NT/VC"  ; 
 startlibrary
 version1
@@ -175,7 +175,7 @@ PRES = 2. <20> <5> \ \ FRAC SUBSTREAM = MIXED \ ? BLOCK FLASH2 FLASH2 ? ;
 "METCBAR_MOLE" ; ; "V-DRUM1" ; \ FRAC SUBSTREAM = MIXED \ ? BLOCK FLASH2 
 FLASH3 ? ; "METCBAR_MOLE" ; ; "V-DRUM1" ; \ FRAC SUBSTREAM = MIXED \ ? BLOCK 
 COMPR COMP1 ? ; "METCBAR_MOLE" ; ; ICON2 ; \ PARAM TYPE = ISENTROPIC OPT-SPEC
- = PRES PRES = 2. <20> <5> SEFF = 1. <0> <0> MEFF = 1. <0> <0> \ ? BLOCK 
+ = PRES PRES = 25. <20> <5> SEFF = 1. <0> <0> MEFF = 1. <0> <0> \ ? BLOCK 
 COMPR COMP2 ? ; "METCBAR_MOLE" ; ; ICON2 ; ? BLOCK COMPR COMP3 ? ; 
 "METCBAR_MOLE" ; ; ICON2 ; ? "DESIGN-SPEC" "DS-1" ? ; "METCBAR_MOLE" ; ? 
 "EO-CONV-OPTI" ? \ DMO-PARAMS MODE = DEFAULT \ \ DMO-PARAMS MODE = SIMULATION 
@@ -230,6 +230,7 @@ autoplacement 1
 grid 2
 gridresolution 0.100000
 scale 0
+streamprefix 
 blockprefix B
 labelscale 1.000000
 3DOn 1
@@ -275,6 +276,7 @@ linklimit 5000
 material_color 0
 material_style 0
 material_width 1
+material_termid 
 heat_color 0
 heat_style 1
 heat_width 1
@@ -286,9 +288,11 @@ work_termid W
 connections_color 9
 connections_style 3
 connections_width 1
+connections_termid 
 measurements_color 4
 measurements_style 4
 measurements_width 1
+measurements_termid 
 power_color 10
 power_style 5
 power_width 1

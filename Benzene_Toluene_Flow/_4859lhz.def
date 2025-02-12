@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _4859lhz.inm
+MODNAME: apmain
+RUNID: _4859lhz
+NEW_RUNID: _4859lhz
+OLD_RUNID: _4859lhz
+PDF: _4859lhz.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:

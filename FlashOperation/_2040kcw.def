@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _2040kcw.inm
+MODNAME: apmain
+RUNID: _2040kcw
+NEW_RUNID: _2040kcw
+OLD_RUNID: _2040kcw
+PDF: _2040kcw.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:

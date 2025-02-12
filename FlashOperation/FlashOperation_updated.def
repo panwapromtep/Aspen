@@ -1,0 +1,10 @@
+INPUT: FlashOperation_updated.inm
+MODNAME: apmain
+RUNID: FlashOperation_updated
+NEW_RUNID: FlashOperation_updated
+OLD_RUNID: FlashOperation_updated
+PDF: FlashOperation_updated.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:
+DBCONN: _5858bzd.ads

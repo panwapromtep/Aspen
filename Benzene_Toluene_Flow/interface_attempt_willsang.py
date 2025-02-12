@@ -21,7 +21,7 @@ from CodeLibrary import Simulation
 
 print("Opening ASPEN file \n \n")
 
-sim = Simulation(AspenFileName= "Flash_Toluene_Benzene.bkp", WorkingDirectoryPath= "" ,VISIBILITY=True)
+sim = Simulation(AspenFileName= "Flash_Toluene_Benzene.bkp", WorkingDirectoryPath= "../Benzene_Toluene_Flow" ,VISIBILITY=True)
 
 print("Aspen is now open \n \n")
 
@@ -47,4 +47,4 @@ sim.SaveAs("test.bkp", True)
 print ("Closing Aspen \n \n")
 
 #remember to close Aspen everytime after
-sim.CloseAspen()
+#sim.CloseAspen()

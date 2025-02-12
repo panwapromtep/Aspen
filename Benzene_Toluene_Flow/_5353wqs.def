@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _5353wqs.inm
+MODNAME: apmain
+RUNID: _5353wqs
+NEW_RUNID: _5353wqs
+OLD_RUNID: _5353wqs
+PDF: _5353wqs.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:
