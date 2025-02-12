@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _5552reb.inm
+MODNAME: apmain
+RUNID: _5552reb
+NEW_RUNID: _5552reb
+OLD_RUNID: _5552reb
+PDF: _5552reb.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:

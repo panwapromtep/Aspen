@@ -459,6 +459,9 @@ class Simulation():
         "ProductTempTolerance":ProductTempTolerance,
         }
         return Dictionary
+    
+    
+    
     def BLK_DSTWU_SET_ALL_INPUTS(self, Blockname:str, Dictionary: Dict[str, Union[str,float,int]] ) ->None:
         """Takes Dictionary with Values set the ones which are given in Aspen. 
         
@@ -1833,7 +1836,34 @@ class Simulation():
 
 
 
-
+    def BLK_COMPR_GET_DISCHARGE_PRES(self, Blockname:str)-> Dict[str, Union[str,float,int]]:
+        """Retrieves all the Inputs and returns Dictionary with Values 
+        
+        Does not include all aspects of a Aspen Simulationsheet, for this look at Exports
+        
+        Args:
+            Blockname: String which gives the name of Block.         
+        """
+        
+        DischargePres = self.BLK.Elements(Blockname).Elements("Input").Elements("PRES").Value
+        
+        
+        Dictionary = {
+            "DischargePres":DischargePres,
+        }
+        return Dictionary
+    
+    def BLK_COMPR_SET_DISCHARGE_PRES(self, Blockname, Pressure):
+        """Retrieves all the Inputs and returns Dictionary with Values 
+        
+        Does not include all aspects of a Aspen Simulationsheet, for this look at Exports
+        
+        Args:
+            Blockname: String which gives the name of Block.         
+        """
+        
+        self.BLK.Elements(Blockname).Elements("Input").Elements("PRES").Value = Pressure
+        
 
 
 
@@ -1857,7 +1887,8 @@ class Simulation():
         Pressure = self.BLK.Elements(Blockname).Elements("Input").Elements("PRES").Value
         Duty = self.BLK.Elements(Blockname).Elements("Input").Elements("DUTY").Value 
         Vapor_fraction = self.BLK.Elements(Blockname).Elements("Input").Elements("VFRAC").Value
-        Phase = self.BLK.Elements(Blockname).Elements("Input").Elements("PHASE").Value #This can be V L, 1
+        #Phase = self.BLK.Elements(Blockname).Elements("Input").Elements("PHASE").Value #This can be V L, 1
+        #Phase = self.BLK.Elements(Blockname).Elements("Input").Elements("CHECK_FREE_W").Value #This can be V, L, VL, or VLW
         Phasenumber = self.BLK.Elements(Blockname).Elements("Input").Elements("NPHASE").Value #This can be 1,2,3    
         TemperatureEstimation = self.BLK.Elements(Blockname).Elements("Input").Elements("T_EST").Value 
         PressureEstimation = self.BLK.Elements(Blockname).Elements("Input").Elements("P_EST").Value
@@ -1874,7 +1905,6 @@ class Simulation():
             "Pressure":Pressure,
             "Duty":Duty,
             "Vapor_fraction":Vapor_fraction,
-            "Phase":Phase,
             "Phasenumber":Phasenumber,
             "TemperatureEstimation":TemperatureEstimation,
             "PressureEstimation":PressureEstimation,
@@ -1917,6 +1947,16 @@ class Simulation():
         self.BLK.Elements(Blockname).Elements("Input").Elements("CONST_METHOD").Value = Dictionary.get("ParticalGrowthModel")
     
 
+
+### FLASH 2 individual getters
+    def BLK_FLASH2_Get_Temperature(self, Blockname):
+            return self.BLK.Elements(Blockname).Elements("Input").Elements("TEMP").Value
+        
+    def BLK_FLASH2_Get_Pressure(self, Blockname):
+            return self.BLK.Elements(Blockname).Elements("Input").Elements("PRES").Value
+    
+    
+    
 #### FLASH2
 #PAGE 1 Specification
     def BLK_FLASH2_Set_Flash_Type_Option(self, Blockname:str, FlashTypeOption: Literal["TP","TD","TV","TQ","PD","PV","PQ"]) -> None:          #This can be TP,TD,TV,TQ,PD,PV,PQ
