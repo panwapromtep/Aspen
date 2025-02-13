@@ -34,18 +34,17 @@ flashpressure = sim.BLK_FLASH2_Get_Pressure("FLASH1")
 print("Flash temp is ", flashtemp, " and flash pressure is ", flashpressure)
 print("change")
 sim.BLK_FLASH2_Set_Temperature("FLASH1", 555)
-sim.BLK_FLASH2_Set_Pressure("FLASH1", 200)
+sim.BLK_FLASH2_Set_Pressure(8008)
 print("Flash temp is ", flashtemp, " and flash pressure is ", flashpressure)
 
 
 
 print("\n I am going to test if we can get and set the compressor discharge pressure \n")
 dischargePres = sim.BLK_COMPR_GET_DISCHARGE_PRES("COMP1")
-print("Discharge pressure is ", dischargePres)
+sim.print_dictionary(dischargePres)
 print("change")
 sim.BLK_COMPR_SET_DISCHARGE_PRES("COMP1", 25)
-dischargePres = sim.BLK_COMPR_GET_DISCHARGE_PRES("COMP1")
-print("Discharge pressure is ", dischargePres)
+sim.print_dictionary(sim.BLK_COMPR_GET_DISCHARGE_PRES("COMP1"))
 
 
 
