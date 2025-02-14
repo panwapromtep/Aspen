@@ -4,70 +4,39 @@ import numpy as np
 from AspenSim import AspenSim
 from typing import Callable
 import unittest
+from scipy.optimize import minimize
+from scipy.optimize import approx_fprime
 
 class gradMoment():
-    def __init__(self, 
-        obj_f,
-        aspensim: AspenSim,
-        check_file = None
-    ):
+    def __init__(self, obj_f, aspensim: AspenSim, check_file=None):
         self.obj_f = obj_f
         self.aspensim = aspensim
         self.check_file = check_file
+
+    def grad_approx(self, x, epsilon=None):
+        if epsilon is None:
+            epsilon = np.sqrt(np.finfo(float).eps)
+        return approx_fprime(x, self.obj_f, epsilon)
+
+    def optimize(self, x_init, method='CG', options=None):
+        result = minimize(self.obj_f, 
+                          x_init, 
+                          method=method, 
+                          jac=self.grad_approx, 
+                          options=options
+                          )
+        return result.x, result.fun
     
-    def load_chkpt(filename):
-        pass
+    # def grad_approx(self, x, h=1e-5):
+    #     grad = np.zeros_like(x)
+    #     for i in range(len(x)):
+    #         x_plus = x.copy()
+    #         x_minus = x.copy()
+    #         x_plus[i] += h
+    #         x_minus[i] -= h
+    #         grad[i] = (self.obj_f(x_plus) - self.obj_f(x_minus)) / (2 * h)
+    #     return grad
     
-    def save_chkpt(filename):
-        # save to pickle file
-        pass
-
-    def optimize(self, x_init: np.ndarray, 
-                 alpha = 0.01, 
-                 beta = 0.9, 
-                 epsilon = 1e-4, 
-                 max_iter = 1000,
-                 patience = 10):
-        x = x_init
-        v = np.zeros_like(x)
-        best_x = x.copy()
-        best_obj = float('inf')
-        patience_counter = 0
-
-        for t in range(max_iter):
-            grad = self.grad_approx(x)
-            v = beta * v + (1 - beta) * grad
-            x = x - alpha * v
-
-            obj = self.obj_f(x)
-
-            if obj < best_obj:
-                best_obj = obj
-                best_x = x.copy()
-                patience_counter = 0
-            else:
-                patience_counter += 1
-
-            if patience_counter >= patience:
-                print(f"Early stopping at iteration {t+1}")
-                break
-
-            if np.linalg.norm(grad) < epsilon:
-                print(f"Convergence achieved at iteration {t+1}")
-                break
-
-        return best_x, best_obj
-        
-    
-    def grad_approx(self, x, h=1e-5):
-        grad = np.zeros_like(x)
-        for i in range(len(x)):
-            x_plus = x.copy()
-            x_minus = x.copy()
-            x_plus[i] += h
-            x_minus[i] -= h
-            grad[i] = (self.obj_f(x_plus) - self.obj_f(x_minus)) / (2 * h)
-        return grad
 class TestGradMoment(unittest.TestCase):
     def setUp(self):
         self.optimizer = gradMoment(None, aspensim=None)
