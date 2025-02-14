@@ -7,7 +7,7 @@ import unittest
 from scipy.optimize import minimize
 from scipy.optimize import approx_fprime
 
-class gradMoment():
+class grad_des():
     def __init__(self, obj_f, aspensim: AspenSim, check_file=None):
         self.obj_f = obj_f
         self.aspensim = aspensim
