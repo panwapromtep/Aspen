@@ -39,7 +39,7 @@ class Simulation():
         print("The new Directory where you should also have your Aspen file is : ")
         print(os.getcwd())          
         self.AspenSimulation.InitFromArchive2(os.path.abspath(AspenFileName))
-        print("The Aspen is active now. If you dont want to see aspen open again take VISIBITLY as False \n")
+        print("Aspen is active now. If you dont want to see aspen open again take VISIBITLY as False \n")
         self.AspenSimulation.Visible = VISIBILITY
 
     def CloseAspen(self):
@@ -4069,7 +4069,7 @@ class Simulation():
     
     #added this to get total molar enthalpy
     def STRM_Get_Molar_Enthalpy(self, Streamname):
-        return self.STRM.Elements(Streamname).Elements("Output").Elements("STRM_MAIN").Elements("HMX").Elements("MIXED").Value 
+        return self.STRM.Elements(Streamname).Elements("Output").Elements("STR_MAIN").Elements("HMX").Elements("MIXED").Value 
 
     def STRM_Get_VolumeFlow(self, Streamname):
         return self.STRM.Elements(Streamname).Elements("Output").Elements("STR_MAIN").Elements("VOLFLMX").Elements("MIXED").Value 
