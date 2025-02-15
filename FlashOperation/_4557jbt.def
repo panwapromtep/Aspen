@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _4557jbt.inm
+MODNAME: apmain
+RUNID: _4557jbt
+NEW_RUNID: _4557jbt
+OLD_RUNID: _4557jbt
+PDF: _4557jbt.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:

@@ -26,8 +26,14 @@ from CodeLibrary import Simulation
 
 
 sim = Simulation(AspenFileName= "FlashOperation.bkp", WorkingDirectoryPath= "../FlashOperation", VISIBILITY=False)
+print(sim.BLK_COMPR_Get_Discharge_Pressure("COMP1"))
 
+sim.Run()
 
+F3 = sim.STRM_Get_VolumeFlow("3")
+print(F3)
+
+'''
 print("\n I am going to test if we can get and set the flash drum pressure and temp \n")
 flashtemp = sim.BLK_FLASH2_Get_Temperature("FLASH1")
 flashpressure = sim.BLK_FLASH2_Get_Pressure("FLASH1")
@@ -36,6 +42,7 @@ print("change")
 sim.BLK_FLASH2_Set_Temperature("FLASH1", 555)
 sim.BLK_FLASH2_Set_Pressure("FLASH1", 200)
 print("Flash temp is ", flashtemp, " and flash pressure is ", flashpressure)
+
 
 
 
@@ -52,6 +59,7 @@ print("Discharge pressure is ", dischargePres)
 
 print("\n we're gonna save dis shit")
 sim.SaveAs("FlashOperation_updated.bkp", True)
+'''
 
 print ("Closing Aspen \n \n")
 

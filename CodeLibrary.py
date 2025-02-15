@@ -1836,7 +1836,7 @@ class Simulation():
 
 
 
-    def BLK_COMPR_GET_DISCHARGE_PRES(self, Blockname:str)-> Dict[str, Union[str,float,int]]:
+    def BLK_COMPR_Get_Discharge_Pressure(self, Blockname:str)-> Dict[str, Union[str,float,int]]:
         """Retrieves all the Inputs and returns Dictionary with Values 
         
         Does not include all aspects of a Aspen Simulationsheet, for this look at Exports
@@ -1853,7 +1853,7 @@ class Simulation():
         }
         return Dictionary
     
-    def BLK_COMPR_SET_DISCHARGE_PRES(self, Blockname, Pressure):
+    def BLK_COMPR_Set_Discharge_Pressure(self, Blockname, Pressure):
         """Retrieves all the Inputs and returns Dictionary with Values 
         
         Does not include all aspects of a Aspen Simulationsheet, for this look at Exports
@@ -4062,6 +4062,15 @@ class Simulation():
         return self.STRM.Elements(Streamname).Elements("Output").Elements("STR_MAIN").Elements("MOLEFLOW").Elements("MIXED").Elements(Compoundname).Value 
     def STRM_Get_MassFlowPerCompound(self, Streamname, Compoundname):
         return self.STRM.Elements(Streamname).Elements("Output").Elements("STR_MAIN").Elements("MASSFLOW").Elements("MIXED").Elements(Compoundname).Value 
+    
+    #added this to get total molar flow
+    def STRM_Get_MoleFlow(self, Streamname):
+        return self.STRM.Elements(Streamname).Elements("Output").Elements("STR_MAIN").Elements("MOLEFLMX").Elements("MIXED").Value 
+    
+    #added this to get total molar enthalpy
+    def STRM_Get_Molar_Enthalpy(self, Streamname):
+        return self.STRM.Elements(Streamname).Elements("Output").Elements("STRM_MAIN").Elements("HMX").Elements("MIXED").Value 
+
     def STRM_Get_VolumeFlow(self, Streamname):
         return self.STRM.Elements(Streamname).Elements("Output").Elements("STR_MAIN").Elements("VOLFLMX").Elements("MIXED").Value 
     def STRM_Get_Temperature(self, Streamname):
