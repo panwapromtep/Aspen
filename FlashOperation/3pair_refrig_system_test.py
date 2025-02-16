@@ -8,6 +8,12 @@ Created on Sat Feb 15 12:59:01 2025
 import sys
 import os
 
+# Get the parent directory
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+# Add it to sys.path
+sys.path.append(parent_dir)
+
 from AspenSim import AspenSim
 from CodeLibrary import Simulation
 
@@ -35,7 +41,7 @@ def runRefrig(AspenFile, wdpath, x):
     """
     
     #todo check to see if WorkingDirectoryPath works as intended
-    sim = Simulation(AspenFileName= AspenFile, WorkingDirectoryPath= wdpath , VISIBILITY=False)
+    sim = Simulation(AspenFileName= AspenFile, WorkingDirectoryPath= wdpath , VISIBILITY=True)
     
     #loop through flashdrums and set values
     for blockname in x["Flash2"]:
@@ -79,11 +85,6 @@ def runRefrig(AspenFile, wdpath, x):
     return results
     
     
-    '''
-    # Add your simulation code here
-    res = None  # Replace with actual simulation result
-    return res
-    '''
 def costFunc_refrig(results):
     """
     Calculates the cost based on the simulation results.

@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _1729qqx.inm
+MODNAME: apmain
+RUNID: _1729qqx
+NEW_RUNID: _1729qqx
+OLD_RUNID: _1729qqx
+PDF: _1729qqx.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+DBCONN: _1729qqx.ads

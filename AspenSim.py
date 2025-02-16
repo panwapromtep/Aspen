@@ -1,7 +1,4 @@
 # Gradient Descent Module
-import pickle
-import numpy as np
-from CodeLibrary import Simulation
 
 class AspenSim():
     """
@@ -23,15 +20,15 @@ class AspenSim():
     """
     def __init__(self, 
                  AspenFile: str, 
-                 runSim, 
-                 costFunc,
                  wdpath: str #working directory path
                  ):
         self.AspenFile = AspenFile
-        self.runSim = runSim
-        self.costFunc = costFunc
         self.wdpath = wdpath
+        
         
     def run_obj(self, x):
         self.runSim(self.AspenFile, self.wdpath, x)
         return self.costFunc(self.AspenFile)
+    
+    def costFunc(self, results):
+        return res

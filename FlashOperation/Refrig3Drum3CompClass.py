@@ -8,6 +8,12 @@ Created on Sat Feb 15 12:59:01 2025
 import sys
 import os
 
+# Get the parent directory
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+# Add it to sys.path
+sys.path.append(parent_dir)
+
 from AspenSim import AspenSim
 from CodeLibrary import Simulation
 
@@ -36,7 +42,6 @@ class Refrig3Drum3Comp(AspenSim):
             obj: The result of the simulation.
         """
         
-        #todo check to see if WorkingDirectoryPath works as intended
         sim = Simulation(AspenFileName = self.AspenFile, WorkingDirectoryPath= self.wdpath , VISIBILITY=False)
         
         #loop through flashdrums and set values

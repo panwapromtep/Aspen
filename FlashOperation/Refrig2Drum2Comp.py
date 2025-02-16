@@ -8,6 +8,13 @@ Created on Sat Feb 15 12:59:01 2025
 import sys
 import os
 
+# Get the parent directory
+parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+# Add it to sys.path
+sys.path.append(parent_dir)
+
+
 from AspenSim import AspenSim
 from CodeLibrary import Simulation
 
@@ -36,7 +43,6 @@ class Refrig2Drum2Comp(AspenSim):
             obj: The result of the simulation.
         """
         
-        #todo check to see if WorkingDirectoryPath works as intended
         sim = Simulation(AspenFileName = self.AspenFile, WorkingDirectoryPath= self.wdpath , VISIBILITY=False)
         
         #loop through flashdrums and set values
@@ -59,17 +65,14 @@ class Refrig2Drum2Comp(AspenSim):
         sim.Run()
     
         #compile the results
-        #results = [F3, F5, F7, H3, H5, H7, H9, H11, H13]
+        #results = [F3, F5, H3, H5, H9, H11]
         results = [
             sim.STRM_Get_MoleFlow("3"),
             sim.STRM_Get_MoleFlow("5"),
-            sim.STRM_Get_MoleFlow("7"),
             sim.STRM_Get_Molar_Enthalpy("3"),
             sim.STRM_Get_Molar_Enthalpy("5"),
-            sim.STRM_Get_Molar_Enthalpy("7"),
             sim.STRM_Get_Molar_Enthalpy("9"),
             sim.STRM_Get_Molar_Enthalpy("11"),
-            sim.STRM_Get_Molar_Enthalpy("13")
             ]
         
         #print(len(results))
@@ -89,33 +92,31 @@ class Refrig2Drum2Comp(AspenSim):
         
         #tries to deal with the failed simulation gracefully
         if len(results) == 9: 
-            F3, F5, F7, H3, H5, H7, H9, H11, H13 = results
+            F3, F5, H3, H5, H9, H11 = results
         else:
             return 20000000
         
         print(F3)
         print(F5)
-        print(F7)
         print(H3)
         print(H9)
         print(H11)
         print(H5)
-        print(H13)
         
         # Add your cost calculation code here
-        cost = F3 * ((H9 - H3)/0.65) +  F5 * ((H11 - H5)/0.65) +  F7 * ((H13 - H7)/0.65)
+        cost = F3 * ((H9 - H3)/0.65) +  F5 * ((H11 - H5)/0.65) 
         return cost
     
 def main():
     #! This is the start of the "driver"
 
     print("ok here's a test drive of the AspenSim class")
-    assSim = Refrig3Drum3Comp(AspenFile = "FlashOperation.bkp", wdpath = "../FlashOperation")
+    assSim = Refrig2Drum2Comp(AspenFile = "FlashOperation.bkp", wdpath = "../FlashOperation")
 
     x = {
-        "Flash2": {"FLASH1": [48.9, 20.7], "FLASH2": [10, 12.4], "FLASH3": [-28.9, 7.4]},
-        "Heater": {"COOLER1": [4.4, 22.1], "COOLER2": [15.6, 36.5], "COOLER3": [26.7, 60.7]},
-        "Compr": {"COMP1": [22.3], "COMP2": [37.2], "COMP3": [62.1]}
+        "Flash2": {"FLASH1": [48.9, 20.7], "FLASH2": [10, 12.4]},
+        "Heater": {"COOLER1": [4.4, 22.1], "COOLER2": [15.6, 36.5]},
+        "Compr": {"COMP1": [22.3], "COMP2": [37.2]}
         }
 
     assSim.run_obj(x)

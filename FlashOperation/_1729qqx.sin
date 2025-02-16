@@ -1,0 +1,121 @@
+ >>ORIGINAL RUN                           FEBRUARY 15, 2025   
+   2:17:38 P.M.                           SATURDAY    
+   INPUT FILE: _1729qqx.inm
+   RUN ID : _1729qqx
+          1    ;
+          2    ;Input file created by Aspen Plus Rel. 40.0 at 14:17:38 Sat Feb 15, 2025
+          3    ;Directory C:\Users\wsangpa1\OneDrive - Johns Hopkins\ASPEN\Aspen\FlashOperation  Runid FLASHOPERATION
+          4    ;
+          5
+          6
+          7    DYNAMICS
+          8        DYNAMICS RESULTS=ON
+          9
+         10    IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         11            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         12
+         13    DEF-STREAMS CONVEN ALL
+         14
+         15    MODEL-OPTION
+         16
+         17    DATABANKS 'APV140 PURE40' / 'APV140 AQUEOUS' / 'APV140 SOLIDS' &
+         18             / 'APV140 INORGANIC' / 'APESV140 AP-EOS' /  &
+         19            'NISTV140 NIST-TRC' / NOASPENPCD
+         20
+         21    PROP-SOURCES 'APV140 PURE40' / 'APV140 AQUEOUS' /  &
+         22            'APV140 SOLIDS' / 'APV140 INORGANIC' / 'APESV140 AP-EOS' &
+         23             / 'NISTV140 NIST-TRC'
+         24
+         25    COMPONENTS
+         26        ETHANE C2H6 /
+         27        PROPANE C3H8 /
+         28        BUTANE C4H10-1
+         29
+         30    SOLVE
+         31        RUN-MODE MODE=SIM
+         32
+         33    FLOWSHEET
+         34        BLOCK FLASH1 IN=2 OUT=3 4
+         35        BLOCK FLASH2 IN=4 OUT=5 6
+         36        BLOCK FLASH3 IN=6 OUT=7 8
+         37        BLOCK COMP1 IN=3 OUT=9
+         38        BLOCK COMP2 IN=5 OUT=11
+         39        BLOCK COMP3 IN=7 OUT=13
+         40        BLOCK COOLER1 IN=9 OUT=10
+         41        BLOCK COOLER2 IN=11 OUT=12
+         42        BLOCK COOLER3 IN=13 OUT=14
+         43        BLOCK B10 IN=10 12 14 FEED OUT=2
+         44
+         45    PROPERTIES PENG-ROB
+         46
+         47    PROP-DATA PRKBV-1
+         48        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         49            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         50        PROP-LIST PRKBV
+         51        BPVAL ETHANE PROPANE 1.10000000E-3 0.0 0.0 -273.1500000  &
+         52            726.8500000
+         53        BPVAL PROPANE ETHANE 1.10000000E-3 0.0 0.0 -273.1500000  &
+         54            726.8500000
+         55        BPVAL ETHANE BUTANE 9.60000000E-3 0.0 0.0 -273.1500000  &
+         56            726.8500000
+         57        BPVAL BUTANE ETHANE 9.60000000E-3 0.0 0.0 -273.1500000  &
+         58            726.8500000
+         59        BPVAL PROPANE BUTANE 3.30000000E-3 0.0 0.0 -273.1500000  &
+         60            726.8500000
+         61        BPVAL BUTANE PROPANE 3.30000000E-3 0.0 0.0 -273.1500000  &
+         62            726.8500000
+         63
+         64    STREAM 8
+         65        SUBSTREAM MIXED TEMP=-20. <F> PRES=511.  &
+         66            MOLE-FLOW=10. <lbmol/hr>
+         67        MOLE-FLOW ETHANE 2.5 <lbmol/hr> / PROPANE 6. <lbmol/hr> /  &
+         68            BUTANE 1.5 <lbmol/hr>
+         69
+         70    STREAM FEED
+         71        SUBSTREAM MIXED TEMP=200. <F> PRES=500. <psia>  &
+         72            MOLE-FLOW=10. <lbmol/hr>
+         73        MOLE-FLOW ETHANE 2.5 <lbmol/hr> / PROPANE 6. <lbmol/hr> /  &
+         74            BUTANE 1.5 <lbmol/hr>
+         75
+         76    BLOCK B10 MIXER
+         77        PARAM PRES=10.
+         78
+         79    BLOCK COOLER1 HEATER
+         80        PARAM TEMP=4.4 PRES=22.1 DPPARMOPT=NO
+         81
+         82    BLOCK COOLER2 HEATER
+         83        PARAM TEMP=15.6 PRES=36.5 DPPARMOPT=NO
+         84
+         85    BLOCK COOLER3 HEATER
+         86        PARAM TEMP=26.7 PRES=60.7 DPPARMOPT=NO
+         87
+         88    BLOCK FLASH1 FLASH2
+         89        PARAM TEMP=48.9 PRES=20.7
+         90
+         91    BLOCK FLASH2 FLASH2
+         92        PARAM TEMP=10. PRES=12.4
+         93
+         94    BLOCK FLASH3 FLASH2
+         95        PARAM TEMP=-28.9 PRES=7.4
+         96
+         97    BLOCK COMP1 COMPR
+         98        PARAM TYPE=ISENTROPIC PRES=22.3 SEFF=1. MEFF=1. SB-MAXIT=30  &
+         99            SB-TOL=0.0001
+        100
+        101    BLOCK COMP2 COMPR
+        102        PARAM TYPE=ISENTROPIC PRES=37.2 SB-MAXIT=30 SB-TOL=0.0001
+        103
+        104    BLOCK COMP3 COMPR
+        105        PARAM TYPE=ISENTROPIC PRES=62.1 SB-MAXIT=30 SB-TOL=0.0001
+        106
+        107    EO-CONV-OPTI
+        108
+        109    STREAM-REPOR MOLEFLOW
+        110    ;
+        111    ;
+        112    ;
+        113    ;
+        114    ;
+
+   SIMULATION STARTED     MODULE USED: apmain  
+   LOCATED IN:C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\\xeq

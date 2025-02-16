@@ -1,0 +1,26 @@
+ IDSET ID_61 (PROPERTIES) (837 *1 182 *2 <22> 183 *2 <20> 184 *2 836 *2 1052 *2 
+ <13> 173 *2 <31> 1165 *2 <31> 1166 *2 <31> )                                   
+ IDSET ID_62 (PROPERTIES) (298 *2 <75> )                                        
+ LSET L_31 (%ID_RXBAL %ID_TPQV %ID_61 %ID_KODE %ID_62)                          
+ DSET BLOCK HEATER COOLER1 BLKSTAT @BLKSTAT (0 0)                               
+ DSET BLOCK HEATER COOLER1 COMPSTAT @L1 (0)                                     
+ DSET BLOCK HEATER COOLER1 SYNCSTAT @L1 (0)                                     
+ DSET BLOCK HEATER COOLER1 BLKIN @BLKIN (1 9                                    
+ "f721c499-3e4b-4d96-803e-463f8126867f" * )                                     
+ DSET BLOCK HEATER COOLER1 TYPIN @TYPIN (1 MATERIAL)                            
+ DSET BLOCK HEATER COOLER1 BLKOUT @BLKOUT (1 10                                 
+ "f721c499-3e4b-4d96-803e-463f8126867f" * )                                     
+ DSET BLOCK HEATER COOLER1 TYPOUT @TYPOUT (1 MATERIAL)                          
+ DSET BLOCK HEATER COOLER1 RES_Q @L_31 (1.56035775D+02 <3> 1.56035775D+02 <3>   
+ 0.D0 <3> 0.D0 6.18076125D+03 <3> 6.18076125D+03 <3> * <3> 0.D0 * <3> * <3> *   
+ <3> * 1.56035775D+02 <3> 1.56035775D+02 <3> 0.D0 <3> 0.D0 6.18076125D+03 <3>   
+ 6.18076125D+03 <3> * <3> 0.D0 -9.59163437D+05 <3> -8.67397619D+05 <3> * <3>    
+ -9.56727651D-02 7.49252635D+02 <3> 7.49252635D+02 <3> 0.D0 <3> 0.D0 <3> 0.D0   
+ <3> 9.17658182D+04 <3> 2.00000000D+02 <4> 3.00000000D+00 <5> 1.00000000D+00 *  
+ 1 * <4> 2.00000000D+00 <5> * * 9.17658182D+04 <3> * <4> * <4> * <4> 11         
+ -1.00000000D+00 <5> )                                                          
+ IDSET ID_63 (PROPERTIES) (1051 *2 )                                            
+ LSET L_32 (%ID_63 )                                                            
+ DSET BLOCK HEATER COOLER1 HTR_RES @L_32 ( *)                                   
+ DSET BLOCK HEATER COOLER1 VLE @VLE ( 3.19767442D-01 3.19767442D-01             
+ 3.19767442D-01 * 6.80232558D-01 6.80232558D-01 6.80232558D-01 * )              

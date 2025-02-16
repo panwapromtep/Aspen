@@ -1,0 +1,43 @@
+
+ BLOCK:  COOLER1  MODEL: HEATER          
+ ------------------------------
+   INLET STREAM:          9       
+   OUTLET STREAM:         10      
+   PROPERTY OPTION SET:   PENG-ROB  STANDARD PR EQUATION OF STATE               
+
+                      ***  MASS AND ENERGY BALANCE  ***
+                                    IN              OUT        RELATIVE DIFF.
+    TOTAL BALANCE
+       MOLE(KMOL/HR )            156.036         156.036         0.00000    
+       MASS(KG/HR   )            6180.76         6180.76         0.00000    
+       ENTHALPY(CAL/SEC )       -959163.        -867398.       -0.956728E-01
+
+                      ***  CO2 EQUIVALENT SUMMARY ***
+    FEED STREAMS CO2E             749.253      KG/HR           
+    PRODUCT STREAMS CO2E          749.253      KG/HR           
+    NET STREAMS CO2E PRODUCTION   0.00000      KG/HR           
+    UTILITIES CO2E PRODUCTION     0.00000      KG/HR           
+    TOTAL CO2E PRODUCTION         0.00000      KG/HR           
+
+                          ***  INPUT DATA  ***
+   TWO    PHASE  TP  FLASH
+   SPECIFIED TEMPERATURE                C                       200.000      
+   SPECIFIED PRESSURE                   BAR                       3.00000    
+   MAXIMUM NO. ITERATIONS                                        30
+   CONVERGENCE TOLERANCE                                          0.000100000
+
+
+
+                           ***  RESULTS  ***
+   OUTLET TEMPERATURE    C                                    200.00    
+   OUTLET PRESSURE       BAR                                  3.0000    
+   HEAT DUTY             CAL/SEC                              91766.    
+   OUTLET VAPOR FRACTION                                      1.0000    
+
+
+
+   V-L PHASE EQUILIBRIUM : 
+
+      COMP              F(I)           X(I)           Y(I)           K(I)      
+      ETHANE           0.31977        0.31977        0.31977         MISSING 
+      PROPANE          0.68023        0.68023        0.68023         MISSING 
