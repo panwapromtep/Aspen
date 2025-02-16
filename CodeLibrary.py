@@ -4210,7 +4210,7 @@ class Simulation():
         while tries != 2:
             start = time.time()
             self.AspenSimulation.Engine.Run2()
-            print(f"Runtime = {time.time() - start}")
+            #print(f"Runtime = {time.time() - start}")
             # print(time.time() - start)
             converged = self.AspenSimulation.Tree.Elements("Data").Elements("Results Summary").Elements(
                            "Run-Status").Elements("Output").Elements("PER_ERROR").Value
