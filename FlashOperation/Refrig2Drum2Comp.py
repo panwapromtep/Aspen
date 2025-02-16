@@ -24,7 +24,7 @@ class Refrig2Drum2Comp(AspenSim):
         super().__init__(AspenFile, wdpath)
     
     #overload the runSim method
-    def runSim(self, x):
+    def runSim(self, x, visibility = False):
         """
         Runs the refrigeration simulation with the given parameters.
 
@@ -43,7 +43,7 @@ class Refrig2Drum2Comp(AspenSim):
             obj: The result of the simulation.
         """
         
-        sim = Simulation(AspenFileName = self.AspenFile, WorkingDirectoryPath= self.wdpath , VISIBILITY=False)
+        sim = Simulation(AspenFileName = self.AspenFile, WorkingDirectoryPath= self.wdpath , VISIBILITY=visibility)
         
         #loop through flashdrums and set values
         for blockname in x["Flash2"]:
@@ -66,14 +66,14 @@ class Refrig2Drum2Comp(AspenSim):
     
         #compile the results
         #results = [F3, F5, H3, H5, H9, H11]
-        results = [
-            sim.STRM_Get_MoleFlow("3"),
-            sim.STRM_Get_MoleFlow("5"),
-            sim.STRM_Get_Molar_Enthalpy("3"),
-            sim.STRM_Get_Molar_Enthalpy("5"),
-            sim.STRM_Get_Molar_Enthalpy("9"),
-            sim.STRM_Get_Molar_Enthalpy("11"),
-            ]
+        results = {
+            "OUTF1_MF": sim.STRM_Get_MoleFlow("OUTF1"),
+            "OUTF2_MF": sim.STRM_Get_MoleFlow("OUTF2"),
+            "OUTF1_H": sim.STRM_Get_Molar_Enthalpy("OUTF1"),
+            "OUTF2_H": sim.STRM_Get_Molar_Enthalpy("OUTF2"),
+            "OUTCOMP1_H": sim.STRM_Get_Molar_Enthalpy("OUTCOMP1"),
+            "OUTCOMP2_H": sim.STRM_Get_Molar_Enthalpy("OUTCOMP2"),
+        }
         
         #print(len(results))
         #print(results)
@@ -89,22 +89,24 @@ class Refrig2Drum2Comp(AspenSim):
         Calculates the cost based on the simulation results.
 
         """
+            
+        OUTCOMP1 = results["OUTCOMP1_H"]
+        OUTF1 = results["OUTF1_H"]
+        OUTCOMP2 = results["OUTCOMP2_H"]
+        OUTF2 = results["OUTF2_H"]
+        FLOW_1 = results["OUTF1_MF"]
+        FLOW_2 = results["OUTF2_MF"]
         
-        #tries to deal with the failed simulation gracefully
-        if len(results) == 9: 
-            F3, F5, H3, H5, H9, H11 = results
-        else:
-            return 20000000
-        
-        print(F3)
-        print(F5)
-        print(H3)
-        print(H9)
-        print(H11)
-        print(H5)
+        if FLOW_1 == 0:
+            OUTF1 = 0
+            OUTCOMP1 = 0
+        if FLOW_2 == 0:
+            OUTF2 = 0
+            OUTCOMP2 = 0
+            
         
         # Add your cost calculation code here
-        cost = F3 * ((H9 - H3)/0.65) +  F5 * ((H11 - H5)/0.65) 
+        cost = FLOW_1 * ((OUTCOMP1 - OUTF1)/0.65) +  FLOW_2 * ((OUTCOMP2 - OUTF2)/0.65) 
         return cost
     
 def main():
@@ -119,7 +121,8 @@ def main():
         "Compr": {"COMP1": [22.3], "COMP2": [37.2]}
         }
 
-    assSim.run_obj(x)
+    res = assSim.run_obj(x, False)
+    print(res)
 
 if __name__ == "__main__":
     main()

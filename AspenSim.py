@@ -1,5 +1,3 @@
-# Gradient Descent Module
-
 class AspenSim():
     """
     A class to represent an Aspen simulation.
@@ -24,11 +22,13 @@ class AspenSim():
                  ):
         self.AspenFile = AspenFile
         self.wdpath = wdpath
-        
-        
-    def run_obj(self, x):
-        self.runSim(self.AspenFile, self.wdpath, x)
-        return self.costFunc(self.AspenFile)
     
-    def costFunc(self, results):
-        return res
+    def runSim(self, x):
+        raise NotImplementedError("The runSim method is not implemented yet.")
+    
+    def costFunc(self, x):
+        raise NotImplementedError("The costFunc method is not implemented yet.")
+        
+    def run_obj(self, x, visibility=False):
+        res = self.runSim(x, visibility)
+        return self.costFunc(res)
