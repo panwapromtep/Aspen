@@ -17,9 +17,9 @@ from grad_ import gradMoment
 
 def main():
     assSim = Refrig2Drum2Comp(AspenFile = "FlashOperation.bkp", wdpath = "../FlashOperation")
-
+    
     x_dict = {
-        "Flash2": {"FLASH1": [48.9, 20.7], "FLASH2": [10, 12.4]},
+        "Flash2": {"FLASH1": [20.7], "FLASH2": [12.4]},
         "Heater": {"COOLER1": [4.4, 22.1], "COOLER2": [15.6, 36.5]},
         "Compr": {"COMP1": [22.3], "COMP2": [37.2]}
     }

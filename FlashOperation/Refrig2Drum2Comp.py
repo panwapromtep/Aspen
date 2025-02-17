@@ -40,9 +40,9 @@ class Refrig2Drum2Comp(AspenSim):
     @staticmethod
     def unflatten_params(flat_array):
         x_dict = {
-            "Flash2": {"FLASH1": [flat_array[0], flat_array[1]], "FLASH2": [flat_array[2], flat_array[3]]},
-            "Heater": {"COOLER1": [flat_array[4], flat_array[5]], "COOLER2": [flat_array[6], flat_array[7]]},
-            "Compr": {"COMP1": [flat_array[8]], "COMP2": [flat_array[9]]}
+            "Flash2": {"FLASH1": [flat_array[0]], "FLASH2": [flat_array[1]]},
+            "Heater": {"COOLER1": [flat_array[2], flat_array[3]], "COOLER2": [flat_array[4], flat_array[5]]},
+            "Compr": {"COMP1": [flat_array[6]], "COMP2": [flat_array[7]]}
         }
         return x_dict
     
@@ -59,8 +59,7 @@ class Refrig2Drum2Comp(AspenSim):
         self.open_simulation()
 
         for blockname, params in x["Flash2"].items():
-            self.sim.BLK_FLASH2_Set_Temperature(blockname, params[0])
-            self.sim.BLK_FLASH2_Set_Pressure(blockname, params[1])
+            self.sim.BLK_FLASH2_Set_Pressure(blockname, params[0])
 
         for blockname, params in x["Heater"].items():
             self.sim.BLK_HEATER_Set_Temperature(blockname, params[0])
@@ -105,7 +104,7 @@ def main():
     assSim = Refrig2Drum2Comp(AspenFile = "FlashOperation.bkp", wdpath = "../FlashOperation")
 
     x = {
-        "Flash2": {"FLASH1": [48.9, 20.7], "FLASH2": [10, 12.4]},
+        "Flash2": {"FLASH1": [20.7], "FLASH2":  [12.4]},
         "Heater": {"COOLER1": [4.4, 22.1], "COOLER2": [15.6, 36.5]},
         "Compr": {"COMP1": [22.3], "COMP2": [37.2]}
         }
