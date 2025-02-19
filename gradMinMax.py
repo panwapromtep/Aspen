@@ -7,9 +7,12 @@ import unittest
 import time
 from FlashOperation.Refrig2Drum2Comp import Refrig2Drum2Comp
 
-class gradMoment():
-    def __init__(self, sim: AspenSim):
+class gradMinMax():
+    def __init__(self, 
+                 sim: AspenSim,
+                 x_range: list[tuple]):
         self.sim = sim
+        sekf.
 
     def optimize(self, x_init: np.ndarray, alpha=1e-4, beta=0.9, epsilon=1e-4, max_iter=1000, patience=10):
         """

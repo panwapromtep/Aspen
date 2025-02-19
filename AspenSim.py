@@ -18,10 +18,21 @@ class AspenSim():
     """
     def __init__(self, 
                  AspenFile: str, 
-                 wdpath: str #working directory path
+                 wdpath: str, #working directory path
+                 visiblity: bool = False
                  ):
         self.AspenFile = AspenFile
         self.wdpath = wdpath
+        self.visibility = visiblity
+    
+    def reset(self):
+        raise NotImplementedError("The unflatten_params method is not implemented yet.")
+        
+    def unflatten_params(self, x):
+        raise NotImplementedError("The unflatten_params method is not implemented yet.")
+    
+    def flatten_params(self, x):
+        raise NotImplementedError("The flatten_params method is not implemented yet.")
     
     def runSim(self, x):
         raise NotImplementedError("The runSim method is not implemented yet.")
@@ -29,6 +40,6 @@ class AspenSim():
     def costFunc(self, x):
         raise NotImplementedError("The costFunc method is not implemented yet.")
         
-    def run_obj(self, x, visibility=False):
-        res = self.runSim(x, visibility)
+    def run_obj(self, x):
+        res = self.runSim(x)
         return self.costFunc(res)

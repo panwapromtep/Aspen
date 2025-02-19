@@ -21,13 +21,23 @@ from CodeLibrary import Simulation
 
 
 class Refrig2Drum2Comp(AspenSim):
-    def __init__(self, AspenFile, wdpath):
-        super().__init__(AspenFile, wdpath)
+    def __init__(self, AspenFile, wdpath, visibility = False):
+        super().__init__(AspenFile, wdpath, visibility)
         self.sim = None
+        self.open_simulation()
+        
 
-    def run_obj(self, x):
-        results = self.runSim(x)
-        return self.costFunc(results)
+    def reset(self):
+        if self.sim is not None:
+            try:
+                # Ensure the method is invoked, not just referenced
+                self.sim.EngineReinit()
+                print("🔄 Aspen simulation successfully reinitialized.")
+            except Exception as e:
+                raise RuntimeError(f"Failed to reinitialize Aspen simulation: {e}")
+        else:
+            raise RuntimeError("Simulation object (self.sim) is None; cannot reset.")
+
 
     @staticmethod
     def flatten_params(x_dict):
@@ -48,24 +58,30 @@ class Refrig2Drum2Comp(AspenSim):
     
     def open_simulation(self):
         if self.sim is None:
-            self.sim = Simulation(AspenFileName=self.AspenFile, WorkingDirectoryPath=self.wdpath, VISIBILITY=False)
+            self.sim = Simulation(AspenFileName=self.AspenFile, 
+                                  WorkingDirectoryPath=self.wdpath, 
+                                  VISIBILITY=self.visibility
+                                  )
 
     def close_simulation(self):
         if self.sim:
             self.sim.CloseAspen()
             self.sim = None
 
-    def runSim(self, x, visibility=False):
+    def runSim(self, x):
         self.open_simulation()
 
         for blockname, params in x["Flash2"].items():
+            print("Setting Flash2", blockname, params)
             self.sim.BLK_FLASH2_Set_Pressure(blockname, params[0])
 
         for blockname, params in x["Heater"].items():
+            print("Setting Heater", blockname, params)
             self.sim.BLK_HEATER_Set_Temperature(blockname, params[0])
             self.sim.BLK_HEATER_Set_Pressure(blockname, params[1])
 
         for blockname, params in x["Compr"].items():
+            print("Setting Compr", blockname, params)
             self.sim.BLK_COMPR_Set_Discharge_Pressure(blockname, params[0])
 
         self.sim.DialogSuppression(True)
