@@ -1,0 +1,10 @@
+INPUT: ETHYLENE.inm
+MODNAME: apmain
+RUNID: ETHYLENE
+NEW_RUNID: ETHYLENE
+OLD_RUNID: ETHYLENE
+PDF: ETHYLENE.appdf
+USERNAME: conno
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:
+DBCONN: _2533ntj
