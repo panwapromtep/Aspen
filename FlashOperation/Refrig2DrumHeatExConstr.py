@@ -45,7 +45,7 @@ class Refrig2DrumConstraintHeatExConstr(Refrig2Drum2Comp):
     def runSim(self, x):
         self.open_simulation()
         for blockname, params in x["Flash2"].items():
-            print("Setting Flash2", blockname, params)
+            #print("Setting Flash2", blockname, params)
             self.sim.BLK_FLASH2_Set_Pressure(blockname, params[0])
 
         self.sim.DialogSuppression(True)
@@ -88,4 +88,10 @@ class Refrig2DrumConstraintHeatExConstr(Refrig2Drum2Comp):
                 1000 * FLOW_2 * ((OUTCOMP2 - OUTF2) / 0.65))/4184 + \
                 Penalty * (TEMPOUT + 28.9)**2
         return cost
-    
+
+    def run_obj(self, x_dict):
+        results = self.runSim(x_dict)
+        cost = self.costFunc(results)
+        print("The cost is {:.2f}".format(cost))
+        return cost
+
