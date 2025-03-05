@@ -23,7 +23,7 @@ sys.path.append(parent_dir)
 class AspenProblem(ElementwiseProblem):
     def __init__(self, assSim):
         
-        super().__init__(n_var=2, n_obj=1, xl = [1, 1], xu = [20, 20])
+        super().__init__(n_var=2, n_obj=1, xl = [1, 1], xu = [25, 25])
         self.assSim = assSim
 
     def _evaluate(self, x, out, *args, **kwargs):  
@@ -35,37 +35,19 @@ class AspenProblem(ElementwiseProblem):
         
         
 
-def main():
-    print("here")
-    print(os.getcwd())
-    assSim = Refrig2DrumConstraintHeatExConstr(AspenFile = "FlashOperation.bkp", 
-                                   wdpath = "../FlashOperation", 
-                                   visibility=False,
-                                   Penalty=1e5
-                                   )
-    
+def run_experiment(gen_size, assSim):
     problem = AspenProblem(assSim)
-    algorithm = GA(pop_size=10, eliminate_duplicates=True)
+    #algorithm = GA(pop_size=pop_size, eliminate_duplicates=True)
+    algorithm = GA(pop_size=5, eliminate_duplicates=True)
     res = minimize(problem,
                    algorithm,
-                   ('n_gen', 10),
+                   ('n_gen', gen_size),
                    verbose=True,
                    save_history=True)
     
     total_exec_time = res.exec_time  # Get the total execution time
     
-    print("Best solution found: %s" % res.X)
-    x_eval = {
-        "Flash2": {'FLASH1': [res.X[0]], 'FLASH2': [res.X[1]]}
-        }
-    assSim.run_obj(x_eval)
-    print("Function value: %s" % res.F)
-    print("Constraint violation: %s" % res.CV)
-    print("Execution time: %s seconds" % total_exec_time)
-    
-    #plot the convergence
-    
-    # Extract average and minimum objective values for each generation
+    # Extract average and minimum objective values  for each generation
     avg_obj_values = []
     min_obj_values = []
     min_design_space_values = []
@@ -86,26 +68,29 @@ def main():
     })
     
     # Save the DataFrame to an Excel file
-    df.to_excel('results.xlsx', index=False, sheet_name='Results')
+    #df.to_excel(f'results_pop_size_{pop_size}_10gen.xlsx', index=False, sheet_name='Results')
+    df.to_excel(f'results_pop_size_5_{gen_size}gen.xlsx', index=False, sheet_name='Results')
+
     
-    # Get the final minimum objective value and corresponding design space values
-    final_min_obj_value = res.F[0]
-    final_design_space_values = res.X
     
-    # Plot average and minimum objective value vs. generation
-    plt.plot(range(1, len(avg_obj_values) + 1), avg_obj_values, marker='o', label='Average Objective Value')
-    plt.plot(range(1, len(min_obj_values) + 1), min_obj_values, marker='x', label='Minimum Objective Value')
-    plt.xlabel('Generation')
-    plt.ylabel('Objective Value')
-    plt.title('Objective Value vs. Generation')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
+def main():
+    assSim = Refrig2DrumConstraintHeatExConstr(AspenFile="FlashOperation.bkp", 
+                                               wdpath="../FlashOperation", 
+                                               visibility=False,
+                                               Penalty=1e2)
+    '''
+    pop_sizes = [3, 5, 10, 15]
+    for pop_size in pop_sizes:
+        run_experiment(pop_size, assSim)
+    '''
+        
+    gen_sizes = [3, 5, 10, 15]
+    for gen_size in gen_sizes:
+        run_experiment(gen_size, assSim)
     
-    # Add text to the graph
-    textstr = f'Final Min Obj Value: {final_min_obj_value:.4f}\n Design Space Values: {final_design_space_values}'
-    plt.gcf().text(0.15, 0.75, textstr, fontsize=9, bbox=dict(facecolor='white', alpha=0.5))
-    plt.show()
     
+    
+    assSim.close_simulation()
+
 if __name__ == "__main__":
     main()
