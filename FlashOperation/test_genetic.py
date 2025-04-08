@@ -2,10 +2,8 @@
 """
 Created on Mon Mar 3 13:36:14 2025
 
-@author: wsangpa1
 """
-
-from Refrig2DrumHeatExConstr import Refrig2DrumConstraintHeatExConstr
+from Refrig2DrumHeatExConstr1 import Refrig2DrumConstraintHeatExConstr
 import os, sys
 import matplotlib.pyplot as plt
 import numpy as np
@@ -13,6 +11,7 @@ from pymoo.optimize import minimize
 from pymoo.core.problem import ElementwiseProblem
 from pymoo.algorithms.soo.nonconvex.ga import GA
 import pandas as pd
+import time  # Import the time module
 
 # Get the parent directory
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -45,13 +44,16 @@ def main():
                                    )
     
     problem = AspenProblem(assSim)
-    algorithm = GA(pop_size=10, eliminate_duplicates=True)
+    algorithm = GA(pop_size=5, eliminate_duplicates=True)
+    
+    start_time = time.time()  # Add this line to record the start time
     res = minimize(problem,
                    algorithm,
                    ('n_gen', 10),
                    verbose=True,
                    save_history=True)
     
+    end_time = time.time()
     total_exec_time = res.exec_time  # Get the total execution time
     
     print("Best solution found: %s" % res.X)
@@ -63,7 +65,27 @@ def main():
     print("Constraint violation: %s" % res.CV)
     print("Execution time: %s seconds" % total_exec_time)
     
-    #plot the convergence
+    # Print total execution time
+    print("Total execution time: %.2f seconds" % (end_time - start_time))
+    
+    # Plot CPU and memory usage over time
+    fig, ax1 = plt.subplots()
+
+    ax1.set_xlabel('Time (s)')
+    ax1.set_ylabel('CPU Usage (%)', color='tab:blue')
+    ax1.plot(assSim.timestamps, assSim.cpu_usage, color='tab:blue', label='CPU Usage')
+    ax1.tick_params(axis='y', labelcolor='tab:blue')
+
+    ax2 = ax1.twinx()
+    ax2.set_ylabel('Memory Usage (MB)', color='tab:green')
+    ax2.plot(assSim.timestamps, assSim.memory_usage, color='tab:green', label='Memory Usage')
+    ax2.tick_params(axis='y', labelcolor='tab:green')
+
+    fig.tight_layout()
+    plt.title('Genetic Algos CPU and Memory Usage Over Time')
+    plt.show()
+    
+    # Plot the convergence
     
     # Extract average and minimum objective values for each generation
     avg_obj_values = []

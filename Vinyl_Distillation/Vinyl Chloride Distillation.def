@@ -1,0 +1,10 @@
+INPUT: Vinyl Chloride Distillation.inm
+MODNAME: apmain
+RUNID: Vinyl Chloride Distillation
+NEW_RUNID: Vinyl Chloride Distillation
+OLD_RUNID: Vinyl Chloride Distillation
+PDF: Vinyl Chloride Distillation.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:
+DBCONN: _0503faf.ads

@@ -1,0 +1,199 @@
+
+ *** CALCULATION TRACE ***
+
+
+<set objective = None>
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/07/2025   22:44:45:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1
+     PARAM NSTAGE=36 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 36 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.426 MOLE-RR=0.714
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=35 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=70.63851153 <mm>  &
+         DC-WBOT-SIDE=70.63851153 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 35 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/07/2025   22:44:45:99 
+ BLOCK RADFRAC2 RADFRAC
+     PARAM NSTAGE=41 ALGORITHM=STANDARD HYDRAULIC=YES MAXOL=25  &
+         DAMPING=NONE
+     COL-CONFIG CONDENSER=TOTAL
+     FEEDS B1 35
+     PRODUCTS B2 41 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.893 MOLE-RR=0.332
+     REPORT HYDRAULIC
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =   2378.34
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+Calculations begin                                                              time   2379.08
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =   2379.08
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    1     0.74667E-04
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =   2379.12
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    1     0.28152E-07
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   2379.12
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   2379.12
+
+ STREAM D2      
+        SUBSTREAM MIXED     F =  1.423838888888891E-02  T =   278.641208010395      P =   213000.000000000    
+                            H =   6257364.49017220      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -2093.71256306160      DENSITY =   936.109528611719      MW =   62.4928308118317    
+        VINYL-01  1.423656786880128E-02  ACETY-01  4.727815707188863E-17  DICHL-01  2.006914896190001E-26
+        OXYGE-01   0.00000000000000      HYDRO-01  4.216833967712833E-17  WATER     1.821020087541907E-06
+        NITROGEN   0.00000000000000      CARBONMO   0.00000000000000      METHANE    0.00000000000000    
+
+ STREAM B2      
+        SUBSTREAM MIXED     F =  1.706055555555554E-03  T =   284.894981360147      P =   213000.000000000    
+                            H =  -27179387.0796681      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -2236.19275771341      DENSITY =   997.334538925350      MW =   69.9191149291697    
+        VINYL-01  1.358833177545801E-03  ACETY-01  1.537228486509038E-26  DICHL-01  3.472223419338924E-04
+        OXYGE-01   0.00000000000000      HYDRO-01  9.803302788069841E-27  WATER     3.607586121637734E-11
+        NITROGEN   0.00000000000000      CARBONMO   0.00000000000000      METHANE    0.00000000000000    
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/07/2025   22:55:50:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1
+     PARAM NSTAGE=41 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 35
+     PRODUCTS B2 41 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.893 MOLE-RR=0.332
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=40 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=76.01468875 <mm>  &
+         DC-WBOT-SIDE=76.01468875 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 40 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =   3043.80
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   3043.83
+
+
+Calculations begin                                                              time   3043.86
+
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =   3043.86
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    1     0.28164E-07
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   3043.87
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =   3043.87
+
+ Report Writer entered                                                            Time =   3069.86
+
+ Results generated                                                                Time =   3069.91
+
+ Report Writer entered                                                            Time =   3070.78
+
+ Results generated                                                                Time =   3070.83
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ Report Writer entered                                                            Time =   3078.43
+
+ Results generated                                                                Time =   3078.47
+
+ Report Writer entered                                                            Time =   3079.40
+
+ Results generated                                                                Time =   3079.44
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED
+
+ Report Writer entered                                                            Time =   3191.54
+
+ Results generated                                                                Time =   3191.59
+
+ Report Writer entered                                                            Time =   3192.47
+
+ Results generated                                                                Time =   3192.51
+
+RUN SAVED
+
+
+
+ NO ERRORS OR WARNINGS GENERATED

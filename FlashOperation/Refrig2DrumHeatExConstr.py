@@ -22,7 +22,7 @@ from FlashOperation.Refrig2Drum2Comp import Refrig2Drum2Comp
 
 #overload only the cost function to include the constraint on temperature
 class Refrig2DrumConstraintHeatExConstr(Refrig2Drum2Comp):
-    def __init__(self, AspenFile, wdpath, visibility = False, Penalty = 1e5):
+    def __init__(self, AspenFile, wdpath, visibility = False, Penalty = 1e4):
         super().__init__(AspenFile, wdpath, visibility)
         self.open_simulation()
         self.Penalty = Penalty
@@ -44,8 +44,10 @@ class Refrig2DrumConstraintHeatExConstr(Refrig2Drum2Comp):
         
     def runSim(self, x):
         self.open_simulation()
+        print(x)
         for blockname, params in x["Flash2"].items():
-            #print("Setting Flash2", blockname, params)
+            print(params)
+            print("Setting Flash2", blockname, params)
             self.sim.BLK_FLASH2_Set_Pressure(blockname, params[0])
 
         self.sim.DialogSuppression(True)
@@ -87,13 +89,5 @@ class Refrig2DrumConstraintHeatExConstr(Refrig2Drum2Comp):
             cost = (1000 * FLOW_1 * ((OUTCOMP1 - OUTF1) / 0.65) + \
                 1000 * FLOW_2 * ((OUTCOMP2 - OUTF2) / 0.65))/4184 + \
                 Penalty * (TEMPOUT + 28.9)**2
-                
-        print(f"TEMPOUT: {TEMPOUT}")
         return cost
-
-    def run_obj(self, x_dict):
-        results = self.runSim(x_dict)
-        cost = self.costFunc(results)
-        print("The cost is {:.2f}".format(cost))
-        return cost
-
+    

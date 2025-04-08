@@ -1678,8 +1678,9 @@ class Simulation():
         self.BLK.Elements(Blockname).Elements("Input").Elements("BASIS_D").Value = TotalDestillateFlowrate
     def BLK_RADFRAC_Set_LiquidBottomRate(self, Blockname, LiquidBottomRate):
         self.BLK.Elements(Blockname).Elements("Input").Elements("BASIS_B").Value = LiquidBottomRate
-    def BLK_RADFRAC_Set_DestillateToFeedRatio(self, Blockname, DestillateToFeedRatio):
-        self.BLK.Elements(Blockname).Elements("Input").Elements("BASIS_D:F").Value = DestillateToFeedRatio
+    def BLK_RADFRAC_Set_DistillateToFeedRatio(self, Blockname, DistillateToFeedRatio):
+        self.BLK.Elements(Blockname).Elements("Input").Elements("D:F").Value = DistillateToFeedRatio
+        
     def BLK_RADFRAC_Set_BottomToFeedRatio(self, Blockname, BottomToFeedRatio):
         self.BLK.Elements(Blockname).Elements("Input").Elements("BASIS_B:F").Value = BottomToFeedRatio
     
@@ -3111,7 +3112,48 @@ class Simulation():
         return Dictionary
 
 
+#RADFRAC INPUTS for the VC system
+    def BLK_RADFRAC_Get_NSTAGE(self, Blockname:str) -> int:
+        return self.BLK.Elements(Blockname).Elements("Input").Elements("NSTAGE").Value
+    
+    def BLK_RADFRAC_Get_FeedStage(self, Blockname:str) -> int:
+        return self.BLK.Elements(Blockname).Elements("Input").Elements("FEED_STAGE").Elements("FEED").Value
+    
+    def BLK_RADFRAC_Get_Refluxratio(self, Blockname:str) -> int:
+        return self.BLK.Elements(Blockname).Elements("Input").Elements("BASIS_RR").Value
+    
+    def BLK_RADFRAC_Get_DistillateToFeedRatio(self, Blockname:str) -> int:
+        return self.BLK.Elements(Blockname).Elements("Input").Elements("D:F").Value
+    
+
 #RADFRAC OUTPUTS
+
+
+    #! This gets you column diameter in meters
+    def BLK_RADFRAC_Get_Diameter(self, Blockname:str) -> float:
+        return self.BLK.Elements(Blockname).Elements("Subobjects").Elements("Column Internals").Elements("INT-1").Elements("Input").Elements("CA_DIAM").Elements("INT-1").Elements("CS-1").Value
+        #return self.BLK.Elements(Blockname).Elements("Subobjects").Elements("Column Internals").Elements("INT-1").Elements("Output").Elements("CA_DIAM6").Elements("INT-1").Elements("CS-1").Value
+
+    #! This gets you column height in meters
+    def BLK_RADFRAC_Get_Height(self, Blockname:str) -> float:
+        num_stages = self.BLK_RADFRAC_Get_NSTAGE(Blockname)
+        #I verified and this is correct
+        return (num_stages-2) * 0.6096 #convert to meters
+    
+    #! This gets you the utility cost in $/hour
+    def Get_Utility_Cost(self, Utilityname:str) -> float:
+        """Get the cost of the utility in the simulation."""
+        return self.AspenSimulation.Tree.Elements("Data").Elements("Utilities").Elements(Utilityname).Elements("Output").Elements("UTL_TCOST").Value
+    
+    #! I converted this from cal/sec to kW
+    def BLK_RADFRAC_Get_ReboilerDuty(self, Blockname:str) -> float:
+        duty_in_cal_sec = self.BLK.Elements(Blockname).Elements("Output").Elements("REB_DUTY").Value
+        duty_in_kW = duty_in_cal_sec * 0.00419 # convert cal/sec to kW
+        return duty_in_kW
+
+    
+    
+    
 
 #PAGE 1 Summary
     #Condenser data
