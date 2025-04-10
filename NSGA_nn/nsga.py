@@ -47,9 +47,8 @@ class FlashOpProblemNN(ElementwiseProblem):
         x_eval = torch.tensor([[x[0], x[1]]], dtype=torch.float32)
         with torch.no_grad():
             out["F"] = self.model(x_eval).numpy()
-        
-
-def train_model_nsga(model, 
+            
+def train_model_nsga1(model, 
                 dataset, 
                 device='cpu', 
                 batch_size=256, 
@@ -77,6 +76,36 @@ def train_model_nsga(model,
         if print_loss and epoch % 10 == 0:
             print(f"Epoch {epoch}: Total Loss={total_loss:.4f}")
     return model
+
+def train_model_nsga2(model, 
+                dataset, 
+                device='cpu', 
+                batch_size=256, 
+                epochs=10, 
+                lr=0.001,
+                lambda_mse=1, 
+                print_loss=False
+                ):
+    device = torch.device(device)
+    """Training function that balances old and new data"""
+    model = model.to(device)
+    print('device', device)
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr)
+    model.train()
+
+    dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
+    for epoch in range(epochs):
+        total_loss = 0
+        for data_point in dataloader:
+            optimizer.zero_grad()
+            loss = MSELossFunction(data_point, model, device=device)
+            loss.backward()
+            optimizer.step()
+            total_loss += loss.item()
+        if print_loss and epoch % 10 == 0:
+            print(f"Epoch {epoch}: Total Loss={total_loss:.4f}")
+    return model
+        
 
 def generate_new_samples_nsga(res, scaler, assSim, new_data_size=10):
     all_x = res.pop.get("X")
@@ -122,7 +151,109 @@ def optimize_surr_nsga_1(
 
     for it in range(iter):
         print(f"Iteration {it}: Training surrogate model...")
-        model = train_model_nsga(
+        model = train_model_nsga1(
+            model, old_dataset, device=device,
+            epochs=epoch, lr=lr, lambda_mse=lambda_mse,
+            print_loss=print_loss
+        )
+
+        # Initialize GA with previous population if available
+        if current_pop is not None:
+            print(f"Using previous population of size {len(current_pop)}")
+            #store the population in the populations list
+
+            algorithm = GA(
+                pop_size=pop_size,
+                eliminate_duplicates=True,
+                sampling=ResumeFromPopulation(current_pop)
+            )
+        else:
+            algorithm = GA(
+                pop_size=pop_size,
+                sampling=LHS(),
+                eliminate_duplicates=True
+            )
+
+        problem = FlashOpProblemNN(model)
+
+        res = minimize(
+            problem,
+            algorithm,
+            ('n_gen', n_gen),
+            verbose=True,
+            save_history=True
+        )
+
+        # Save population to reuse
+        current_pop = res.pop.get("X")
+        initial_gen = res.history[0].pop.get("X")
+        populations.append(initial_gen)
+
+        # Evaluate optimal solution using true simulation
+        optim_input_scaled = res.X
+        optim_input_tensor = torch.tensor(optim_input_scaled, dtype=torch.float32)
+        optim_input = scaler.inverse_transform(optim_input_tensor).numpy()
+
+        y_val = assSim.run_obj(assSim.unflatten_params(optim_input))
+        assSim_call_count += 1
+
+        # Scale new input-output pair and add to dataset
+        optim_input_scaled, y_scaled = scaler.transform(optim_input, np.array([[y_val]]))
+        new_samples = [np.concatenate([optim_input_scaled.flatten(), y_scaled.flatten()])]
+
+        # Generate additional candidate samples from GA population
+        additional_samples = generate_new_samples_nsga(res, scaler, assSim, new_data_size=new_data_size)
+        new_samples.extend(additional_samples)
+
+        # Update dataset
+        new_dataset.add_samples(np.stack(new_samples))
+        old_dataset.merge(new_dataset.data)
+        new_dataset.clear()
+
+        # Track paths
+        x_path.append(optim_input)
+        y_path.append(y_val)
+
+        if print_it_data:
+            print(f"Iteration {it}: Optimal input {optim_input}, output {y_val}, dataset size {old_dataset.data.shape}")
+
+    return {
+        'model': model,
+        'x_path': x_path,
+        'y_path': y_path,
+        'dataset': old_dataset,
+        'assSim_call_count': assSim_call_count,
+        'populations': populations
+    }
+
+def optimize_surr_nsga_2(
+    model,
+    old_dataset,
+    assSim,
+    lr=1e-4,
+    epoch=30,
+    min_vals=None,
+    max_vals=None,
+    scaler=None,
+    device="cpu",
+    iter=10,
+    pop_size=10,
+    n_gen=3,
+    new_data_size=10,
+    print_loss=False,
+    print_it_data=False,
+    lambda_mse=0
+):
+    x_path, y_path = [], []
+    assSim_call_count = 0
+    new_dataset = NewDataSet(k=14)
+
+    populations = []
+    current_pop = None
+
+    for it in range(iter):
+        print(f"Iteration {it}: Training surrogate model...")
+        model = train_model_nsga2(
             model, old_dataset, device=device,
             epochs=epoch, lr=lr, lambda_mse=lambda_mse,
             print_loss=print_loss
