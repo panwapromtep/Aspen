@@ -29,6 +29,21 @@ from localityaware.module import *
 
 from pymoo.core.sampling import Sampling
 
+class DynamicDataset(Dataset):
+    """Basic dataset for (x, y) pairs with dynamic adding"""
+    def __init__(self, data):
+        self.data = data  # expects a 2D numpy array: shape (n_samples, n_features + 1)
+
+    def add_samples(self, new_data):
+        self.data = np.vstack([self.data, new_data])
+
+    def __len__(self):
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        x = self.data[idx, :-1]
+        y = self.data[idx, -1]
+        return torch.tensor(x, dtype=torch.float32), torch.tensor(y, dtype=torch.float32)
 
 class ResumeFromPopulation(Sampling):
     def __init__(self, X):
@@ -47,21 +62,18 @@ class FlashOpProblemNN(ElementwiseProblem):
         x_eval = torch.tensor([[x[0], x[1]]], dtype=torch.float32)
         with torch.no_grad():
             out["F"] = self.model(x_eval).numpy()
-        
-
+ 
 def train_model_nsga(model, 
                 dataset, 
                 device='cpu', 
                 batch_size=256, 
                 epochs=10, 
                 lr=0.001,
-                lambda_mse=1, 
                 print_loss=False
                 ):
     device = torch.device(device)
     """Training function that balances old and new data"""
     model = model.to(device)
-    print('device', device)
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     model.train()
 
@@ -70,13 +82,14 @@ def train_model_nsga(model,
         total_loss = 0
         for data_point in dataloader:
             optimizer.zero_grad()
-            loss = GradPIELossMSEFunction(data_point, model, lambda_mse=lambda_mse, device=device)
+            loss = MSELossFunction(data_point, model, device=device)
             loss.backward()
             optimizer.step()
             total_loss += loss.item()
-        if print_loss and epoch % 10 == 0:
+        if print_loss and epoch % 50 == 0:
             print(f"Epoch {epoch}: Total Loss={total_loss:.4f}")
     return model
+        
 
 def generate_new_samples_nsga(res, scaler, assSim, new_data_size=10):
     all_x = res.pop.get("X")
@@ -95,12 +108,13 @@ def generate_new_samples_nsga(res, scaler, assSim, new_data_size=10):
     new_samples_scaled, new_samples_y_scaled = scaler.transform(new_samples_unscaled, new_samples_y)
     return np.concatenate([new_samples_scaled, new_samples_y_scaled], axis=1)
 
-def optimize_surr_nsga_1(
+def optimize_surr_nsga(
     model,
-    old_dataset,
+    dataset,
     assSim,
-    lr=1e-4,
-    epoch=30,
+    lrs={'first':1e-4, 'others':1e-5},
+    epochs={'first':1000, 'others':100},
+    batch_size=256,
     min_vals=None,
     max_vals=None,
     scaler=None,
@@ -110,22 +124,30 @@ def optimize_surr_nsga_1(
     n_gen=3,
     new_data_size=10,
     print_loss=False,
-    print_it_data=False,
-    lambda_mse=0
+    print_it_data=False
 ):
+    iteration_log = []
     x_path, y_path = [], []
     assSim_call_count = 0
-    new_dataset = NewDataSet(k=14)
 
     populations = []
     current_pop = None
 
     for it in range(iter):
+        start_time = time.time()
+
         print(f"Iteration {it}: Training surrogate model...")
+        if it == 0:
+            # First iteration, use the first training parameters
+            lr = lrs['first']
+            epoch = epochs['first']
+        else:
+            # Subsequent iterations, use the other training parameters
+            lr = lrs['others']
+            epoch = epochs['others']
         model = train_model_nsga(
-            model, old_dataset, device=device,
-            epochs=epoch, lr=lr, lambda_mse=lambda_mse,
-            print_loss=print_loss
+            model, dataset, device=device, batch_size=batch_size,
+            epochs=epoch, lr=lr, print_loss=print_loss
         )
 
         # Initialize GA with previous population if available
@@ -167,6 +189,14 @@ def optimize_surr_nsga_1(
 
         y_val = assSim.run_obj(assSim.unflatten_params(optim_input))
         assSim_call_count += 1
+        elapsed = time.time() - start_time  # Already defined
+        iteration_log.append({
+            "iteration": it,
+            "time_sec": elapsed,
+            "assSim_calls": assSim_call_count,
+            "x": optim_input,
+            "y": y_val
+        })
 
         # Scale new input-output pair and add to dataset
         optim_input_scaled, y_scaled = scaler.transform(optim_input, np.array([[y_val]]))
@@ -175,24 +205,24 @@ def optimize_surr_nsga_1(
         # Generate additional candidate samples from GA population
         additional_samples = generate_new_samples_nsga(res, scaler, assSim, new_data_size=new_data_size)
         new_samples.extend(additional_samples)
+        assSim_call_count += new_data_size
 
         # Update dataset
-        new_dataset.add_samples(np.stack(new_samples))
-        old_dataset.merge(new_dataset.data)
-        new_dataset.clear()
-
+        dataset.add_samples(np.stack(new_samples))
         # Track paths
         x_path.append(optim_input)
         y_path.append(y_val)
 
         if print_it_data:
-            print(f"Iteration {it}: Optimal input {optim_input}, output {y_val}, dataset size {old_dataset.data.shape}")
+            print(f"Iteration {it}: Optimal input {optim_input}, output {y_val}, dataset size {dataset.data.shape}")
 
     return {
         'model': model,
         'x_path': x_path,
         'y_path': y_path,
-        'dataset': old_dataset,
+        'dataset': dataset,
         'assSim_call_count': assSim_call_count,
-        'populations': populations
+        'populations': populations,
+        'iteration_log': iteration_log
     }
+
