@@ -131,6 +131,19 @@ def GradPIELossMSEFunction(data_point, model, lambda_mse = 1e-2, device='cpu'):
     loss = (diff ** 2).mean() + mseloss
     return loss
 
+def MSELossFunction(data_point, model, device='cpu'):
+    device = torch.device(device)
+    x, y = data_point  # Ignore neighbor_x and neighbor_y
+    x = x.to(device)
+    y = y.to(device)
+
+    model_preds = model(x)  # shape: (batch_size, output_dim)
+    mse = nn.MSELoss()
+    loss = mse(model_preds, y.unsqueeze(1))
+    
+    return loss
+
+
 def train_model(model, 
                 old_dataset, 
                 new_dataset=None, 

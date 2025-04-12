@@ -62,7 +62,8 @@ class FlashOpProblemNN(ElementwiseProblem):
         x_eval = torch.tensor([[x[0], x[1]]], dtype=torch.float32)
         with torch.no_grad():
             out["F"] = self.model(x_eval).numpy()
- 
+        
+
 def train_model_nsga(model, 
                 dataset, 
                 device='cpu', 
@@ -90,6 +91,7 @@ def train_model_nsga(model,
             print(f"Epoch {epoch}: Total Loss={total_loss:.4f}")
     return model
         
+    
 
 def generate_new_samples_nsga(res, scaler, assSim, new_data_size=10):
     all_x = res.pop.get("X")
@@ -137,17 +139,10 @@ def optimize_surr_nsga(
         start_time = time.time()
 
         print(f"Iteration {it}: Training surrogate model...")
-        if it == 0:
-            # First iteration, use the first training parameters
-            lr = lrs['first']
-            epoch = epochs['first']
-        else:
-            # Subsequent iterations, use the other training parameters
-            lr = lrs['others']
-            epoch = epochs['others']
         model = train_model_nsga(
-            model, dataset, device=device, batch_size=batch_size,
-            epochs=epoch, lr=lr, print_loss=print_loss
+            model, old_dataset, device=device,
+            epochs=epoch, lr=lr, lambda_mse=lambda_mse,
+            print_loss=print_loss
         )
 
         # Initialize GA with previous population if available
@@ -225,4 +220,3 @@ def optimize_surr_nsga(
         'populations': populations,
         'iteration_log': iteration_log
     }
-
