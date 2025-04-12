@@ -29,20 +29,25 @@ from localityaware.module import *
 
 from pymoo.core.sampling import Sampling
 
+
 class DynamicDataset(Dataset):
-    """Basic dataset for (x, y) pairs with dynamic adding"""
-    def __init__(self, data):
-        self.data = data  # expects a 2D numpy array: shape (n_samples, n_features + 1)
-
-    def add_samples(self, new_data):
-        self.data = np.vstack([self.data, new_data])
-
+    def __init__(self, data, num_inputs=2):
+        """
+        Args:
+            data (np.array): Data with shape (N, total_features)
+            num_inputs (int): Number of columns in data corresponding to input features.
+                              The remaining columns will be treated as outputs.
+        """
+        self.data = data
+        self.num_inputs = num_inputs
+        
     def __len__(self):
         return len(self.data)
-
+    
     def __getitem__(self, idx):
-        x = self.data[idx, :-1]
-        y = self.data[idx, -1]
+        # The first num_inputs columns are inputs; the remaining columns are outputs.
+        x = self.data[idx, :self.num_inputs]
+        y = self.data[idx, self.num_inputs:]
         return torch.tensor(x, dtype=torch.float32), torch.tensor(y, dtype=torch.float32)
 
 class ResumeFromPopulation(Sampling):
@@ -114,6 +119,7 @@ def optimize_surr_nsga(
     model,
     dataset,
     assSim,
+    problem,
     lrs={'first':1e-4, 'others':1e-5},
     epochs={'first':1000, 'others':100},
     batch_size=256,
@@ -126,7 +132,7 @@ def optimize_surr_nsga(
     n_gen=3,
     new_data_size=10,
     print_loss=False,
-    print_it_data=False
+    print_it_data=False,
 ):
     iteration_log = []
     x_path, y_path = [], []
@@ -137,11 +143,18 @@ def optimize_surr_nsga(
 
     for it in range(iter):
         start_time = time.time()
+        
+        if it == 0:
+            lr = lrs['first']
+            epoch = epochs['first']
+        else:
+            lr = lrs['others']
+            epoch = epochs['others']
 
         print(f"Iteration {it}: Training surrogate model...")
         model = train_model_nsga(
-            model, old_dataset, device=device,
-            epochs=epoch, lr=lr, lambda_mse=lambda_mse,
+            model, dataset, device=device,
+            epochs=epoch, lr=lr,
             print_loss=print_loss
         )
 
@@ -161,8 +174,6 @@ def optimize_surr_nsga(
                 sampling=LHS(),
                 eliminate_duplicates=True
             )
-
-        problem = FlashOpProblemNN(model)
 
         res = minimize(
             problem,
