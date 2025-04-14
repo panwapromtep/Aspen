@@ -21,6 +21,8 @@ print(sys.path)
 from pymoo.optimize import minimize
 from pymoo.core.problem import ElementwiseProblem
 from pymoo.algorithms.soo.nonconvex.ga import GA
+from pymoo.algorithms.moo.nsga2 import NSGA2
+
 from pymoo.core.population import Population
 from pymoo.operators.sampling.lhs import LHS
 
@@ -49,9 +51,15 @@ class DynamicDataset(Dataset):
         x = self.data[idx, :self.num_inputs]
         y = self.data[idx, self.num_inputs:]
         return torch.tensor(x, dtype=torch.float32), torch.tensor(y, dtype=torch.float32)
+    def add_samples(self, new_samples):
+        """Safely add new samples and update KDTree."""
+        if len(self.data) == 0:
+            self.data = new_samples
+        else:
+            self.data = np.vstack((self.data, new_samples))
 
 class ResumeFromPopulation(Sampling):
-    def __init__(self, X):
+    def __init__(self, X, **kwargs):
         super().__init__()
         self.X = X
 
@@ -96,24 +104,42 @@ def train_model_nsga(model,
             print(f"Epoch {epoch}: Total Loss={total_loss:.4f}")
     return model
         
-    
-
 def generate_new_samples_nsga(res, scaler, assSim, new_data_size=10):
-    all_x = res.pop.get("X")
-    all_f = res.pop.get("F")
-    # sort the population based on the objective value
-    I = np.argsort(all_f[:, 0])
-    #take the x values of the first new_data_size samples
-    new_samples = all_x[I[:new_data_size]]
-    #unscale the new samples and pass through assSim to get the true objective value
+    """
+    Generate additional candidate samples from the GA population using random sampling.
+    
+    Parameters:
+        res : The optimization result from pymoo.
+        scaler : The scaling object with inverse_transform and transform methods.
+        assSim : The simulation object that implements run_obj and unflatten_params.
+        new_data_size : The fixed number of additional samples to select.
+    
+    Returns:
+        A NumPy array where each row is a concatenated (scaled) candidate input (8-D)
+        and the corresponding (scaled) objective values (2-D), i.e. an array of shape (new_data_size, 10).
+    """
+    all_x = res.pop.get("X")  # shape: (pop_size, n_var)
+    
+    # Randomly select new_data_size candidates from the current population.
+    indices = np.random.choice(len(all_x), size=new_data_size, replace=False)
+    new_samples = all_x[indices]  # shape: (new_data_size, n_var)
+    
+    # Unscale these candidate inputs.
     new_samples_unscaled = scaler.inverse_transform(new_samples)
+    
+    # Evaluate each candidate using the true simulation.
     new_samples_y = []
-    for i in range(new_data_size):
-        y_val = assSim.run_obj(assSim.unflatten_params(new_samples_unscaled[i]))
+    for sample in new_samples_unscaled:
+        y_val = assSim.run_obj(assSim.unflatten_params(sample))
         new_samples_y.append(y_val)
-    new_samples_y = np.array(new_samples_y)
+    new_samples_y = np.array(new_samples_y)  # shape: (new_data_size, n_obj)
+    
+    # Re-scale both inputs and outputs.
     new_samples_scaled, new_samples_y_scaled = scaler.transform(new_samples_unscaled, new_samples_y)
+    
+    # Concatenate the scaled inputs (n_var columns) and scaled outputs (n_obj columns)
     return np.concatenate([new_samples_scaled, new_samples_y_scaled], axis=1)
+
 
 def optimize_surr_nsga(
     model,
@@ -163,17 +189,9 @@ def optimize_surr_nsga(
             print(f"Using previous population of size {len(current_pop)}")
             #store the population in the populations list
 
-            algorithm = GA(
-                pop_size=pop_size,
-                eliminate_duplicates=True,
-                sampling=ResumeFromPopulation(current_pop)
-            )
+            algorithm = NSGA2(pop_size=pop_size, sampling=ResumeFromPopulation(current_pop), eliminate_duplicates=True)
         else:
-            algorithm = GA(
-                pop_size=pop_size,
-                sampling=LHS(),
-                eliminate_duplicates=True
-            )
+            algorithm = NSGA2(pop_size=pop_size, sampling=LHS(), eliminate_duplicates=True)
 
         res = minimize(
             problem,
@@ -187,41 +205,55 @@ def optimize_surr_nsga(
         current_pop = res.pop.get("X")
         initial_gen = res.history[0].pop.get("X")
         populations.append(initial_gen)
+        # Evaluate the final population using true simulation
+        optim_input_scaled = res.X  # This is a 2D array: shape (pop_size, 8)
+        print("optim_input_scaled (res.X):", optim_input_scaled)
 
-        # Evaluate optimal solution using true simulation
-        optim_input_scaled = res.X
+        # Convert to a torch tensor and then inverse scale to obtain original inputs.
         optim_input_tensor = torch.tensor(optim_input_scaled, dtype=torch.float32)
         optim_input = scaler.inverse_transform(optim_input_tensor).numpy()
+        print("optim_input (unscaled):", optim_input)
+        print("optim_input.shape:", optim_input.shape)
 
-        y_val = assSim.run_obj(assSim.unflatten_params(optim_input))
-        assSim_call_count += 1
-        elapsed = time.time() - start_time  # Already defined
+        # Evaluate each candidate in the current population.
+        y_vals = []
+        for candidate in optim_input:
+            y_vals.append(assSim.run_obj(assSim.unflatten_params(candidate)))
+            assSim_call_count += 1
+
+        # Log the iteration data.
+        elapsed = time.time() - start_time
         iteration_log.append({
             "iteration": it,
             "time_sec": elapsed,
             "assSim_calls": assSim_call_count,
-            "x": optim_input,
-            "y": y_val
+            "x": optim_input,  # (pop_size, 8)
+            "y": y_vals        # a list of outputs (length = pop_size, each output is 2-D)
         })
 
-        # Scale new input-output pair and add to dataset
-        optim_input_scaled, y_scaled = scaler.transform(optim_input, np.array([[y_val]]))
-        new_samples = [np.concatenate([optim_input_scaled.flatten(), y_scaled.flatten()])]
+        # Scale the entire evaluated population (inputs and their associated objectives).
+        # Convert y_vals to a numpy array of shape (pop_size, 2)
+        y_vals_array = np.array(y_vals)
+        evaluated_scaled_inputs, evaluated_scaled_outputs = scaler.transform(optim_input, y_vals_array)
+        # Concatenate inputs and outputs to form samples of shape (pop_size, 10)
+        evaluated_samples = np.concatenate([evaluated_scaled_inputs, evaluated_scaled_outputs], axis=1)
 
-        # Generate additional candidate samples from GA population
+        # Generate additional new samples from the GA population (using random sampling).
         additional_samples = generate_new_samples_nsga(res, scaler, assSim, new_data_size=new_data_size)
-        new_samples.extend(additional_samples)
         assSim_call_count += new_data_size
 
-        # Update dataset
-        dataset.add_samples(np.stack(new_samples))
-        # Track paths
+        # Combine the evaluated population and the additional samples.
+        new_samples = np.vstack([evaluated_samples, additional_samples])
+
+        # Update the dataset with the new samples.
+        dataset.add_samples(new_samples)
+
+        # Track paths (for analysis or logging).
         x_path.append(optim_input)
-        y_path.append(y_val)
+        y_path.append(y_vals)
 
         if print_it_data:
-            print(f"Iteration {it}: Optimal input {optim_input}, output {y_val}, dataset size {dataset.data.shape}")
-
+            print(f"Iteration {it}: Evaluated population shape {optim_input.shape}, outputs length: {len(y_vals)}, dataset size {dataset.data.shape}")
     return {
         'model': model,
         'x_path': x_path,
