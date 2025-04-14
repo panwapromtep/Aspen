@@ -28,6 +28,7 @@ from pymoo.operators.sampling.lhs import LHS
 
 
 from localityaware.module import *
+from localityaware.module import MSELossFunction
 
 from pymoo.core.sampling import Sampling
 
@@ -95,7 +96,11 @@ def train_model_nsga(model,
     for epoch in range(epochs):
         total_loss = 0
         for data_point in dataloader:
+            #print dimensions of data_point
+            # print("data_point.shape:", data_point.shape)
             optimizer.zero_grad()
+            # print("data_point[0].shape:", data_point[0].shape)
+            # print("data_point[1].shape:", data_point[1].shape)
             loss = MSELossFunction(data_point, model, device=device)
             loss.backward()
             optimizer.step()
@@ -166,6 +171,7 @@ def optimize_surr_nsga(
 
     populations = []
     current_pop = None
+    
 
     for it in range(iter):
         start_time = time.time()
@@ -174,6 +180,8 @@ def optimize_surr_nsga(
             lr = lrs['first']
             epoch = epochs['first']
         else:
+            #check dimensions of dataset (each batch dimensions)
+            print("dataset.data.shape:", dataset.data.shape)    
             lr = lrs['others']
             epoch = epochs['others']
 
@@ -249,7 +257,7 @@ def optimize_surr_nsga(
 
         # Combine the evaluated population and the additional samples.
         new_samples = np.vstack([evaluated_samples, additional_samples])
-
+        print(f"New samples shape: {new_samples.shape}")
         # Update the dataset with the new samples.
         dataset.add_samples(new_samples)
 
@@ -259,6 +267,7 @@ def optimize_surr_nsga(
 
         if print_it_data:
             print(f"Iteration {it}: Evaluated population shape {optim_input.shape}, outputs length: {len(y_vals)}, dataset size {dataset.data.shape}")
+
     return {
         'model': model,
         'x_path': x_path,

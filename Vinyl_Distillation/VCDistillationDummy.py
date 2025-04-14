@@ -161,44 +161,47 @@ class VCDistillationDummy:
  
 from pymoo.core.problem import ElementwiseProblem
 
+
 class MultiTestProblem(Problem):
     def __init__(self, model):
         """
-        A vectorized problem for a multi-objective test function. It assumes:
+        A vectorized problem for a multi-objective test function with inequality constraints.
+        It assumes:
           - 2 decision variables, each in [-2, 2].
           - 2 objectives (for example, defined as:
               f1(x) = 100 * (x1^2 + x2^2)
               f2(x) = (x1 - 1)^2 + x2^2
             ).
+          - 2 inequality constraints (e.g., g1(x) and g2(x)).
           - The provided model is a neural network capable of batch evaluation.
         """
-        super().__init__(n_var=2, n_obj=2, xl=np.array([-2, -2]), xu=np.array([2, 2]), vectorized=True)
+        super().__init__(n_var=2, n_obj=2, n_ieq_constr=2, xl=np.array([-2, -2]), xu=np.array([2, 2]), vectorized=True)
         self.model = model
 
     def _evaluate(self, X, out, *args, **kwargs):
         """
-        Evaluate the candidate solutions in batch.
+        Evaluate candidate solutions in batch.
         
         Parameters:
           X: A 2D NumPy array of shape (n_candidates, 2). Each row is a candidate.
-          out: A dictionary in which to store the objectives (under key "F").
-          
-        Process:
-          1. Convert X to a PyTorch tensor.
-          2. Use the neural network model to compute the objective values for the entire batch.
-          3. Return the results as a NumPy array.
+          out: A dictionary to store objectives under key "F" and constraints under key "G".
         """
-        # Convert the input batch to a torch tensor.
         X_tensor = torch.tensor(X, dtype=torch.float32)
-        
-        # Evaluate the model on the batch. Ensure the model is in eval mode.
         self.model.eval()
         with torch.no_grad():
             F_tensor = self.model(X_tensor)  # Expected shape: (n_candidates, 2)
-        
-        # Store the computed objectives in the output dictionary.
         out["F"] = F_tensor.numpy()
- 
+        
+        # Example inequality constraints:
+        # Let's assume we have two constraints:
+        # g1(x) = 2*(x1 - 0.1)*(x1 - 0.9)/0.18, and
+        # g2(x) = -20*(x1 - 0.4)*(x1 - 0.6)/4.8,
+        # which should be <= 0 for feasibility.
+        x1 = X[:, 0]
+        g1 = 2 * (x1 - 0.1) * (x1 - 0.9) / 0.18
+        g2 = -20 * (x1 - 0.4) * (x1 - 0.6) / 4.8
+        out["G"] = np.column_stack([g1, g2])
+        
 class MultiTestDummy:
     """
     A dummy simulation class for testing multi-objective equations.

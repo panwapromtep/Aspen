@@ -93,14 +93,18 @@ class NewDataSet(Dataset):
 ### ==============================================
 
 def MSELossFunction(data_point, model, device='cpu'):
+    # print("Using MSELossFunction")
     device = torch.device(device)
     x, y = data_point  # Ignore neighbor_x and neighbor_y
     x = x.to(device)
     y = y.to(device)
+    
+    # print("x.shape:", x.shape)
+    # print("y.shape:", y.shape)
 
     model_preds = model(x)  # shape: (batch_size, output_dim)
     mse = nn.MSELoss()
-    loss = mse(model_preds, y.unsqueeze(1))
+    loss = mse(model_preds, y)
     
     return loss
 
@@ -129,18 +133,6 @@ def GradPIELossMSEFunction(data_point, model, lambda_mse = 1e-2, device='cpu'):
     mseloss = mse(model_preds, y.unsqueeze(1)) * lambda_mse
     diff = (neighbor_y - y.unsqueeze(1)) - (model_preds_neighbors - model_preds)
     loss = (diff ** 2).mean() + mseloss
-    return loss
-
-def MSELossFunction(data_point, model, device='cpu'):
-    device = torch.device(device)
-    x, y = data_point  # Ignore neighbor_x and neighbor_y
-    x = x.to(device)
-    y = y.to(device)
-
-    model_preds = model(x)  # shape: (batch_size, output_dim)
-    mse = nn.MSELoss()
-    loss = mse(model_preds, y.unsqueeze(1))
-    
     return loss
 
 
