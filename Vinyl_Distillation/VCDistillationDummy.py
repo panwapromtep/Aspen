@@ -17,6 +17,34 @@ sys.path.append(parent_dir)
 from AspenSim import AspenSim
 # from CodeLibrary import Simulation
 
+from pymoo.core.problem import Problem
+import torch
+
+class VinylDistillationProblem(Problem):
+    def __init__(self, model):
+        # n_var = 8 input variables, n_obj = 2 objectives.
+        # Set vectorized=True so that _evaluate receives a matrix of solutions.
+        super().__init__(n_var=8, n_obj=2, xl=[-1]*8, xu=[1]*8, vectorized=True)
+        self.model = model
+
+    def _evaluate(self, X, out, *args, **kwargs):
+        """
+        Vectorized evaluation of candidate solutions.
+
+        Parameters:
+            X: A 2D NumPy array of shape (n, 8), where each row is a candidate solution.
+            out: A dictionary where results (objectives) should be stored under key "F".
+        """
+        # Convert X into a torch tensor. X is assumed to be a numpy array with shape (n, 8)
+        X_tensor = torch.tensor(X, dtype=torch.float32)
+        
+        with torch.no_grad():
+            # Evaluate the model on the entire batch.
+            # The model should return a tensor of shape (n, 2)
+            F = self.model(X_tensor).numpy()
+            
+        out["F"] = F
+
 
 class VCDistillationDummy:
     """
@@ -53,7 +81,16 @@ class VCDistillationDummy:
         For the dummy we assume that the input consists of two parameters—
         one for each of two blocks: 'RADFRAC1' and 'RADFRAC2'.
         """
-        return {"RadFrac": {"RADFRAC1": [flat_array[0]], "RADFRAC2": [flat_array[1]]}}
+        # flat_array = flat_array[0]
+        print("flat_array:", flat_array)
+        if len(flat_array) != 8:
+            raise ValueError("Expected flat array of length 8, got {}.".format(len(flat_array)))
+        return {
+            "RadFrac": {
+                "RADFRAC1": flat_array[:4].tolist(),
+                "RADFRAC2": flat_array[4:8].tolist()
+            }
+        }
 
     def open_simulation(self):
         print("Dummy mode: open_simulation() called. (No Aspen simulation initialized.)")

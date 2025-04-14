@@ -17,7 +17,6 @@ sys.path.append(parent_dir)
 from AspenSim import AspenSim
 from CodeLibrary import Simulation
 
-
 class VCDistillation(AspenSim):
     """
     A class to represent a distillation column in Aspen.
@@ -98,13 +97,9 @@ class VCDistillation(AspenSim):
     def costFunc(self, results):
         tac = self.calc_tac(results)
         co2_emission = self.calc_co2_emission(results)
-        
-        print("Total accumulated cost is ", tac)
-        print("Total CO2 emissions are ", co2_emission)
-        
-        #! we need to weight the two objectives?
 
-        return 42
+
+        return tac,co2_emission
     
     def calc_tac(self, results):
         # Calculate the total annual cost (TAC) based on the results
@@ -131,8 +126,11 @@ class VCDistillation(AspenSim):
     def run_obj(self, x):
         res = self.runSim(x)
         return self.costFunc(res)      
-        
-            
+       
+import numpy as np
+import time
+
+         
 def main():
     #! This is the start of the "driver"
     print("Ok we are now testing the VCDistillation class.")
