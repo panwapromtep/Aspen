@@ -209,6 +209,7 @@ def optimize_surr_nsga(
         # Evaluate the final population using true simulation
         optim_input_scaled = res.X  # This is a 2D array: shape (pop_size, 8)
         print("optim_input_scaled.shape:", optim_input_scaled.shape)
+        print("optim_input_scaled:", optim_input_scaled)
         
         # Convert to a torch tensor and then inverse scale to obtain original inputs.
         optim_input_tensor = torch.tensor(optim_input_scaled, dtype=torch.float32)
@@ -220,6 +221,7 @@ def optimize_surr_nsga(
         for candidate in optim_input:
             y_vals.append(assSim.run_obj(assSim.unflatten_params(candidate)))
             assSim_call_count += 1
+        print("assSim_call_count:", assSim_call_count)
 
         # Log the iteration data.
         elapsed = time.time() - start_time
@@ -247,7 +249,7 @@ def optimize_surr_nsga(
 
         # Combine the evaluated population and the additional samples.
         new_samples = np.vstack([evaluated_samples, additional_samples])
-        
+
         # Update the dataset with the new samples.
         dataset.add_samples(new_samples)
 

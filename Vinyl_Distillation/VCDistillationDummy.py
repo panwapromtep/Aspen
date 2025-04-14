@@ -82,7 +82,7 @@ class VCDistillationDummy:
         one for each of two blocks: 'RADFRAC1' and 'RADFRAC2'.
         """
         # flat_array = flat_array[0]
-        print("flat_array:", flat_array)
+        # print("flat_array:", flat_array)
         if len(flat_array) != 8:
             raise ValueError("Expected flat array of length 8, got {}.".format(len(flat_array)))
         return {
@@ -159,4 +159,148 @@ class VCDistillationDummy:
         res = self.runSim(x)
         return self.costFunc(res)
  
-   
+from pymoo.core.problem import ElementwiseProblem
+
+class MultiTestProblem(Problem):
+    def __init__(self, model):
+        """
+        A vectorized problem for a multi-objective test function. It assumes:
+          - 2 decision variables, each in [-2, 2].
+          - 2 objectives (for example, defined as:
+              f1(x) = 100 * (x1^2 + x2^2)
+              f2(x) = (x1 - 1)^2 + x2^2
+            ).
+          - The provided model is a neural network capable of batch evaluation.
+        """
+        super().__init__(n_var=2, n_obj=2, xl=np.array([-2, -2]), xu=np.array([2, 2]), vectorized=True)
+        self.model = model
+
+    def _evaluate(self, X, out, *args, **kwargs):
+        """
+        Evaluate the candidate solutions in batch.
+        
+        Parameters:
+          X: A 2D NumPy array of shape (n_candidates, 2). Each row is a candidate.
+          out: A dictionary in which to store the objectives (under key "F").
+          
+        Process:
+          1. Convert X to a PyTorch tensor.
+          2. Use the neural network model to compute the objective values for the entire batch.
+          3. Return the results as a NumPy array.
+        """
+        # Convert the input batch to a torch tensor.
+        X_tensor = torch.tensor(X, dtype=torch.float32)
+        
+        # Evaluate the model on the batch. Ensure the model is in eval mode.
+        self.model.eval()
+        with torch.no_grad():
+            F_tensor = self.model(X_tensor)  # Expected shape: (n_candidates, 2)
+        
+        # Store the computed objectives in the output dictionary.
+        out["F"] = F_tensor.numpy()
+ 
+class MultiTestDummy:
+    """
+    A dummy simulation class for testing multi-objective equations.
+    This class uses the same interface as VCDistillationDummy but implements
+    the multitest equations:
+    
+        f1 = 100*(x1^2 + x2^2)
+        f2 = (x1-1)^2 + x2^2
+
+    and inequality constraints:
+    
+        g1 = 2*(x1 - 0.1)*(x1 - 0.9) / 0.18
+        g2 = -20*(x1 - 0.4)*(x1 - 0.6) / 4.8
+
+    The decision vector is 2-dimensional.
+    """
+    
+    def __init__(self, AspenFile=None, wdpath=None, visibility=False):
+        self.AspenFile = AspenFile
+        self.wdpath = wdpath
+        self.visibility = visibility
+        print("MultiTestDummy: Initialized dummy simulation for multitest equation. No Aspen calls will be made.")
+
+    def reset(self):
+        print("MultiTestDummy: reset() called (nothing to reset).")
+
+    @staticmethod
+    def flatten_params(x_dict):
+        """
+        Flatten the dictionary format into a NumPy array.
+        Assumes that the dictionary uses a block named 'Test' with one key 'TEST1'
+        that contains a list of 2 parameters.
+        
+        For example:
+        
+            {
+              'Test': {'TEST1': [0.5, -1.0]}
+            }
+        
+        will be flattened to: [0.5, -1.0]
+        """
+        flat_list = []
+        for block_type in ["Test"]:
+            for block, params in x_dict[block_type].items():
+                flat_list.extend(params)
+        return np.array(flat_list)
+
+    @staticmethod
+    def unflatten_params(flat_array):
+        """
+        Convert a flat NumPy array back to dictionary format.
+        Here, we assume the input consists of 2 parameters.
+        """
+        if len(flat_array) != 2:
+            raise ValueError("Expected flat array of length 2, got {}.".format(len(flat_array)))
+        return {"Test": {"TEST1": flat_array.tolist()}}
+
+    def open_simulation(self):
+        print("MultiTestDummy: open_simulation() called. (No simulation initialized.)")
+
+    def close_simulation(self):
+        print("MultiTestDummy: close_simulation() called. (Nothing to close.)")
+
+    def runSim(self, x):
+        """
+        Instead of running a real simulation, compute the multitest equations.
+        Expected input x structure:
+            x = {"Test": {"TEST1": [x1, x2]}}
+        where x1 and x2 are the decision variables.
+        Returns a dictionary with objectives 'F' and constraints 'G'.
+        """
+        try:
+            params = x["Test"]["TEST1"]
+            x1 = params[0]
+            x2 = params[1]
+        except Exception as e:
+            print("MultiTestDummy: Error extracting parameters; using defaults. Error:", e)
+            x1, x2 = 0, 0
+
+        # Compute the objectives:
+        f1 = 100 * (x1**2 + x2**2)
+        f2 = (x1 - 1)**2 + x2**2
+
+        # Compute inequality constraints:
+        g1 = 2*(x1 - 0.1)*(x1 - 0.9) / 0.18
+        g2 = -20*(x1 - 0.4)*(x1 - 0.6) / 4.8
+
+        results = {
+            "F": [f1, f2],
+            "G": [g1, g2]
+        }
+        return results
+
+    def costFunc(self, results):
+        """
+        For multi-objective problems, the cost function may simply return the objectives.
+        """
+        return results["F"]
+
+    def run_obj(self, x):
+        """
+        High-level wrapper that runs the simulation and computes the objectives.
+        """
+        results = self.runSim(x)
+        return self.costFunc(results)
