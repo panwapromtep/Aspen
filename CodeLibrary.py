@@ -6,6 +6,7 @@ from typing import Union, Dict, Literal
 import win32com.client as win32
 import numpy as np
 import time
+import math
 #from scripy import optimize
 
 
@@ -3147,13 +3148,55 @@ class Simulation():
     
     #! I converted this from cal/sec to kW
     def BLK_RADFRAC_Get_ReboilerDuty(self, Blockname:str) -> float:
-        duty_in_cal_sec = self.BLK.Elements(Blockname).Elements("Output").Elements("REB_DUTY").Value
+        duty_in_cal_sec = self.BLK_RADFRAC_Get_Reboiler_HeatDuty(Blockname)
         duty_in_kW = duty_in_cal_sec * 0.00419 # convert cal/sec to kW
-        return duty_in_kW
+        return duty_in_cal_sec
+    
+    def get_acetylene_purity(self, streamname:str) -> float:
+        return self.STRM.Elements(streamname).Elements("Output").Elements("MOLEFRAC").Elements("MIXED").Elements("ACETY-01").Value
+    
+    def get_vc_purity(self, streamname:str) -> float:
+        return self.STRM.Elements(streamname).Elements("Output").Elements("MOLEFRAC").Elements("MIXED").Elements("VINYL-01").Value
+    
+    
+    def get_heat_exchanger_cost(self, blockname:str) -> float:
+        c2 = 0
+        if (blockname == 'RADFRAC1'):
+            cooling = 'REFRIG4'
+        else:
+            cooling = 'REFRIG1'
+            
+        delta_T_cool = self.get_delta_T(blockname, cooling)
+        delta_T_hot = self.get_delta_T(blockname, 'LP')
+        Qr = self.BLK_RADFRAC_Get_Reboiler_HeatDuty(blockname) * 0.00419 #convert cal/sec to kW
+        Qc = self.BLK_RADFRAC_Get_Condenser_HeatingDuty(blockname) * 0.00419 #convert cal/sec to kW
+        Uc = 0.852 #kW / (m^2 * K)
+        
+        Ar = abs(Qr / (Uc * delta_T_hot))
+        Ac = abs(Qc / (Uc * delta_T_cool))
+                
+        c = 7296 * (Ar**0.65 + Ac**0.65) 
+            
+        return c
 
+    def get_delta_T(self, blockname:str, utilityname: str) -> float:
+        Tc = self.get_condensation_temp(blockname)
+        Tin = self.get_inlet_temp(utilityname)
+        Tout = self.get_outlet_temp(utilityname)
+
+        return ((Tc - Tout) - (Tc - Tin)) / math.log( ((Tc - Tout)/(Tc - Tin)) )
     
+    def get_inlet_temp(self, utilityname:str) -> float:
+        return self.AspenSimulation.Tree.Elements("Data").Elements("Utilities").Elements(utilityname).Elements("Output").Elements("UTL_IN_TEMP").Value + 273.15
     
+    def get_outlet_temp(self, utilityname:str) -> float:
+        return self.AspenSimulation.Tree.Elements("Data").Elements("Utilities").Elements(utilityname).Elements("Output").Elements("UTL_OUT_TEMP").Value + 273.15
     
+    def get_condensation_temp(self, blockname: str) -> float:
+        return self.BLK.Elements(blockname).Elements("Output").Elements("TOP_TEMP").Value + 273.15
+    
+    def get_reboiler_temp(self, blockname: str) -> float:
+        return self.BLK.Elements(blockname).Elements("Output").Elements("BOTTOM_TEMP").Value + 273.15
 
 #PAGE 1 Summary
     #Condenser data
