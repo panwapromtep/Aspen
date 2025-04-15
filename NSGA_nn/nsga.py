@@ -219,22 +219,50 @@ def optimize_surr_nsga(
         optim_input_scaled = res.X  # This is a 2D array: shape (pop_size, 8)
         # print("optim_input_scaled.shape:", optim_input_scaled.shape)
         # print("optim_input_scaled:", optim_input_scaled)
+        if optim_input_scaled is not None:
+    
+            # Convert to a torch tensor and then inverse scale to obtain original inputs.
+            optim_input_tensor = torch.tensor(optim_input_scaled, dtype=torch.float32)
+            optim_input = scaler.inverse_transform(optim_input_tensor).numpy()
+            # print("optim_input.shape:", optim_input.shape)
+
+            # Evaluate each candidate in the current population.
+            y_vals = []
+            for candidate in optim_input:
+                # print("unflattened optim:",assSim.unflatten_params(candidate))
+                y_vals.append(assSim.run_obj(assSim.unflatten_params(candidate)))
+                assSim_call_count += 1
+            print("assSim_call_count:", assSim_call_count)
+             # Log the iteration data.
+            elapsed = time.time() - start_time
+
+
+            # Scale the entire evaluated population (inputs and their associated objectives).
+            y_vals_array = np.array(y_vals)
+            evaluated_scaled_inputs, evaluated_scaled_outputs = scaler.transform(optim_input, y_vals_array)
+            
+            # Concatenate inputs and outputs to form samples of shape (pop_size, 10)
+            evaluated_samples = np.concatenate([evaluated_scaled_inputs, evaluated_scaled_outputs], axis=1)
+            
+
+            # Generate additional new samples from the GA population (using random sampling).
+            additional_samples = generate_new_samples_nsga(res, scaler, assSim, new_data_size=new_data_size)
+            assSim_call_count += new_data_size
+
+            # Combine the evaluated population and the additional samples.
+            new_samples = np.vstack([evaluated_samples, additional_samples])
+            dataset.add_samples(new_samples)
+        else:
+            elapsed = time.time() - start_time
+            print("No front found in iteration", it)
+            y_vals = np.array([])
+
+       
+
+        # Track paths (for analysis or logging).
+        x_path.append(optim_input)
+        y_path.append(y_vals)
         
-        # Convert to a torch tensor and then inverse scale to obtain original inputs.
-        optim_input_tensor = torch.tensor(optim_input_scaled, dtype=torch.float32)
-        optim_input = scaler.inverse_transform(optim_input_tensor).numpy()
-        # print("optim_input.shape:", optim_input.shape)
-
-        # Evaluate each candidate in the current population.
-        y_vals = []
-        for candidate in optim_input:
-            # print("unflattened optim:",assSim.unflatten_params(candidate))
-            y_vals.append(assSim.run_obj(assSim.unflatten_params(candidate)))
-            assSim_call_count += 1
-        print("assSim_call_count:", assSim_call_count)
-
-        # Log the iteration data.
-        elapsed = time.time() - start_time
         iteration_log.append({
             "iteration": it,
             "time_sec": elapsed,
@@ -242,30 +270,6 @@ def optimize_surr_nsga(
             "x": optim_input,  # (pop_size, 8)
             "y": y_vals        # a list of outputs (length = pop_size, each output is 2-D)
         })
-
-        # Scale the entire evaluated population (inputs and their associated objectives).
-        # Convert y_vals to a numpy array of shape (pop_size, 2)
-        y_vals_array = np.array(y_vals)
-        evaluated_scaled_inputs, evaluated_scaled_outputs = scaler.transform(optim_input, y_vals_array)
-        
-        # Concatenate inputs and outputs to form samples of shape (pop_size, 10)
-        evaluated_samples = np.concatenate([evaluated_scaled_inputs, evaluated_scaled_outputs], axis=1)
-        
-        # print(f"Evaluated samples shape: {evaluated_samples.shape}")
-
-        # Generate additional new samples from the GA population (using random sampling).
-        additional_samples = generate_new_samples_nsga(res, scaler, assSim, new_data_size=new_data_size)
-        assSim_call_count += new_data_size
-
-        # Combine the evaluated population and the additional samples.
-        new_samples = np.vstack([evaluated_samples, additional_samples])
-        # print(f"New samples shape: {new_samples.shape}")
-        # Update the dataset with the new samples.
-        dataset.add_samples(new_samples)
-
-        # Track paths (for analysis or logging).
-        x_path.append(optim_input)
-        y_path.append(y_vals)
 
         if print_it_data:
             print(f"Iteration {it}: Evaluated population shape {optim_input.shape}, outputs length: {len(y_vals)}, dataset size {dataset.data.shape}")
