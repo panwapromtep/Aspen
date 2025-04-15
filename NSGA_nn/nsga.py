@@ -256,6 +256,7 @@ def optimize_surr_nsga(
             elapsed = time.time() - start_time
             print("No front found in iteration", it)
             y_vals = np.array([])
+            optim_input = np.array([])
 
        
 
