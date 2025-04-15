@@ -42,7 +42,7 @@ class VCDistillation(AspenSim):
     @staticmethod
     def flatten_params(x_dict):
         flat_list = []
-        for block_type in ["Radfrac"]:
+        for block_type in ["RadFrac"]:
             for block, params in x_dict[block_type].items():
                 flat_list.extend(params)
         return np.array(flat_list)
@@ -53,7 +53,7 @@ class VCDistillation(AspenSim):
         radfrac1 = flat_array[:4]
         radfrac2 = flat_array[-4:]
         x_dict = {
-            "Radfrac": {"RADFRAC1": [radfrac1[0], [radfrac1[1], 'FEED'], radfrac1[2], radfrac1[3]], 
+            "RadFrac": {"RADFRAC1": [radfrac1[0], [radfrac1[1], 'FEED'], radfrac1[2], radfrac1[3]], 
                         "RADFRAC2": [radfrac2[0], [radfrac2[1], 'B1'], radfrac2[2], radfrac2[3]]}
         }
         return x_dict
@@ -103,7 +103,7 @@ class VCDistillation(AspenSim):
     def costFunc(self, results):
         tac = self.calc_tac(results)
         co2_emission = self.calc_co2_emission(results)        
-        return (tac, co2_emission)
+        return (results["ACETYLENE_PURITY"], results["VC_PURITY"], tac, co2_emission)
     
     def calc_tac(self, results):
         # Calculate the total annual cost (TAC) based on the results
@@ -138,7 +138,7 @@ class VinylDistillationNNProblem(Problem):
     def __init__(self, model, scaler):
         # n_var = 8 input variables, n_obj = 2 objectives.
         # Set vectorized=True so that _evaluate receives a matrix of solutions.
-        super().__init__(n_var=8, n_obj=2, n_ieq = 2,xl=[-1]*8, xu=[1]*8, vectorized=True)
+        super().__init__(n_var=8, n_obj=2, n_ieq_constr = 2,xl=[-1]*8, xu=[1]*8, vectorized=True)
         self.model = model
         thresholds = scaler.transform(torch.tensor([0.0005, 0.9999], dtype=torch.float32)).numpy()
         acetyl_threshold, vc_threshold = thresholds[0], thresholds[1]
