@@ -192,6 +192,7 @@ def optimize_surr_nsga(
             print_loss=print_loss
         )
 
+
         # Initialize GA with previous population if available
         if current_pop is not None:
             print(f"Using previous population of size {len(current_pop)}")
@@ -216,17 +217,18 @@ def optimize_surr_nsga(
         
         # Evaluate the final population using true simulation
         optim_input_scaled = res.X  # This is a 2D array: shape (pop_size, 8)
-        print("optim_input_scaled.shape:", optim_input_scaled.shape)
-        print("optim_input_scaled:", optim_input_scaled)
+        # print("optim_input_scaled.shape:", optim_input_scaled.shape)
+        # print("optim_input_scaled:", optim_input_scaled)
         
         # Convert to a torch tensor and then inverse scale to obtain original inputs.
         optim_input_tensor = torch.tensor(optim_input_scaled, dtype=torch.float32)
         optim_input = scaler.inverse_transform(optim_input_tensor).numpy()
-        print("optim_input.shape:", optim_input.shape)
+        # print("optim_input.shape:", optim_input.shape)
 
         # Evaluate each candidate in the current population.
         y_vals = []
         for candidate in optim_input:
+            # print("unflattened optim:",assSim.unflatten_params(candidate))
             y_vals.append(assSim.run_obj(assSim.unflatten_params(candidate)))
             assSim_call_count += 1
         print("assSim_call_count:", assSim_call_count)
@@ -249,7 +251,7 @@ def optimize_surr_nsga(
         # Concatenate inputs and outputs to form samples of shape (pop_size, 10)
         evaluated_samples = np.concatenate([evaluated_scaled_inputs, evaluated_scaled_outputs], axis=1)
         
-        print(f"Evaluated samples shape: {evaluated_samples.shape}")
+        # print(f"Evaluated samples shape: {evaluated_samples.shape}")
 
         # Generate additional new samples from the GA population (using random sampling).
         additional_samples = generate_new_samples_nsga(res, scaler, assSim, new_data_size=new_data_size)
@@ -257,7 +259,7 @@ def optimize_surr_nsga(
 
         # Combine the evaluated population and the additional samples.
         new_samples = np.vstack([evaluated_samples, additional_samples])
-        print(f"New samples shape: {new_samples.shape}")
+        # print(f"New samples shape: {new_samples.shape}")
         # Update the dataset with the new samples.
         dataset.add_samples(new_samples)
 
