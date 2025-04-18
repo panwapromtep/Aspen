@@ -49,7 +49,6 @@ class VCDistillation(AspenSim):
 
     @staticmethod
     def unflatten_params(flat_array):
-        print('hi')
         radfrac1 = flat_array[:4]
         radfrac2 = flat_array[-4:]
         x_dict = {
@@ -60,31 +59,80 @@ class VCDistillation(AspenSim):
     
     def open_simulation(self):
         if self.sim is None:
-            self.sim = Simulation(AspenFileName=self.AspenFile, 
-                                  WorkingDirectoryPath=self.wdpath, 
-                                  VISIBILITY=self.visibility
-                                  )
+            # build full path to the Aspen archive
+            archive = os.path.join(self.wdpath, self.AspenFile)
+            if not os.path.isfile(archive):
+                raise FileNotFoundError(f"Aspen archive not found at {archive!r}")
+            # now launch Aspen with the correct filename and working dir
+            self.sim = Simulation(
+                AspenFileName=archive,
+                WorkingDirectoryPath=self.wdpath,
+                VISIBILITY=self.visibility
+            )
+
 
     def close_simulation(self):
         if self.sim:
             self.sim.CloseAspen()
             self.sim = None
             
-            
     def runSim(self, x):
-        
+        # 1) ensure Aspen is open
+        self.open_simulation()
+        self.reset()
+        print(x["RadFrac"].items())
+
+        # 2) apply all your inputs
         for blockname, params in x["RadFrac"].items():
-            end_stage_2 = params[0] -1
-            
+            end_stage_2 = params[0] - 1
             self.sim.BLK_RADFRAC_Set_NSTAGE(blockname, params[0])
             self.set_section_value(blockname, end_stage_2)
             self.sim.BLK_RADFRAC_Set_FeedStage(blockname, params[1][0], params[1][1])
             self.sim.BLK_RADFRAC_Set_Refluxratio(blockname, params[2])
             self.sim.BLK_RADFRAC_Set_DistillateToFeedRatio(blockname, params[3])
 
+        # suppress any dialogs
         self.sim.DialogSuppression(True)
-        self.sim.Run()
 
+        # helper to retry a run
+        def attempt_run():
+            self.sim.Run()
+
+        try:
+            attempt_run()
+        except Exception as e:
+            print(f"⚠️ First run failed ({e}); saving, quitting and reloading Aspen…")
+            # --- SAVE current case to disk ---
+            # (you can overwrite the original or write to a temp file)
+            save_path = os.path.join(self.wdpath, "reload_case.bkp")
+            self.sim.AspenSimulation.SaveAs(os.path.abspath(save_path))
+
+            # --- QUIT the COM server entirely ---
+            self.sim.AspenSimulation.Quit()
+            self.sim = None
+
+            # --- REOPEN from the saved file ---
+            archive = save_path
+            self.sim = Simulation(
+                AspenFileName=archive,
+                WorkingDirectoryPath=self.wdpath,
+                VISIBILITY=self.visibility
+            )
+            self.sim.DialogSuppression(True)
+
+            # --- RE‑APPLY inputs ---
+            for blockname, params in x["RadFrac"].items():
+                end_stage_2 = params[0] - 1
+                self.sim.BLK_RADFRAC_Set_NSTAGE(blockname, params[0])
+                self.set_section_value(blockname, end_stage_2)
+                self.sim.BLK_RADFRAC_Set_FeedStage(blockname, params[1][0], params[1][1])
+                self.sim.BLK_RADFRAC_Set_Refluxratio(blockname, params[2])
+                self.sim.BLK_RADFRAC_Set_DistillateToFeedRatio(blockname, params[3])
+
+            # final retry
+            attempt_run()
+
+        # --- collect outputs as before ---
         results = {
             "COL_1_DIAM": self.sim.BLK_RADFRAC_Get_Diameter("RADFRAC1"),
             "COL_2_DIAM": self.sim.BLK_RADFRAC_Get_Diameter("RADFRAC2"),
@@ -100,6 +148,8 @@ class VCDistillation(AspenSim):
             "VC_PURITY": self.sim.get_vc_purity("D2"),
         }
         return results
+
+
     
     def costFunc(self, results):
         tac = self.calc_tac(results)
