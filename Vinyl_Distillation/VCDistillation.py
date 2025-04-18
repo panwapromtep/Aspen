@@ -80,10 +80,11 @@ class VCDistillation(AspenSim):
         # 1) ensure Aspen is open
         self.open_simulation()
         self.reset()
-        print(x["RadFrac"].items())
+        #print(x["RadFrac"].items())
 
         # 2) apply all your inputs
         for blockname, params in x["RadFrac"].items():
+            print(params)
             end_stage_2 = params[0] - 1
             self.sim.BLK_RADFRAC_Set_NSTAGE(blockname, params[0])
             self.set_section_value(blockname, end_stage_2)
@@ -198,7 +199,7 @@ class VCDistillation(AspenSim):
         print("Results:", res)
         return self.costFunc(res)     
     
-'''
+
 from pymoo.core.problem import Problem
 import torch
 class VinylDistillationNNProblem(Problem):
@@ -243,7 +244,6 @@ class VinylDistillationNNProblem(Problem):
 import numpy as np
 import time
 
-'''
          
 def main():
     #! This is the start of the "driver"
@@ -261,7 +261,26 @@ def main():
                      'RADFRAC2': [39, [17,'B1'], 1.0, 0.9]},
     }
     
-    res = assSim.run_obj(x)
+    a = {
+        'RadFrac': {'RADFRAC1': [39, [19,'FEED'], 0.7140, 0.4620],
+                     'RADFRAC2': [41, [35,'B1'], 0.3320, 0.8930]},
+    }
+    
+    b = {
+        'RadFrac': {'RADFRAC1': [39, [28,'FEED'], 0.8760, 0.4700],
+                     'RADFRAC2': [42, [25,'B1'], 0.2870, 0.8960]},
+    }
+    
+    c = {
+        'RadFrac': {'RADFRAC1': [40, [23,'FEED'], 0.5540, 0.4718],
+                     'RADFRAC2': [41, [9,'B1'], 0.3903, 0.8930]},
+    }
+    
+    
+    res = assSim.run_obj(a)
+    print("TAC:", res[2])
+    print("CO2 Emission:", res[3])
+    
         
     
 

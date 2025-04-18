@@ -1,0 +1,11 @@
+SLAVE:
+INPUT: _3441pdi.inm
+MODNAME: apmain
+RUNID: _3441pdi
+NEW_RUNID: _3441pdi
+OLD_RUNID: _3441pdi
+PDF: _3441pdi.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+SPONLY:
+DBCONN: _3441pdi.ads
