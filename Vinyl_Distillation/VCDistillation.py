@@ -72,11 +72,12 @@ class VCDistillation(AspenSim):
             
             
     def runSim(self, x):
-        self.open_simulation()
-
+        
         for blockname, params in x["RadFrac"].items():
-            print(params)
+            end_stage_2 = params[0] -1
+            
             self.sim.BLK_RADFRAC_Set_NSTAGE(blockname, params[0])
+            self.set_section_value(blockname, end_stage_2)
             self.sim.BLK_RADFRAC_Set_FeedStage(blockname, params[1][0], params[1][1])
             self.sim.BLK_RADFRAC_Set_Refluxratio(blockname, params[2])
             self.sim.BLK_RADFRAC_Set_DistillateToFeedRatio(blockname, params[3])
@@ -95,7 +96,7 @@ class VCDistillation(AspenSim):
             "COL_2_COOL_UTIL": self.sim.Get_Utility_Cost("REFRIG1"),
             "COL_1_REBOILER_DUTY": self.sim.BLK_RADFRAC_Get_ReboilerDuty("RADFRAC1"),
             "COL_2_REBOILER_DUTY": self.sim.BLK_RADFRAC_Get_ReboilerDuty("RADFRAC2"),
-            "ACETYLENE_PURITY": self.sim.get_acetylene_purity("D1"),
+            "ACETYLENE_PURITY": self.sim.get_acetylene_purity("B1"),
             "VC_PURITY": self.sim.get_vc_purity("D2"),
         }
         return results
@@ -122,16 +123,32 @@ class VCDistillation(AspenSim):
         return 17640 * diameter**1.066 * height**0.802
     
     def calc_co2_emission(self, results):
-        column_1_emission = ((results["COL_1_REBOILER_DUTY"]/0.8) / 22000) * 0.0068 * 3.67 * 8000 * 3600 * 0.00110231 #converts kilograms to tons
-        column_2_emission = ((results["COL_2_REBOILER_DUTY"]/0.8) / 22000) * 0.0068 * 3.67 * 8000 * 3600 * 0.00110231
+        column_1_emission = ((results["COL_1_REBOILER_DUTY"]/0.8) / 22000) * 0.0068 * 3.67 * 8000 * 3600
+        column_2_emission = ((results["COL_2_REBOILER_DUTY"]/0.8) / 22000) * 0.0068 * 3.67 * 8000 * 3600 
         total_emission = column_1_emission + column_2_emission
         return total_emission
+
+    def set_section_value(self, blockname: str, new_value):
+        """
+        Set the INT‑1 → CS‑2 section value under Column Internals for the given block.
+        """
+        path = (
+            f"\\Data\\Blocks\\{blockname}"
+            "\\Subobjects\\Column Internals\\INT-1"
+            "\\Subobjects\\Sections\\CS-2"
+            "\\Input\\CA_STAGE2\\INT-1\\CS-2"
+        )
+        node = self.sim.AspenSimulation.Tree.FindNode(path)
+        node.Value = new_value
+
         
       
     def run_obj(self, x):
         res = self.runSim(x)
+        print("Results:", res)
         return self.costFunc(res)     
     
+'''
 from pymoo.core.problem import Problem
 import torch
 class VinylDistillationNNProblem(Problem):
@@ -176,6 +193,7 @@ class VinylDistillationNNProblem(Problem):
 import numpy as np
 import time
 
+'''
          
 def main():
     #! This is the start of the "driver"

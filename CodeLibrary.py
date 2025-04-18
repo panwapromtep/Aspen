@@ -3150,7 +3150,7 @@ class Simulation():
     def BLK_RADFRAC_Get_ReboilerDuty(self, Blockname:str) -> float:
         duty_in_cal_sec = self.BLK_RADFRAC_Get_Reboiler_HeatDuty(Blockname)
         duty_in_kW = duty_in_cal_sec * 0.00419 # convert cal/sec to kW
-        return duty_in_cal_sec
+        return duty_in_kW
     
     def get_acetylene_purity(self, streamname:str) -> float:
         return self.STRM.Elements(streamname).Elements("Output").Elements("MOLEFRAC").Elements("MIXED").Elements("ACETY-01").Value
@@ -4481,7 +4481,6 @@ class Simulation():
         print("Items held:")
         for item, amount in dct.items():  # dct.iteritems() in Python 2
             print("{} ({})".format(item, amount))
-
 
 
 
