@@ -92,23 +92,32 @@ class VCDistillation(AspenSim):
             reflux   = round(float(params[2]), 4)
             dist2feed = round(float(params[3]), 4)
 
-            print(blockname)
-            print("nstage", nstage)
-            print("feedpos", feed_pos)
-            print("feed port", feed_port)
-            print("reflux:", reflux)
-            print("dist2feed", dist2feed)
+            # -- commpute cs1 bound
+            cs1_start = 2
+            cs1_end = feed_pos - 1 if feed_pos > cs1_start else cs1_start
+
+            # --compute cs2 bound
+            cs2_start = cs1_end + 1
+            cs2_end = nstage - 1
+
+            # debug print
+            print(f"{blockname}:")
+            print(f"  CS1 stage range: {cs1_start} → {cs1_end}")
+            print(f"  CS2 stage range: {cs2_start} → {cs2_end}")
     
-            # apply them
+            # apply to Aspen
             self.sim.BLK_RADFRAC_Set_NSTAGE(blockname, nstage)
-            self.set_sectioncs1_value(blockname, feed_pos - 1)
-            self.set_sectioncs2_value(blockname, nstage - 1)
-            self.set_sectioncs2_value_start(blockname, feed_pos)
+            self.set_sectioncs1_value(blockname, cs1_end)
+            self.set_sectioncs2_value_start(blockname, cs2_start)
+            self.set_sectioncs2_value(blockname, cs2_end)
+    
+            # the rest of your block settings…
             self.sim.BLK_RADFRAC_Set_FeedStage(blockname, feed_pos, feed_port)
             self.sim.BLK_RADFRAC_Set_Refluxratio(blockname, reflux)
             self.sim.BLK_RADFRAC_Set_DistillateToFeedRatio(blockname, dist2feed)
     
         self.sim.DialogSuppression(True)
+        time.sleep(2)
         self.sim.Run()
     
         results = {
@@ -152,8 +161,8 @@ class VCDistillation(AspenSim):
         return 17640 * diameter**1.066 * height**0.802
     
     def calc_co2_emission(self, results):
-        column_1_emission = ((results["COL_1_REBOILER_DUTY"]/0.8) / 22000) * 0.0068 * 3.67 * 8000 * 3600 * 0.00110231 #converts kilograms to tons
-        column_2_emission = ((results["COL_2_REBOILER_DUTY"]/0.8) / 22000) * 0.0068 * 3.67 * 8000 * 3600 * 0.00110231
+        column_1_emission = ((results["COL_1_REBOILER_DUTY"]/0.8) / 22000) * 0.0068 * 3.67 * 8000 * 3600 
+        column_2_emission = ((results["COL_2_REBOILER_DUTY"]/0.8) / 22000) * 0.0068 * 3.67 * 8000 * 3600
         total_emission = column_1_emission + column_2_emission
         return total_emission
         

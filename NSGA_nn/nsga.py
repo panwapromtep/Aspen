@@ -10,6 +10,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils.data import Dataset, DataLoader
+import time
+import torch
+import numpy as np
+from pymoo.algorithms.moo.nsga2 import NSGA2
+from pymoo.optimize import minimize
+
 
 # Get the parent directory
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -145,7 +151,6 @@ def generate_new_samples_nsga(res, scaler, assSim, new_data_size=10):
     # Concatenate the scaled inputs (n_var columns) and scaled outputs (n_obj columns)
     return np.concatenate([new_samples_scaled, new_samples_y_scaled], axis=1)
 
-
 def optimize_surr_nsga(
     model,
     dataset,
@@ -164,27 +169,31 @@ def optimize_surr_nsga(
     new_data_size=10,
     print_loss=False,
     print_it_data=False,
+    max_aspen_calls_per_iter=None,
 ):
+    """
+    Surrogate‐assisted NSGA‑II optimization loop with controlled Aspen calls
+    and fallback sampling if no Pareto front is found.
+    """
+
     iteration_log = []
     x_path, y_path = [], []
     assSim_call_count = 0
 
     populations = []
     current_pop = None
-    
 
     for it in range(iter):
         start_time = time.time()
-        
-        if it == 0:
-            lr = lrs['first']
-            epoch = epochs['first']
-        else:
-            #check dimensions of dataset (each batch dimensions)
-            print("dataset.data.shape:", dataset.data.shape)    
-            lr = lrs['others']
-            epoch = epochs['others']
 
+        # pick LR / epochs
+        if it == 0:
+            lr, epoch = lrs['first'], epochs['first']
+        else:
+            print("dataset.data.shape:", dataset.data.shape)
+            lr, epoch = lrs['others'], epochs['others']
+
+        # train surrogate
         print(f"Iteration {it}: Training surrogate model...")
         model = train_model_nsga(
             model, dataset, device=device,
@@ -192,15 +201,13 @@ def optimize_surr_nsga(
             print_loss=print_loss
         )
 
-
-        # Initialize GA with previous population if available
+        # set up NSGA-II with resume or LHS
         if current_pop is not None:
-            print(f"Using previous population of size {len(current_pop)}")
-            #store the population in the populations list
-
-            algorithm = NSGA2(pop_size=pop_size, sampling=ResumeFromPopulation(current_pop), eliminate_duplicates=True)
-        else:
+            #print(f"Using previous population of size {len(current_pop)}")
+            #sampling = ResumeFromPopulation(current_pop)
             algorithm = NSGA2(pop_size=pop_size, sampling=LHS(), eliminate_duplicates=True)
+        else:
+           algorithm = NSGA2(pop_size=pop_size, sampling=LHS(), eliminate_duplicates=True)
 
         res = minimize(
             problem,
@@ -210,70 +217,78 @@ def optimize_surr_nsga(
             save_history=True
         )
 
-        # Save population to reuse
+        # store for next iteration
         current_pop = res.pop.get("X")
-        initial_gen = res.history[0].pop.get("X")
-        populations.append(initial_gen)
-        
-        # Evaluate the final population using true simulation
-        optim_input_scaled = res.X  # This is a 2D array: shape (pop_size, 8)
-        # print("optim_input_scaled.shape:", optim_input_scaled.shape)
-        # print("optim_input_scaled:", optim_input_scaled)
-        if optim_input_scaled is not None:
-    
-            # Convert to a torch tensor and then inverse scale to obtain original inputs.
-            optim_input_tensor = torch.tensor(optim_input_scaled, dtype=torch.float32)
-            optim_input = scaler.inverse_transform(optim_input_tensor).numpy()
-            # print("optim_input.shape:", optim_input.shape)
+        populations.append(res.history[0].pop.get("X"))
 
-            # Evaluate each candidate in the current population.
-            y_vals = []
-            for candidate in optim_input:
-                # print("unflattened optim:",assSim.unflatten_params(candidate))
-                y_vals.append(assSim.run_obj(assSim.unflatten_params(candidate)))
-                assSim_call_count += 1
-            print("assSim_call_count:", assSim_call_count)
-             # Log the iteration data.
-            elapsed = time.time() - start_time
+        # get scaled inputs (may be None if no front)
+        optim_input_scaled = res.X
 
+        # decide whether to use front or fallback population
+        if optim_input_scaled is None or len(optim_input_scaled) == 0:
+            print("No Pareto front found; sampling the final GA population instead")
+            fallback_scaled = current_pop
+            optim_input_scaled = np.array(fallback_scaled)
 
-            # Scale the entire evaluated population (inputs and their associated objectives).
-            y_vals_array = np.array(y_vals)
-            evaluated_scaled_inputs, evaluated_scaled_outputs = scaler.transform(optim_input, y_vals_array)
-            
-            # Concatenate inputs and outputs to form samples of shape (pop_size, 10)
-            evaluated_samples = np.concatenate([evaluated_scaled_inputs, evaluated_scaled_outputs], axis=1)
-            
+        # inverse‐scale to real inputs
+        optim_input_tensor = torch.tensor(optim_input_scaled, dtype=torch.float32)
+        optim_input = scaler.inverse_transform(optim_input_tensor).numpy()
 
-            # Generate additional new samples from the GA population (using random sampling).
-            additional_samples = generate_new_samples_nsga(res, scaler, assSim, new_data_size=new_data_size)
-            assSim_call_count += new_data_size
+        # evaluate up to new_data_size candidates
+        y_vals = []
+        calls_this_iter = 0
+        for idx, candidate in enumerate(optim_input):
+            if max_aspen_calls_per_iter is not None and calls_this_iter >= max_aspen_calls_per_iter:
+                print(f"Reached cap of {max_aspen_calls_per_iter} Aspen calls this iteration.")
+                break
+            if idx >= new_data_size:
+                break
+            y = assSim.run_obj(assSim.unflatten_params(candidate))
+            y_vals.append(y)
+            assSim_call_count += 1
+            calls_this_iter   += 1
 
-            # Combine the evaluated population and the additional samples.
-            new_samples = np.vstack([evaluated_samples, additional_samples])
-            dataset.add_samples(new_samples)
+        print("assSim_call_count:", assSim_call_count)
+
+        # prepare arrays for scaling
+        y_vals_array = np.array(y_vals)
+        inputs_evaluated = optim_input[:len(y_vals)]
+
+        # scale evaluated inputs & outputs
+        eval_scaled_in, eval_scaled_out = scaler.transform(inputs_evaluated, y_vals_array)
+        evaluated_samples = np.hstack([eval_scaled_in, eval_scaled_out])
+
+        # generate additional samples if needed
+        if len(y_vals) < new_data_size:
+            needed = new_data_size - len(y_vals)
+            print(f"Generating {needed} additional samples to reach {new_data_size}")
+            additional_samples = generate_new_samples_nsga(
+                res, scaler, assSim, new_data_size=needed
+            )
+            assSim_call_count += needed
         else:
-            elapsed = time.time() - start_time
-            print("No front found in iteration", it)
-            y_vals = np.array([])
-            optim_input = np.array([])
+            # empty array with correct column count
+            n_cols = evaluated_samples.shape[1]
+            additional_samples = np.empty((0, n_cols))
 
-       
+        # add everything to dataset
+        new_samples = np.vstack([evaluated_samples, additional_samples])
+        dataset.add_samples(new_samples)
 
-        # Track paths (for analysis or logging).
-        x_path.append(optim_input)
+        # logging & bookkeeping
+        elapsed = time.time() - start_time
+        x_path.append(inputs_evaluated)
         y_path.append(y_vals)
-        
         iteration_log.append({
             "iteration": it,
             "time_sec": elapsed,
             "assSim_calls": assSim_call_count,
-            "x": optim_input,  # (pop_size, 8)
-            "y": y_vals        # a list of outputs (length = pop_size, each output is 2-D)
+            "x": inputs_evaluated,
+            "y": y_vals
         })
 
         if print_it_data:
-            print(f"Iteration {it}: Evaluated population shape {optim_input.shape}, outputs length: {len(y_vals)}, dataset size {dataset.data.shape}")
+            print(f"Iteration {it}: Added {new_data_size} points, dataset size {dataset.data.shape}")
 
     return {
         'model': model,
