@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _0114mhc.inm
+MODNAME: apmain
+RUNID: _0114mhc
+NEW_RUNID: _0114mhc
+OLD_RUNID: _0114mhc
+PDF: _0114mhc.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+DBCONN: _0114mhc.ads

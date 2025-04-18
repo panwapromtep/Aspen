@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _2106nvw.inm
+MODNAME: apmain
+RUNID: _2106nvw
+NEW_RUNID: _2106nvw
+OLD_RUNID: _2106nvw
+PDF: _2106nvw.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+DBCONN: _2106nvw.ads

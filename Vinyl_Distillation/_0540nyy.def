@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _0540nyy.inm
+MODNAME: apmain
+RUNID: _0540nyy
+NEW_RUNID: _0540nyy
+OLD_RUNID: _0540nyy
+PDF: _0540nyy.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+DBCONN: _0540nyy.ads

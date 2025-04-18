@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _4534mpe.inm
+MODNAME: apmain
+RUNID: _4534mpe
+NEW_RUNID: _4534mpe
+OLD_RUNID: _4534mpe
+PDF: _4534mpe.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+DBCONN: _4534mpe.ads

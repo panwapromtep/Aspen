@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _2540bei.inm
+MODNAME: apmain
+RUNID: _2540bei
+NEW_RUNID: _2540bei
+OLD_RUNID: _2540bei
+PDF: _2540bei.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+DBCONN: _2540bei.ads

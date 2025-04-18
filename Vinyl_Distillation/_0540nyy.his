@@ -1,0 +1,3248 @@
+
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + +                                                                         + +
+ + +                      ASPEN PLUS CALCULATION HISTORY                     + +
+ + +                                                                         + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+ + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + + +
+
+ ASPEN PLUS IS A TRADEMARK OF           HOTLINE:
+ ASPEN TECHNOLOGY, INC.                 U.S.A. 888/996-7100
+ 781/221-6400                           EUROPE (44) 1189-226555
+
+ PLATFORM: WIN-X64                                       APRIL 17, 2025      
+ VERSION: 40.0   Build 359                               THURSDAY    
+ INSTALLATION:                                           10:05:44 P.M.       
+
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+
+
+      ASPEN PLUS (R) IS A PROPRIETARY PRODUCT OF ASPEN TECHNOLOGY, INC.
+      (ASPENTECH), AND MAY BE USED ONLY UNDER AGREEMENT WITH ASPENTECH.
+      RESTRICTED RIGHTS LEGEND:  USE, REPRODUCTION, OR DISCLOSURE BY THE
+      U.S. GOVERNMENT IS SUBJECT TO RESTRICTIONS SET FORTH IN 
+      (i) FAR 52.227-14, Alt. III, (ii) FAR 52.227-19, (iii) DFARS 
+      252.227-7013(c)(1)(ii), or (iv) THE ACCOMPANYING LICENSE AGREEMENT,
+      AS APPLICABLE. FOR PURPOSES OF THE FAR, THIS SOFTWARE SHALL BE DEEMED
+      TO BE "UNPUBLISHED" AND LICENSED WITH DISCLOSURE PROHIBITIONS.
+      CONTRACTOR/SUBCONTRACTOR: ASPEN TECHNOLOGY, INC. 20 CROSBY DRIVE,
+      BEDFORD, MA 01730.
+ *** INPUT SUMMARY ***
+
+ >>CURRENT RUN
+
+   ORIGINAL RUN                           APRIL 17, 2025      
+   10:05:44 P.M.                          THURSDAY    
+   INPUT FILE: _0540nyy.inm
+   RUN ID : _0540nyy
+          1    ;
+          2    ;Input file created by Aspen Plus Rel. 40.0 at 22:05:43 Thu Apr 17, 2025
+          3    ;Directory C:\Users\wsangpa1\OneDrive - Johns Hopkins\ASPEN\Aspen\Vinyl_Distillation  Runid VINYL CHLORIDE DISTILLATION
+          4    ;
+          5
+          6
+          7    DYNAMICS
+          8        DYNAMICS RESULTS=ON
+          9
+         10    IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         11            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         12
+         13    DEF-STREAMS CONVEN ALL
+         14
+         15    MODEL-OPTION
+         16
+         17    DATABANKS 'APV140 PURE40' / 'APV140 AQUEOUS' / 'APV140 SOLIDS' &
+         18             / 'APV140 INORGANIC' / 'APESV140 AP-EOS' /  &
+         19            'NISTV140 NIST-TRC' / 'APESV140 ACIDGAS' /  &
+         20            'APESV140 BIOFEED' / 'APESV140 FERMENT' /  &
+         21            'APESV140 FLARE' / 'APV140 ASPENPCD' / 'APV140 BIODIESEL' &
+         22             / 'APV140 COMBUST' / 'APV140 ELECPURE' /  &
+         23            'APV140 EOS-LIT' / 'APV140 ETHYLENE' / 'APV140 HYSYS' /  &
+         24            'APV140 INITIATO' / 'APV140 NRTL-SAC' / 'APV140 PC-SAFT' &
+         25             / 'APV140 POLYMER' / 'APV140 POLYPCSF' /  &
+         26            'APV140 PURE25' / 'APV140 PURE26' / 'APV140 PURE27' /  &
+         27            'APV140 PURE28' / 'APV140 PURE32' / 'APV140 PURE35' /  &
+         28            'APV140 PURE36' / 'APV140 PURE37' / 'APV140 PURE38' /  &
+         29            'APV140 PURE39' / 'APV140 SEGMENT' / 'FACTV140 FACTPCD'
+         30
+         31    PROP-SOURCES 'APV140 PURE40' / 'APV140 AQUEOUS' /  &
+         32            'APV140 SOLIDS' / 'APV140 INORGANIC' / 'APESV140 AP-EOS' &
+         33             / 'NISTV140 NIST-TRC' / 'APESV140 ACIDGAS' /  &
+         34            'APESV140 BIOFEED' / 'APESV140 FERMENT' /  &
+         35            'APESV140 FLARE' / 'APV140 ASPENPCD' / 'APV140 BIODIESEL' &
+         36             / 'APV140 COMBUST' / 'APV140 ELECPURE' /  &
+         37            'APV140 EOS-LIT' / 'APV140 ETHYLENE' / 'APV140 HYSYS' /  &
+         38            'APV140 INITIATO' / 'APV140 NRTL-SAC' / 'APV140 PC-SAFT' &
+         39             / 'APV140 POLYMER' / 'APV140 POLYPCSF' /  &
+         40            'APV140 PURE25' / 'APV140 PURE26' / 'APV140 PURE27' /  &
+         41            'APV140 PURE28' / 'APV140 PURE32' / 'APV140 PURE35' /  &
+         42            'APV140 PURE36' / 'APV140 PURE37' / 'APV140 PURE38' /  &
+         43            'APV140 PURE39' / 'APV140 SEGMENT' / 'FACTV140 FACTPCD'
+         44
+         45    COMPONENTS
+         46        VINYL-01 C2H3CL /
+         47        ACETY-01 C2H2 /
+         48        DICHL-01 C2H4CL2-1 /
+         49        OXYGE-01 O2 /
+         50        HYDRO-01 HCL /
+         51        WATER H2O /
+         52        NITROGEN N2 /
+         53        CARBONMO CO /
+         54        METHANE CH4
+         55
+         56    SOLVE
+         57        RUN-MODE MODE=SIM
+         58
+         59    FLOWSHEET
+         60        BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+         61        BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+         62
+         63    PROPERTIES NRTL
+         64
+         65    PROP-DATA PCES-1
+         66        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         67            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         68        PROP-LIST DHVLB / VB / RKTZRA / VLSTD
+         69        PVAL DICHL-01 6750.889295 / 88.65938200 / .2692624250 /  &
+         70            83.75050270
+         71
+         72    PROP-DATA DHVLWT-1
+         73        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         74            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         75        PROP-LIST DHVLWT
+         76        PVAL DICHL-01 6750.889295 57.20700000 .3800000000 0.0  &
+         77            -141.0072000
+         78
+         79    PROP-DATA KLDIP-1
+         80        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         81            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         82        PROP-LIST KLDIP
+         83        PVAL DICHL-01 .1017396118 6.34424108E-5 -4.1249461E-6  &
+         84            2.17593050E-8 -4.501867E-11 57.20700000 243.5904000
+         85
+         86    PROP-DATA MULAND-1
+         87        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         88            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         89        PROP-LIST MULAND
+         90        PVAL DICHL-01 80.92147478 -3642.542350 -12.26059350  &
+         91            57.20700000 243.5904000
+         92
+         93    PROP-DATA SIGDIP-1
+         94        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         95            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         96        PROP-LIST SIGDIP
+         97        PVAL DICHL-01 68.72045330 1.222222220 -1.348626E-10  &
+         98            1.4957495E-10 -6.024811E-11 57.20700000 238.3708000
+         99
+        100    PROP-DATA NRTL-1
+        101        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+        102            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+        103        PROP-LIST NRTL
+        104        BPVAL VINYL-01 HYDRO-01 .3421000000 -119.7519000 .3000000000  &
+        105            0.0 0.0 0.0 -80.70000000 -80.70000000
+        106        BPVAL HYDRO-01 VINYL-01 .1251000000 13.81580000 .3000000000  &
+        107            0.0 0.0 0.0 -80.70000000 -80.70000000
+        108        BPVAL VINYL-01 WATER -7.166300000 3581.032000 .3000000000  &
+        109            0.0 0.0 0.0 15.00000000 92.00000000
+        110        BPVAL WATER VINYL-01 4.137300000 253.3814000 .3000000000  &
+        111            0.0 0.0 0.0 15.00000000 92.00000000
+        112        BPVAL DICHL-01 WATER 161.6302000 -4790.826200 .2000000000  &
+        113            0.0 -24.93690000 0.0 0.0 50.00000000
+        114        BPVAL WATER DICHL-01 128.7456000 -6025.360400 .2000000000  &
+        115            0.0 -18.11790000 0.0 0.0 50.00000000
+        116
+        117    STREAM FEED
+        118        SUBSTREAM MIXED TEMP=15.0227 PRES=540. <kPa>  &
+        119            MOLE-FLOW=238.1141
+        120        MOLE-FRAC VINYL-01 0.82 / ACETY-01 0.0163 / DICHL-01  &
+        121            0.0125 / OXYGE-01 0.0058 / HYDRO-01 0.0682 / WATER  &
+        122            0.0026 / NITROGEN 0.0552 / CARBONMO 0.006 / METHANE  &
+        123            0.0134
+        124
+        125    BLOCK RADFRAC1 RADFRAC
+        126        SUBOBJECTS INTERNALS = CS-1 CS-2
+        127        PARAM NSTAGE=35 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+        128            DAMPING=NONE
+        129        PARAM2 STATIC-DP=YES OLD-SULZER=NO
+        130        COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+        131        FEEDS FEED 7
+        132        PRODUCTS B1 35 L / D1 1 L
+        133        P-SPEC 1 525. <kPa>
+        134        COL-SPECS D:F=0.47285020274 MOLE-RR=0.58375737582
+        135        REPORT NOHYDRAULIC
+        136        INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+        137            NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+        138            WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+        139            DC-WTOP-SIDE=141.1844920 <mm> DC-WBOT-SIDE=141.1844920 <mm>  &
+        140            HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+        141            FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+        142            PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+        143            MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+        144            MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+        145            MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+        146            MIN-PCT-DCA=.1000000000
+        147        TRAY-SIZE 1 2 5 SIEVE
+        148        INTERNALS CS-2 STAGE1=6 STAGE2=34 P-UPDATE=NO  &
+        149            TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+        150            OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+        151            DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=138.4000000 <mm>  &
+        152            DC-WBOT-SIDE=138.4000000 <mm> HOLE-DIAM=12.70000000 <mm>  &
+        153            HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+        154            DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+        155            AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+        156            MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+        157            MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+        158            MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+        159        TRAY-SIZE 2 6 34 SIEVE
+        160        UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+        161
+        162    BLOCK RADFRAC2 RADFRAC
+        163        SUBOBJECTS INTERNALS = CS-1 CS-2
+        164        PARAM NSTAGE=38 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+        165            DAMPING=NONE
+        166        PARAM2 STATIC-DP=YES OLD-SULZER=NO
+        167        COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+        168        FEEDS B1 12
+        169        PRODUCTS B2 38 L / D2 1 L
+        170        P-SPEC 1 213. <kPa>
+        171        COL-SPECS D:F=0.89276414575 MOLE-RR=0.74264451778
+        172        REPORT NOHYDRAULIC
+        173        INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+        174            TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+        175            OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+        176            DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=131.3579200 <mm>  &
+        177            DC-WBOT-SIDE=131.3579200 <mm> HOLE-DIAM=12.70000000 <mm>  &
+        178            HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+        179            DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+        180            AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+        181            MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+        182            MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+        183            MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+        184        TRAY-SIZE 1 2 26 SIEVE
+        185        INTERNALS CS-2 STAGE1=27 STAGE2=37 P-UPDATE=NO  &
+        186            TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+        187            OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+        188            DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=126.2597047 <mm>  &
+        189            DC-WBOT-SIDE=126.2597047 <mm> HOLE-DIAM=12.70000000 <mm>  &
+        190            HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+        191            DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+        192            AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+        193            MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+        194            MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+        195            MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+        196        TRAY-SIZE 2 27 37 SIEVE
+        197        UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+        198
+        199    UTILITY HP GENERAL
+        200        DESCRIPTION  &
+        201            'High Pressure Steam, Inlet Temp=250 C, Outlet Temp=249 C, Pres=572 psia'
+        202        COST ENERGY-PRICE=2.5E-06 <$/kJ>
+        203        PARAM UTILITY-TYPE=STEAM TIN=250. TOUT=249. VFRAC=1.  &
+        204            VFR-OUT=0. CALOPT=FLASH MIN-TAPP=10. CALCCO2=YES  &
+        205            FACTORSOURCE="US-Title40-Part98" FUELSOURCE="Natural_gas"  &
+        206            CO2FACTOR=2.10554172E-7 EFFICIENCY=0.85  &
+        207            HTC=0.0216 <GJ/hr-sqm-C>
+        208
+        209    UTILITY LP GENERAL
+        210        DESCRIPTION  &
+        211            'Low Pressure Steam, Inlet Temp=125 C, Outlet Temp=124 C'
+        212        COST ENERGY-PRICE=1.9E-06 <$/kJ>
+        213        PARAM UTILITY-TYPE=STEAM TIN=125. TOUT=124. VFRAC=1.  &
+        214            VFR-OUT=0. CALOPT=FLASH MIN-TAPP=10. CALCCO2=YES  &
+        215            FACTORSOURCE="US-Title40-Part98" FUELSOURCE="Natural_gas"  &
+        216            CO2FACTOR=2.10554172E-7 EFFICIENCY=0.85  &
+        217            HTC=0.0216 <GJ/hr-sqm-C>
+        218
+        219    UTILITY MP GENERAL
+        220        DESCRIPTION  &
+        221            'Medium Pressure Steam, Inlet Temp=175 C, Outlet Temp=174 C, Pres=127 psia'
+        222        COST ENERGY-PRICE=2.2E-06 <$/kJ>
+        223        PARAM UTILITY-TYPE=STEAM TIN=175. TOUT=174. VFRAC=1.  &
+        224            VFR-OUT=0. CALOPT=FLASH MIN-TAPP=10. CALCCO2=YES  &
+        225            FACTORSOURCE="US-Title40-Part98" FUELSOURCE="Natural_gas"  &
+        226            CO2FACTOR=2.10554172E-7 EFFICIENCY=0.85  &
+        227            HTC=0.0216 <GJ/hr-sqm-C>
+        228
+        229    UTILITY REFRIG1 GENERAL
+        230        DESCRIPTION  &
+        231            'Refrigerant 1, Inlet Temp=-25 C, Outlet Temp=-24 C'
+        232        COST ENERGY-PRICE=2.74E-06 <$/kJ>
+        233        PARAM UTILITY-TYPE=REFRIGERATIO COOLING-VALU=-4. <kJ/kg>  &
+        234            TIN=-25. TOUT=-24. MIN-TAPP=3. CALCCO2=YES FACTORSOURCE= &
+        235            "US-Title40-Part98" FUELSOURCE="Natural_gas"  &
+        236            CO2FACTOR=2.10554172E-7 EFFICIENCY=1.  &
+        237            HTC=0.00468 <GJ/hr-sqm-C>
+        238
+        239    UTILITY REFRIG4 GENERAL
+        240        DESCRIPTION  &
+        241            'Very Low Temperature, Inlet Temp=-270 C, Outlet Temp=-269 C'
+        242        COST ENERGY-PRICE=8.9E-06 <$/kJ>
+        243        PARAM UTILITY-TYPE=REFRIGERATIO COOLING-VALU=-1.341 <kJ/kg>  &
+        244            TIN=-270. TOUT=-269. MIN-TAPP=2. CALCCO2=YES  &
+        245            FACTORSOURCE="US-Title40-Part98" FUELSOURCE="Natural_gas"  &
+        246            CO2FACTOR=2.10554172E-7 EFFICIENCY=1.  &
+        247            HTC=0.00468 <GJ/hr-sqm-C>
+        248
+        249    UTILITY WATER GENERAL
+        250        DESCRIPTION 'Cooling Water, Inlet Temp=20 C, Outlet Temp=25 C'
+        251        COST ENERGY-PRICE=2.12E-07 <$/kJ>
+        252        PARAM UTILITY-TYPE=WATER PRES=1. <atm> PRES-OUT=1. <atm>  &
+        253            TIN=20. TOUT=25. CALOPT=FLASH MIN-TAPP=5.  &
+        254            HTC=0.0135 <GJ/hr-sqm-C>
+        255
+        256    EO-CONV-OPTI
+        257
+        258    STREAM-REPOR MOLEFLOW
+        259
+        260    PROPERTY-REP PCES NOPROP-DATA NODFMS
+        261    ;
+        262    ;
+        263    ;
+        264    ;
+        265    ;
+ *** INPUT TRANSLATOR MESSAGES ***
+
+  *** THIS RUN USES THE PROPERTIES ENTERPRISE DATABASE ***
+      SQLLOCALDB.APESV140 : (DATAVERSION - 40.0.0.13)                         
+      SQLLOCALDB.APV140 : (DATAVERSION - 40.0.0.13)                           
+      SQLLOCALDB.FACTV140 : (DATAVERSION - 40.0.0.12)                         
+      SQLLOCALDB.NISTV140 : (DATAVERSION - 40.0.0.12)                         
+ 
+ 
+
+ PDF updated                                                                      TIME =      2.35
+
+ *** CALCULATION TRACE ***
+
+
+ *** FLOWSHEET ANALYSIS MESSAGES ***
+
+ FLOWSHEET CONNECTIVITY BY STREAMS       
+
+   STREAM     SOURCE     DEST           STREAM     SOURCE     DEST
+   FEED       ----       RADFRAC1       D1         RADFRAC1   ----    
+   B1         RADFRAC1   RADFRAC2       D2         RADFRAC2   ----    
+   B2         RADFRAC2   ----                                         
+
+ FLOWSHEET CONNECTIVITY BY BLOCKS        
+
+   BLOCK        INLETS                         OUTLETS
+   RADFRAC1     FEED                           D1 B1                       
+   RADFRAC2     B1                             D2 B2                       
+
+      COMPUTATION ORDER FOR THE FLOWSHEET IS:
+      REFRIG1 LP REFRIG4 RADFRAC1 RADFRAC2 HP MP WATER 
+
+Calculations begin                                                              time      1.47
+
+
+ SIMULATION CALCULATIONS BEGIN                                                    TIME =      1.47
+
+      UTILITY BLOCK REFRIG1  MODEL: GENERAL                                       TIME =      1.47
+      HEATING/COOLING VALUE    -4.000000D+03 J/KG
+
+      UTILITY BLOCK LP       MODEL: GENERAL                                       TIME =      1.47
+      KODE = 5  NTRIAL =   2  T = 398.1500  P =  232179.      V =  1.00000      Q =  0.00000    
+      KODE = 5  NTRIAL =   2  T = 397.1500  P =  225121.      V =  0.00000      Q =  0.00000    
+      HEATING/COOLING VALUE     2.191879D+06 J/KG
+
+      UTILITY BLOCK REFRIG4  MODEL: GENERAL                                       TIME =      1.47
+      HEATING/COOLING VALUE    -1.341000D+03 J/KG
+
+      ENTHALPY CALCULATION FOR INLET STREAM FEED OF BLOCK RADFRAC1                TIME =      1.47
+      KODE = 2  NTRIAL =   4  T = 288.1727  P =  540000.      V = 0.293865      Q =  0.00000    
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =      1.47
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      2130.7    
+          2    1    4      831.56    
+          3    1    3      171.59    
+          4    1    3      68.764    
+          5    1    2      15.478    
+          6    1    2      1.1500    
+          7    1    2     0.10425    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =      1.48
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    2      9.0748    
+          2    1    2     0.24533    
+
+      UTILITY BLOCK HP       MODEL: GENERAL                                       TIME =      1.48
+      KODE = 5  NTRIAL =   5  T = 523.1500  P = 3.975372E+06  V =  1.00000      Q =  0.00000    
+      KODE = 5  NTRIAL =   5  T = 522.1500  P = 3.908667E+06  V =  0.00000      Q =  0.00000    
+      HEATING/COOLING VALUE     1.719324D+06 J/KG
+
+      UTILITY BLOCK MP       MODEL: GENERAL                                       TIME =      1.48
+      KODE = 5  NTRIAL =   3  T = 448.1500  P =  892540.      V =  1.00000      Q =  0.00000    
+      KODE = 5  NTRIAL =   3  T = 447.1500  P =  871696.      V =  0.00000      Q =  0.00000    
+      HEATING/COOLING VALUE     2.034752D+06 J/KG
+
+      UTILITY BLOCK WATER    MODEL: GENERAL                                       TIME =      1.48
+      KODE = 2  NTRIAL =   1  T = 293.1500  P =  101325.      V =  0.00000      Q =  0.00000    
+      KODE = 3  NTRIAL =   4  T = 373.1407  P =  101325.      V =  0.00000      Q = 6.026911E+06
+      KODE = 2  NTRIAL =   1  T = 298.1500  P =  101325.      V =  0.00000      Q =  0.00000    
+      KODE = 3  NTRIAL =   4  T = 373.1407  P =  101325.      V =  0.00000      Q = 5.650828E+06
+      HEATING/COOLING VALUE    -2.087576D+04 J/KG
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      1.48
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      1.48
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:05:49:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:05:49:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47968979188 MOLE-RR=0.295449263
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=110.5958053 <mm> DC-WBOT-SIDE=110.5958053 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=116.1700224 <mm>  &
+         DC-WBOT-SIDE=116.1700224 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:05:49:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 2
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90831430842 MOLE-RR=0.64929410002
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=129.6334898 <mm>  &
+         DC-WBOT-SIDE=129.6334898 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=124.4730049 <mm>  &
+         DC-WBOT-SIDE=124.4730049 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =      3.30
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time      3.55
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =      3.55
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10      43188.    
+          2    1   10      17426.    
+          3    1   10      12551.    
+          4    1   10      6394.6    
+          5    1   10      3248.5    
+          6    1   10      10141.    
+          7    1   10      23975.    
+          8    1   10      18324.    
+          9    1    6      5410.3    
+         10    1    6      1760.9    
+         11    1    6      221.64    
+         12    1    5      182.46    
+         13    1    4      79.060    
+         14    1    4      31.854    
+         15    1    5      6.0741    
+         16    1    4      3.2500    
+         17    1    5      1.4873    
+         18    1    4     0.66778    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =      3.57
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      2.5197    
+          2    1    2     0.67331E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      3.57
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      3.57
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:05:51:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 28
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47473391436 MOLE-RR=0.48742172169
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=95.43363282 <mm> DC-WBOT-SIDE=95.43363282 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=107.0278348 <mm>  &
+         DC-WBOT-SIDE=107.0278348 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:05:51:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 24
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.9013744676 MOLE-RR=0.49104444206
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=121.0349285 <mm>  &
+         DC-WBOT-SIDE=121.0349285 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=121.0348630 <mm>  &
+         DC-WBOT-SIDE=121.0348630 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =      5.13
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time      5.39
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =      5.39
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10      21972.    
+          2    1   10      6205.8    
+          3    1   10      5348.4    
+          4    1   10      4582.6    
+          5    1   10      41525.    
+          6    1   10      38174.    
+          7    1   10      16394.    
+          8    1    5      4722.6    
+          9    1    5      375.20    
+         10    1    4      175.59    
+         11    1    3      89.686    
+         12    1    3      27.992    
+         13    1    3      9.0522    
+         14    1    3      3.0374    
+         15    1    3      1.2708    
+         16    1    3     0.38661    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =      5.41
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      2.9226    
+          2    1    2     0.23180E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      5.41
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      5.41
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:05:53:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:05:53:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=34 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 24
+     PRODUCTS B1 34 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47870255895 MOLE-RR=0.8723155478
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=105.7329874 <mm> DC-WBOT-SIDE=105.7329874 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=33 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=113.1164917 <mm>  &
+         DC-WBOT-SIDE=113.1164917 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 33 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:05:53:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 27
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.89280534234 MOLE-RR=0.47656056694
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=119.8350352 <mm>  &
+         DC-WBOT-SIDE=119.8350352 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=114.0859572 <mm>  &
+         DC-WBOT-SIDE=114.0859572 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =      7.03
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time      7.35
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =      7.35
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    6      17.372    
+          2    1    3     0.31495    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =      7.36
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3      1.4263    
+          2    1    2     0.32497E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      7.36
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      7.36
+
+ STREAM D1      
+        SUBSTREAM MIXED     F =  3.166273027557681E-02  T =   129.050817347790      P =   525000.000000000    
+                            H =  -23004332.9216737      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -3232.75351707784      DENSITY =   1107.10855144039      MW =   51.2272591169692    
+        VINYL-01  2.058392236712365E-02  ACETY-01  1.078127727437909E-03  DICHL-01  5.803263907454958E-26
+        OXYGE-01  3.836282711256558E-04  HYDRO-01  4.510939325937082E-03  WATER     1.718593036121898E-04
+        NITROGEN  3.651082856230376E-03  CARBONMO  3.968568321989540E-04  METHANE   8.863135919109975E-04
+
+ STREAM B1      
+        SUBSTREAM MIXED     F =  3.448007527997890E-02  T =   308.699207903810      P =   525000.000000000    
+                            H =   5870867.61676804      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -1925.77764898195      DENSITY =   892.448936190443      MW =   63.3726518257787    
+        VINYL-01  3.365317821792935E-02  ACETY-01  3.591592021090819E-14  DICHL-01  8.267850716146355E-04
+        OXYGE-01  1.859856568915700E-28  HYDRO-01  5.769557697538826E-14  WATER     1.119903413043402E-07
+        NITROGEN  1.412952117116351E-28  CARBONMO  3.608431648708728E-29  METHANE   3.142783728336816E-24
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:05:55:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:05:55:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=30 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 10
+     PRODUCTS B1 30 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.46621907502 MOLE-RR=1.4507702916
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=125.9018745 <mm> DC-WBOT-SIDE=125.9018745 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=29 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=125.9060699 <mm>  &
+         DC-WBOT-SIDE=125.9060699 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 29 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:05:55:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=39 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 23
+     PRODUCTS B2 39 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.89288304735 MOLE-RR=0.57858466508
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=118.2035403 <mm>  &
+         DC-WBOT-SIDE=118.2035403 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=38 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=112.3783426 <mm>  &
+         DC-WBOT-SIDE=112.3783426 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 38 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =      8.95
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time      9.21
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =      9.21
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      19.063    
+          2    1    3      1.0561    
+          3    1    2     0.22620    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =      9.21
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3     0.86329    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      9.21
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =      9.21
+
+ STREAM D1      
+        SUBSTREAM MIXED     F =  3.083703762533892E-02  T =   128.447349936758      P =   525000.000000000    
+                            H =  -23391531.6716854      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -3234.87073435971      DENSITY =   1106.55300400804      MW =   50.9252982501948    
+        VINYL-01  1.975811772614832E-02  ACETY-01  1.078127730299523E-03  DICHL-01  1.622380689164655E-13
+        OXYGE-01  3.836282721311185E-04  HYDRO-01  4.510939337817634E-03  WATER     1.719712655074335E-04
+        NITROGEN  3.651082865799611E-03  CARBONMO  3.968568332390880E-04  METHANE   8.863135942339634E-04
+
+ STREAM B1      
+        SUBSTREAM MIXED     F =  3.530576793021679E-02  T =   308.680205605389      P =   525000.000000000    
+                            H =   5963554.84997280      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -1925.39229331870      DENSITY =   892.271873403228      MW =   63.3523496504105    
+        VINYL-01  3.447898283186692E-02  ACETY-01  5.789727295948733E-24  DICHL-01  8.267850694537028E-04
+        OXYGE-01  8.425663839805418E-50  HYDRO-01  4.014886424919767E-24  WATER     2.889617132900987E-11
+        NITROGEN  7.963662678681915E-51  CARBONMO  4.115458563552728E-51  METHANE   2.319862160059824E-42
+
+ STREAM D2      
+        SUBSTREAM MIXED     F =  3.152392165856389E-02  T =   278.651356383233      P =   213000.000000000    
+                            H =   6292324.21492827      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -2093.65072017690      DENSITY =   936.073956171060      MW =   62.4985199592248    
+        VINYL-01  3.152392162966772E-02  ACETY-01   0.00000000000000      DICHL-01  5.286620818196368E-22
+        OXYGE-01   0.00000000000000      HYDRO-01   0.00000000000000      WATER     2.889617134412871E-11
+        NITROGEN   0.00000000000000      CARBONMO   0.00000000000000      METHANE    0.00000000000000    
+
+ STREAM B2      
+        SUBSTREAM MIXED     F =  3.781846271652900E-03  T =   285.428083929160      P =   213000.000000000    
+                            H =  -29652926.5905646      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -2247.23678978066      DENSITY =   1001.48797561784      MW =   70.4695242277354    
+        VINYL-01  2.955061206443115E-03  ACETY-01   0.00000000000000      DICHL-01  8.267850652097846E-04
+        OXYGE-01   0.00000000000000      HYDRO-01   0.00000000000000      WATER     2.675326706638015E-21
+        NITROGEN   0.00000000000000      CARBONMO   0.00000000000000      METHANE    0.00000000000000    
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:05:57:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:05:57:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47968386692 MOLE-RR=0.295449263
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=148.9321474 <mm> DC-WBOT-SIDE=148.9321474 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=148.9399796 <mm>  &
+         DC-WBOT-SIDE=148.9399796 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:05:57:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=38 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 2
+     PRODUCTS B2 38 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90787515701 MOLE-RR=0.64802571302
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=123.8845588 <mm>  &
+         DC-WBOT-SIDE=123.8845588 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=37 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=118.3252967 <mm>  &
+         DC-WBOT-SIDE=118.3252967 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 37 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     10.86
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     11.23
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     11.23
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10      18320.    
+          2    1    9      3984.5    
+          3    1   10      34817.    
+          4    1   10      9263.4    
+          5    1   10      35433.    
+          6    1    8      24929.    
+          7    1   10     0.33931E+06
+          8    1    9      18693.    
+          9    1    6      8132.0    
+         10    1    4      2238.4    
+         11    1    4      259.50    
+         12    1    3      148.36    
+         13    1    3      74.029    
+         14    1    3      17.431    
+         15    1    3      7.2875    
+         16    1    3      2.4011    
+         17    1    3     0.85603    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     11.25
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      2.5402    
+          2    1    2     0.69091E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     11.25
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     11.25
+
+ STREAM D1      
+        SUBSTREAM MIXED     F =  3.172763673782663E-02  T =   129.097223664364      P =   525000.000000000    
+                            H =  -22963991.5271381      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -3232.48955567723      DENSITY =   1107.14612592472      MW =   51.2519819030097    
+        VINYL-01  2.065001618716153E-02  ACETY-01  1.078127730504351E-03  DICHL-01  7.668180349263605E-18
+        OXYGE-01  3.836282722066313E-04  HYDRO-01  4.510939338696185E-03  WATER     1.706719150140080E-04
+        NITROGEN  3.651082866518284E-03  CARBONMO  3.968568333172048E-04  METHANE   8.863135944084242E-04
+
+ STREAM B1      
+        SUBSTREAM MIXED     F =  3.441516881772907E-02  T =   308.698542689491      P =   525000.000000000    
+                            H =   5854016.57378543      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -1925.81533532397      DENSITY =   892.472439893183      MW =   63.3727656655554    
+        VINYL-01  3.358708436881334E-02  ACETY-01  7.388874419097241E-15  DICHL-01  8.267850694754173E-04
+        OXYGE-01  1.390986961986833E-32  HYDRO-01  9.375988802634410E-15  WATER     1.299379423548826E-06
+        NITROGEN  5.645728650244720E-33  CARBONMO  1.782251676382643E-33  METHANE   2.157121159901530E-27
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:05:59:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:05:59:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=35 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 7
+     PRODUCTS B1 35 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47285020274 MOLE-RR=0.58375737582
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=95.43046194 <mm> DC-WBOT-SIDE=95.43046194 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=34 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=107.0304587 <mm>  &
+         DC-WBOT-SIDE=107.0304587 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 34 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:05:59:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 13
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.89276414575 MOLE-RR=0.74264451778
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.9492227 <mm>  &
+         DC-WBOT-SIDE=120.9492227 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.9491726 <mm>  &
+         DC-WBOT-SIDE=120.9491726 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     12.83
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     13.07
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     13.07
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      11.653    
+          2    1    3     0.63282    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     13.07
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      3.2941    
+          2    1    2     0.62140E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     13.08
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     13.08
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:01:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:01:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 28
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.46918932431 MOLE-RR=1.4553578583
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=110.5943708 <mm> DC-WBOT-SIDE=110.5943708 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=116.1720278 <mm>  &
+         DC-WBOT-SIDE=116.1720278 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:01:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=39 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 24
+     PRODUCTS B2 39 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.89288304735 MOLE-RR=0.57858466508
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=129.6334892 <mm>  &
+         DC-WBOT-SIDE=129.6334892 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=38 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=124.4641512 <mm>  &
+         DC-WBOT-SIDE=124.4641512 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 38 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     14.68
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     14.94
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     14.94
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10     0.43854E+08
+          2    1   10      25115.    
+          3    1    5      30620.    
+          4    1    8      19729.    
+          5    1    8      4576.2    
+          6    1   10      388.07    
+          7    1    4      328.77    
+          8    1    4      174.74    
+          9    1    3      59.262    
+         10    1    4      30.735    
+         11    1    3      11.395    
+         12    1    3      2.3249    
+         13    1    3     0.31370    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     14.95
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3     0.26774    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     14.95
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     14.95
+
+ STREAM D2      
+        SUBSTREAM MIXED     F =  3.134850530038684E-02  T =   278.646794049557      P =   213000.000000000    
+                            H =   6277098.81191557      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -2093.67152539636      DENSITY =   936.089661129563      MW =   62.4960368433820    
+        VINYL-01  3.134675187712705E-02  ACETY-01  2.730302001316072E-09  DICHL-01  8.363244252109100E-23
+        OXYGE-01  1.170519739722228E-16  HYDRO-01  7.199382594298989E-09  WATER     1.743493551296307E-06
+        NITROGEN  3.107907146841735E-16  CARBONMO  5.198498051988108E-17  METHANE   2.341341672102491E-14
+
+ STREAM B2      
+        SUBSTREAM MIXED     F =  3.760802008589942E-03  T =   285.470614438168      P =   213000.000000000    
+                            H =  -29853448.3953466      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -2248.13496538846      DENSITY =   1001.82411570349      MW =   70.5141274796668    
+        VINYL-01  2.934016940921287E-03  ACETY-01  4.938705327793435E-29  DICHL-01  8.267850676681221E-04
+        OXYGE-01  1.134179727610538E-58  HYDRO-01  6.247780555991943E-29  WATER     5.330074521797113E-16
+        NITROGEN  3.820267603566670E-60  CARBONMO  2.737228539171972E-60  METHANE   2.158491111044476E-50
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:03:09 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:03:09 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=35 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 7
+     PRODUCTS B1 35 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.4728523295 MOLE-RR=0.58375737582
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=149.7172817 <mm> DC-WBOT-SIDE=149.7172817 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=34 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=149.7259308 <mm>  &
+         DC-WBOT-SIDE=149.7259308 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 34 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:03:09 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 12
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.89276414575 MOLE-RR=0.74391290477
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=123.5346709 <mm>  &
+         DC-WBOT-SIDE=123.5346709 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=117.9543713 <mm>  &
+         DC-WBOT-SIDE=117.9543713 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     16.47
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     16.80
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     16.80
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      21.969    
+          2    1    3     0.99115    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     16.80
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3     0.74234    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     16.80
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     16.80
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:05:09 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:05:09 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=34 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 23
+     PRODUCTS B1 34 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47870255895 MOLE-RR=0.8723155478
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=110.6029785 <mm> DC-WBOT-SIDE=110.6029785 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=33 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=116.1703548 <mm>  &
+         DC-WBOT-SIDE=116.1703548 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 33 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:05:09 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=38 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 26
+     PRODUCTS B2 38 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.89280534234 MOLE-RR=0.47656056694
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=129.6829441 <mm>  &
+         DC-WBOT-SIDE=129.6829441 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=37 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=124.5334934 <mm>  &
+         DC-WBOT-SIDE=124.5334934 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 37 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     18.45
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     18.74
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     18.74
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10     0.13636E+06
+          2    1    8      2912.7    
+          3    1    4      96193.    
+          4    1   10      7680.0    
+          5    1    5      2130.8    
+          6    1    5      1700.9    
+          7    1    6      3866.2    
+          8    1   10      7810.4    
+          9    1    6      2933.0    
+         10    1    4      1118.1    
+         11    1    3      200.96    
+         12    1    4      83.728    
+         13    1    4      44.054    
+         14    1    4      14.596    
+         15    1    4      10.697    
+         16    1    3      5.3913    
+         17    1    3      2.5200    
+         18    1    3     0.62499    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     18.75
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3     0.62839    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     18.75
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     18.75
+
+ STREAM D1      
+        SUBSTREAM MIXED     F =  3.166273027557681E-02  T =   129.051027579836      P =   525000.000000000    
+                            H =  -23004759.4426825      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -3232.75455585018      DENSITY =   1107.10841534043      MW =   51.2271899227876    
+        VINYL-01  2.058387310402994E-02  ACETY-01  1.078127731467147E-03  DICHL-01  4.933155898524233E-25
+        OXYGE-01  3.836282725483081E-04  HYDRO-01  4.510939342716081E-03  WATER     1.719085261767526E-04
+        NITROGEN  3.651082869770103E-03  CARBONMO  3.968568336706636E-04  METHANE   8.863135951978147E-04
+
+ STREAM B1      
+        SUBSTREAM MIXED     F =  3.448007527997889E-02  T =   308.699186221556      P =   525000.000000000    
+                            H =   5871244.48024834      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -1925.77841490280      DENSITY =   892.448759316135      MW =   63.3727153247877    
+        VINYL-01  3.365322744275407E-02  ACETY-01  4.822474273329897E-15  DICHL-01  8.267850687991006E-04
+        OXYGE-01  1.751788209026133E-30  HYDRO-01  7.127333447121441E-15  WATER     6.276841376576551E-08
+        NITROGEN  1.080537753955235E-30  CARBONMO  2.960976276942806E-31  METHANE   6.200458658909919E-26
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:07:09 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:07:09 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47968386692 MOLE-RR=0.26655608881
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=125.9067815 <mm> DC-WBOT-SIDE=125.9067815 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=125.9183032 <mm>  &
+         DC-WBOT-SIDE=125.9183032 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:07:09 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=38 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 3
+     PRODUCTS B2 38 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90787515701 MOLE-RR=0.65138564039
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=118.2037233 <mm>  &
+         DC-WBOT-SIDE=118.2037233 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=37 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=112.3603241 <mm>  &
+         DC-WBOT-SIDE=112.3603241 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 37 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     20.42
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     20.72
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     20.72
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    6      27.808    
+          2    1    3      1.4935    
+          3    1    2     0.32704    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     20.72
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      2.9921    
+          2    1    2     0.83562E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     20.72
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     20.72
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:08:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:08:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47968979188 MOLE-RR=0.30144367684
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=93.69759866 <mm> DC-WBOT-SIDE=93.69759866 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=106.0573889 <mm>  &
+         DC-WBOT-SIDE=106.0573889 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:08:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 2
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90141686205 MOLE-RR=0.64889656925
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=126.2294462 <mm>  &
+         DC-WBOT-SIDE=126.2294462 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.9906446 <mm>  &
+         DC-WBOT-SIDE=120.9906446 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     22.31
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     22.55
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     22.55
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      2.7763    
+          2    1    3     0.39351E-01
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     22.56
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      2.2002    
+          2    1    2     0.52212E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     22.56
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     22.56
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:10:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:10:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=36 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 18
+     PRODUCTS B1 36 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47979680223 MOLE-RR=0.295449263
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=95.79092874 <mm> DC-WBOT-SIDE=95.79092874 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=35 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=107.2311894 <mm>  &
+         DC-WBOT-SIDE=107.2311894 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 35 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:10:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=38 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 2
+     PRODUCTS B2 38 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90787515701 MOLE-RR=0.64802571302
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.5037429 <mm>  &
+         DC-WBOT-SIDE=120.5037429 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=37 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.5037626 <mm>  &
+         DC-WBOT-SIDE=120.5037626 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 37 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     24.28
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     24.55
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     24.55
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4     0.52957    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     24.55
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      1.5733    
+          2    1    2     0.41883E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     24.55
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     24.55
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:12:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:12:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=35 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 7
+     PRODUCTS B1 35 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47285020274 MOLE-RR=0.64926359114
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=95.45040470 <mm> DC-WBOT-SIDE=95.45040470 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=34 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=107.0347375 <mm>  &
+         DC-WBOT-SIDE=107.0347375 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 34 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:12:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 12
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.89276414575 MOLE-RR=0.80708131111
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.9353538 <mm>  &
+         DC-WBOT-SIDE=120.9353538 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.9353177 <mm>  &
+         DC-WBOT-SIDE=120.9353177 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     26.19
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     26.48
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     26.48
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      12.551    
+          2    1    3     0.63480    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     26.48
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      3.2630    
+          2    1    2     0.62355E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     26.49
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     26.49
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:14:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:14:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 28
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47420529998 MOLE-RR=0.48142730785
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=113.9770318 <mm> DC-WBOT-SIDE=113.9770318 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=118.1524340 <mm>  &
+         DC-WBOT-SIDE=118.1524340 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:14:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 25
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.9082719137 MOLE-RR=0.49144197283
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=132.1212734 <mm>  &
+         DC-WBOT-SIDE=132.1212734 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=127.0911585 <mm>  &
+         DC-WBOT-SIDE=127.0911585 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     28.09
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     28.34
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     28.34
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1   10     0.14150E+10
+          2    1   10      56963.    
+          3    1   10      7210.1    
+          4    1    7      19985.    
+          5    1    9      14494.    
+          6    1    7      2724.1    
+          7    1    5      424.33    
+          8    1    5      284.65    
+          9    1    4      179.63    
+         10    1    3      144.66    
+         11    1    3      73.596    
+         12    1    4      36.886    
+         13    1    3      14.675    
+         14    1    3      6.0419    
+         15    1    4      2.4032    
+         16    1    4      1.0190    
+         17    1    3     0.47418    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     28.35
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3      2.7122    
+          2    1    2     0.71511E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     28.35
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     28.35
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:16:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:16:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 18
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47968386692 MOLE-RR=0.26655608881
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=105.3365627 <mm> DC-WBOT-SIDE=105.3365627 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=112.9195676 <mm>  &
+         DC-WBOT-SIDE=112.9195676 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:16:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=38 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 2
+     PRODUCTS B2 38 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90787515701 MOLE-RR=0.65139595997
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.3746293 <mm>  &
+         DC-WBOT-SIDE=120.3746293 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=37 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=114.6550977 <mm>  &
+         DC-WBOT-SIDE=114.6550977 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 37 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     29.96
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     30.25
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     30.25
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      17.682    
+          2    1    3     0.62046    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     30.26
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      1.6117    
+          2    1    3     0.21598E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     30.26
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     30.26
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:18:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:18:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47986637788 MOLE-RR=0.295449263
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=93.69906816 <mm> DC-WBOT-SIDE=93.69906816 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=106.0597751 <mm>  &
+         DC-WBOT-SIDE=106.0597751 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:18:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 3
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90787199071 MOLE-RR=0.64931284289
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=121.0922387 <mm>  &
+         DC-WBOT-SIDE=121.0922387 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=121.0922696 <mm>  &
+         DC-WBOT-SIDE=121.0922696 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     31.95
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     32.22
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     32.22
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      2.3558    
+          2    1    3     0.34402E-01
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     32.22
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3     0.92804    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     32.22
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     32.22
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:20:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:20:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47968386692 MOLE-RR=0.26655608881
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=95.45511821 <mm> DC-WBOT-SIDE=95.45511821 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=107.0302863 <mm>  &
+         DC-WBOT-SIDE=107.0302863 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:20:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=38 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 3
+     PRODUCTS B2 38 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90787515701 MOLE-RR=0.65138564039
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=126.1360830 <mm>  &
+         DC-WBOT-SIDE=126.1360830 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=37 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.8708532 <mm>  &
+         DC-WBOT-SIDE=120.8708532 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 37 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     33.73
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     33.97
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     33.97
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      2.3653    
+          2    1    3     0.33974E-01
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     33.98
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    2     0.90983E-02
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     33.98
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     33.98
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:22:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:22:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47968979188 MOLE-RR=0.30144367684
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=93.69806231 <mm> DC-WBOT-SIDE=93.69806231 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=106.0570172 <mm>  &
+         DC-WBOT-SIDE=106.0570172 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:22:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 3
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90141686205 MOLE-RR=0.69838888618
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=126.2293689 <mm>  &
+         DC-WBOT-SIDE=126.2293689 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.9906387 <mm>  &
+         DC-WBOT-SIDE=120.9906387 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     35.62
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     35.89
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     35.89
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      2.7898    
+          2    1    3     0.39271E-01
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     35.90
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      1.4733    
+          2    1    2     0.36539E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     35.90
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     35.90
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:23:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:23:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47968960566 MOLE-RR=0.38780263955
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=95.79092903 <mm> DC-WBOT-SIDE=95.79092903 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=107.2311886 <mm>  &
+         DC-WBOT-SIDE=107.2311886 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:23:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=38 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 2
+     PRODUCTS B2 38 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90627685621 MOLE-RR=0.64800697015
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=127.6365382 <mm>  &
+         DC-WBOT-SIDE=127.6365382 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=37 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=122.4785237 <mm>  &
+         DC-WBOT-SIDE=122.4785237 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 37 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     37.37
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     37.64
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     37.64
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      6.0534    
+          2    1    3     0.89049E-01
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     37.64
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3     0.27954    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     37.65
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     37.65
+
+ STREAM D1      
+        SUBSTREAM MIXED     F =  3.172801631419059E-02  T =   129.098042219681      P =   525000.000000000    
+                            H =  -22971212.4699876      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -3232.54877296600      DENSITY =   1107.14835052069      MW =   51.2509658750225    
+        VINYL-01  2.064957511234445E-02  ACETY-01  1.078127728532100E-03  DICHL-01  6.512505059040693E-19
+        OXYGE-01  3.836282715031046E-04  HYDRO-01  4.510939330429911E-03  WATER     1.714925861859297E-04
+        NITROGEN  3.651082859822650E-03  CARBONMO  3.968568325894187E-04  METHANE   8.863135927830343E-04
+
+ STREAM B1      
+        SUBSTREAM MIXED     F =  3.441478924136510E-02  T =   308.700081488494      P =   525000.000000000    
+                            H =   5860502.17706202      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -1925.80992617096      DENSITY =   892.466098812458      MW =   63.3738360780661    
+        VINYL-01  3.358752546254833E-02  ACETY-01  2.486497027698609E-15  DICHL-01  8.267850708732750E-04
+        OXYGE-01  4.623523302036823E-33  HYDRO-01  3.144010438209789E-15  WATER     4.787079378761926E-07
+        NITROGEN  1.877843817550747E-33  CARBONMO  5.926750412092708E-34  METHANE   7.170637500290656E-28
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:25:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47997202194 MOLE-RR=0.26655608881
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=100.8268006 <mm> DC-WBOT-SIDE=100.8268006 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=110.0853033 <mm>  &
+         DC-WBOT-SIDE=110.0853033 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:25:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=38 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 3
+     PRODUCTS B2 38 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90787515701 MOLE-RR=0.65138564039
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.8315034 <mm>  &
+         DC-WBOT-SIDE=120.8315034 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=37 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.8304252 <mm>  &
+         DC-WBOT-SIDE=120.8304252 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 37 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     39.30
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     39.56
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     39.56
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    5      8.8812    
+          2    1    3     0.12471    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     39.57
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3      1.2596    
+          2    1    2     0.32389E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     39.57
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     39.57
+
+ STREAM D1      
+        SUBSTREAM MIXED     F =  3.174669611928436E-02  T =   129.110685236781      P =   525000.000000000    
+                            H =  -22950586.6910807      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -3232.39950479227      DENSITY =   1107.15670602774      MW =   51.2594699156126    
+        VINYL-01  2.066960088412295E-02  ACETY-01  1.078127729433861E-03  DICHL-01  2.126214064218174E-17
+        OXYGE-01  3.836282718269432E-04  HYDRO-01  4.510939334227197E-03  WATER     1.701466103130491E-04
+        NITROGEN  3.651082862904699E-03  CARBONMO  3.968568329244240E-04  METHANE   8.863135935312130E-04
+
+ STREAM B1      
+        SUBSTREAM MIXED     F =  3.439610943627134E-02  T =   308.698021035187      P =   525000.000000000    
+                            H =   5847650.50151761      V =   0.00000000000000      L =   1.00000000000000    
+                            ENTROPY =  -1925.82928883488      DENSITY =   892.480735478433      MW =   63.3725707412208    
+        VINYL-01  3.356749968205824E-02  ACETY-01  1.082405837287732E-14  DICHL-01  8.267850702307026E-04
+        OXYGE-01  2.046622501780154E-32  HYDRO-01  1.375258704424681E-14  WATER     1.824683957816520E-06
+        NITROGEN  8.304740757811758E-33  CARBONMO  2.621847125329715E-33  METHANE   3.173824395150646E-27
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:28:09 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47986637788 MOLE-RR=0.295449263
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=93.73252932 <mm> DC-WBOT-SIDE=93.73252932 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=106.0559387 <mm>  &
+         DC-WBOT-SIDE=106.0559387 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:28:09 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=38 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 3
+     PRODUCTS B2 38 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90787184108 MOLE-RR=0.6513370123
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=126.1940951 <mm>  &
+         DC-WBOT-SIDE=126.1940951 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=37 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.9559463 <mm>  &
+         DC-WBOT-SIDE=120.9559463 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 37 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     41.48
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     41.73
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     41.73
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      2.3057    
+          2    1    3     0.32606E-01
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     41.73
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    2     0.61275E-02
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     41.74
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     41.74
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:30:09 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:30:09 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47972573694 MOLE-RR=0.30144367684
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=95.45510205 <mm> DC-WBOT-SIDE=95.45510205 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=107.0302747 <mm>  &
+         DC-WBOT-SIDE=107.0302747 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:30:09 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 2
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90141686205 MOLE-RR=0.64889656925
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=126.2052695 <mm>  &
+         DC-WBOT-SIDE=126.2052695 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.9664062 <mm>  &
+         DC-WBOT-SIDE=120.9664062 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     43.52
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     43.87
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     43.87
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4     0.44184    
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     43.87
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      2.2068    
+          2    1    2     0.52365E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     43.87
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     43.87
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:32:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:32:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 18
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47968386692 MOLE-RR=0.26655608881
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=95.79159426 <mm> DC-WBOT-SIDE=95.79159426 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=107.2328294 <mm>  &
+         DC-WBOT-SIDE=107.2328294 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:32:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=38 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 2
+     PRODUCTS B2 38 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90787515701 MOLE-RR=0.65139595997
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.5000000 <mm>  &
+         DC-WBOT-SIDE=120.5000000 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=37 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=120.5000000 <mm>  &
+         DC-WBOT-SIDE=120.5000000 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 37 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     45.60
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     45.90
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     45.90
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      2.7150    
+          2    1    3     0.39987E-01
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     45.91
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    4      1.3567    
+          2    1    2     0.36162E-01
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     45.91
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     45.91
+
+
+*** INPUT SPECIFICATION MESSAGES ***
+
+ FLOWSHEET    IS GENERATED BECAUSE OF OTHER CHANGES 04/17/2025   22:06:34:99 
+ FLOWSHEET
+     BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+     BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC1 04/17/2025   22:06:34:99 
+ BLOCK RADFRAC1 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS FEED 19
+     PRODUCTS B1 32 L / D1 1 L
+     P-SPEC 1 525. <kPa>
+     COL-SPECS D:F=0.47968386692 MOLE-RR=0.26655608881
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+         NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+         WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+         DC-WTOP-SIDE=93.69788817 <mm> DC-WBOT-SIDE=93.69788817 <mm>  &
+         HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+         FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+         PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+         MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+         MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+         MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+         MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 5 SIEVE
+     INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=106.0598684 <mm>  &
+         DC-WBOT-SIDE=106.0598684 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 6 31 SIEVE
+     UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+
+ CHANGES WERE MADE TO BLOCK        RADFRAC2 04/17/2025   22:06:34:99 
+ BLOCK RADFRAC2 RADFRAC
+     SUBOBJECTS INTERNALS = CS-1 CS-2
+     PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+         DAMPING=NONE
+     PARAM2 STATIC-DP=YES OLD-SULZER=NO
+     COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+     FEEDS B1 3
+     PRODUCTS B2 37 L / D2 1 L
+     P-SPEC 1 213. <kPa>
+     COL-SPECS D:F=0.90787530665 MOLE-RR=0.64936147097
+     REPORT NOHYDRAULIC
+     INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=121.0920680 <mm>  &
+         DC-WBOT-SIDE=121.0920680 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 1 2 26 SIEVE
+     INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+         TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+         OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+         DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=121.0920331 <mm>  &
+         DC-WBOT-SIDE=121.0920331 <mm> HOLE-DIAM=12.70000000 <mm>  &
+         HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+         DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+         AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+         MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+         MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+         MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+     TRAY-SIZE 2 27 36 SIEVE
+     UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+
+ PDF updated                                                                      TIME =     47.70
+ THIS COPY OF ASPEN PLUS LICENSED TO JOHNS HOPKINS UNIVERSITY        
+ 
+ 
+
+
+Calculations begin                                                              time     47.96
+
+
+      UOS BLOCK RADFRAC1 MODEL: RADFRAC                                           TIME =     47.96
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    2     0.37022E-01
+
+      UOS BLOCK RADFRAC2 MODEL: RADFRAC                                           TIME =     47.96
+
+       Convergence iterations:
+         OL   ML   IL     Err/Tol
+          1    1    3     0.92138    
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     47.96
+
+      CHECKING PHASE EQUILIBRIUM RESULTS                                          TIME =     47.96

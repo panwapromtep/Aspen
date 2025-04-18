@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _2629zce.inm
+MODNAME: apmain
+RUNID: _2629zce
+NEW_RUNID: _2629zce
+OLD_RUNID: _2629zce
+PDF: _2629zce.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+DBCONN: _2629zce.ads

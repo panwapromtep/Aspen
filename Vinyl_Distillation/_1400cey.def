@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _1400cey.inm
+MODNAME: apmain
+RUNID: _1400cey
+NEW_RUNID: _1400cey
+OLD_RUNID: _1400cey
+PDF: _1400cey.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+DBCONN: _1400cey.ads

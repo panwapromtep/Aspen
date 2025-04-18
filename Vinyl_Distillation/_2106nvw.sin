@@ -1,0 +1,272 @@
+ >>ORIGINAL RUN                           APRIL 17, 2025      
+   10:21:10 P.M.                          THURSDAY    
+   INPUT FILE: _2106nvw.inm
+   RUN ID : _2106nvw
+          1    ;
+          2    ;Input file created by Aspen Plus Rel. 40.0 at 22:21:09 Thu Apr 17, 2025
+          3    ;Directory C:\Users\wsangpa1\OneDrive - Johns Hopkins\ASPEN\Aspen\Vinyl_Distillation  Runid VINYL CHLORIDE DISTILLATION
+          4    ;
+          5
+          6
+          7    DYNAMICS
+          8        DYNAMICS RESULTS=ON
+          9
+         10    IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         11            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         12
+         13    DEF-STREAMS CONVEN ALL
+         14
+         15    MODEL-OPTION
+         16
+         17    DATABANKS 'APV140 PURE40' / 'APV140 AQUEOUS' / 'APV140 SOLIDS' &
+         18             / 'APV140 INORGANIC' / 'APESV140 AP-EOS' /  &
+         19            'NISTV140 NIST-TRC' / 'APESV140 ACIDGAS' /  &
+         20            'APESV140 BIOFEED' / 'APESV140 FERMENT' /  &
+         21            'APESV140 FLARE' / 'APV140 ASPENPCD' / 'APV140 BIODIESEL' &
+         22             / 'APV140 COMBUST' / 'APV140 ELECPURE' /  &
+         23            'APV140 EOS-LIT' / 'APV140 ETHYLENE' / 'APV140 HYSYS' /  &
+         24            'APV140 INITIATO' / 'APV140 NRTL-SAC' / 'APV140 PC-SAFT' &
+         25             / 'APV140 POLYMER' / 'APV140 POLYPCSF' /  &
+         26            'APV140 PURE25' / 'APV140 PURE26' / 'APV140 PURE27' /  &
+         27            'APV140 PURE28' / 'APV140 PURE32' / 'APV140 PURE35' /  &
+         28            'APV140 PURE36' / 'APV140 PURE37' / 'APV140 PURE38' /  &
+         29            'APV140 PURE39' / 'APV140 SEGMENT' / 'FACTV140 FACTPCD'
+         30
+         31    PROP-SOURCES 'APV140 PURE40' / 'APV140 AQUEOUS' /  &
+         32            'APV140 SOLIDS' / 'APV140 INORGANIC' / 'APESV140 AP-EOS' &
+         33             / 'NISTV140 NIST-TRC' / 'APESV140 ACIDGAS' /  &
+         34            'APESV140 BIOFEED' / 'APESV140 FERMENT' /  &
+         35            'APESV140 FLARE' / 'APV140 ASPENPCD' / 'APV140 BIODIESEL' &
+         36             / 'APV140 COMBUST' / 'APV140 ELECPURE' /  &
+         37            'APV140 EOS-LIT' / 'APV140 ETHYLENE' / 'APV140 HYSYS' /  &
+         38            'APV140 INITIATO' / 'APV140 NRTL-SAC' / 'APV140 PC-SAFT' &
+         39             / 'APV140 POLYMER' / 'APV140 POLYPCSF' /  &
+         40            'APV140 PURE25' / 'APV140 PURE26' / 'APV140 PURE27' /  &
+         41            'APV140 PURE28' / 'APV140 PURE32' / 'APV140 PURE35' /  &
+         42            'APV140 PURE36' / 'APV140 PURE37' / 'APV140 PURE38' /  &
+         43            'APV140 PURE39' / 'APV140 SEGMENT' / 'FACTV140 FACTPCD'
+         44
+         45    COMPONENTS
+         46        VINYL-01 C2H3CL /
+         47        ACETY-01 C2H2 /
+         48        DICHL-01 C2H4CL2-1 /
+         49        OXYGE-01 O2 /
+         50        HYDRO-01 HCL /
+         51        WATER H2O /
+         52        NITROGEN N2 /
+         53        CARBONMO CO /
+         54        METHANE CH4
+         55
+         56    SOLVE
+         57        RUN-MODE MODE=SIM
+         58
+         59    FLOWSHEET
+         60        BLOCK RADFRAC1 IN=FEED OUT=D1 B1
+         61        BLOCK RADFRAC2 IN=B1 OUT=D2 B2
+         62
+         63    PROPERTIES NRTL
+         64
+         65    PROP-DATA PCES-1
+         66        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         67            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         68        PROP-LIST DHVLB / VB / RKTZRA / VLSTD
+         69        PVAL DICHL-01 6750.889295 / 88.65938200 / .2692624250 /  &
+         70            83.75050270
+         71
+         72    PROP-DATA DHVLWT-1
+         73        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         74            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         75        PROP-LIST DHVLWT
+         76        PVAL DICHL-01 6750.889295 57.20700000 .3800000000 0.0  &
+         77            -141.0072000
+         78
+         79    PROP-DATA KLDIP-1
+         80        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         81            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         82        PROP-LIST KLDIP
+         83        PVAL DICHL-01 .1017396118 6.34424108E-5 -4.1249461E-6  &
+         84            2.17593050E-8 -4.501867E-11 57.20700000 243.5904000
+         85
+         86    PROP-DATA MULAND-1
+         87        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         88            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         89        PROP-LIST MULAND
+         90        PVAL DICHL-01 80.92147478 -3642.542350 -12.26059350  &
+         91            57.20700000 243.5904000
+         92
+         93    PROP-DATA SIGDIP-1
+         94        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+         95            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+         96        PROP-LIST SIGDIP
+         97        PVAL DICHL-01 68.72045330 1.222222220 -1.348626E-10  &
+         98            1.4957495E-10 -6.024811E-11 57.20700000 238.3708000
+         99
+        100    PROP-DATA NRTL-1
+        101        IN-UNITS MET PRESSURE=bar TEMPERATURE=C DELTA-T=C PDROP=bar  &
+        102            INVERSE-PRES='1/bar' SHORT-LENGTH=mm
+        103        PROP-LIST NRTL
+        104        BPVAL VINYL-01 HYDRO-01 .3421000000 -119.7519000 .3000000000  &
+        105            0.0 0.0 0.0 -80.70000000 -80.70000000
+        106        BPVAL HYDRO-01 VINYL-01 .1251000000 13.81580000 .3000000000  &
+        107            0.0 0.0 0.0 -80.70000000 -80.70000000
+        108        BPVAL VINYL-01 WATER -7.166300000 3581.032000 .3000000000  &
+        109            0.0 0.0 0.0 15.00000000 92.00000000
+        110        BPVAL WATER VINYL-01 4.137300000 253.3814000 .3000000000  &
+        111            0.0 0.0 0.0 15.00000000 92.00000000
+        112        BPVAL DICHL-01 WATER 161.6302000 -4790.826200 .2000000000  &
+        113            0.0 -24.93690000 0.0 0.0 50.00000000
+        114        BPVAL WATER DICHL-01 128.7456000 -6025.360400 .2000000000  &
+        115            0.0 -18.11790000 0.0 0.0 50.00000000
+        116
+        117    STREAM FEED
+        118        SUBSTREAM MIXED TEMP=15.0227 PRES=540. <kPa>  &
+        119            MOLE-FLOW=238.1141
+        120        MOLE-FRAC VINYL-01 0.82 / ACETY-01 0.0163 / DICHL-01  &
+        121            0.0125 / OXYGE-01 0.0058 / HYDRO-01 0.0682 / WATER  &
+        122            0.0026 / NITROGEN 0.0552 / CARBONMO 0.006 / METHANE  &
+        123            0.0134
+        124
+        125    BLOCK RADFRAC1 RADFRAC
+        126        SUBOBJECTS INTERNALS = CS-1 CS-2
+        127        PARAM NSTAGE=32 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+        128            DAMPING=NONE
+        129        PARAM2 STATIC-DP=YES OLD-SULZER=NO
+        130        COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+        131        FEEDS FEED 27
+        132        PRODUCTS B1 32 L / D1 1 L
+        133        P-SPEC 1 525. <kPa>
+        134        COL-SPECS D:F=0.46639957614 MOLE-RR=0.70944859843
+        135        REPORT NOHYDRAULIC
+        136        INTERNALS CS-1 STAGE1=2 STAGE2=5 P-UPDATE=NO TRAYTYPE=SIEVE  &
+        137            NPASS=1 SYSFAC=1.000000000 OVER-DESIGN=1.000000000  &
+        138            WEIR-HT=50.80000000 <mm> DC-CLEAR=38.10000000 <mm>  &
+        139            DC-WTOP-SIDE=141.1844920 <mm> DC-WBOT-SIDE=141.1844920 <mm>  &
+        140            HOLE-DIAM=12.70000000 <mm> HOLE-AREA=.1000000000  &
+        141            FLOOD-METH=GLITSCH6 DECK-THICK=0.134 <IN>  &
+        142            PCT-FLOOD-FA=80.00000000 AER-PARAM-M=1.000000000  &
+        143            MAX-DC-LOAD=GLITSCH MAX-ACC-DP=.0250000000  &
+        144            MAX-PCT-DCB=100.0000000 MAX-PCT-ENT=10.00000000  &
+        145            MIN-WEIR-LD=4.470981863 MAX-WEIR-LD=117.3721131  &
+        146            MIN-PCT-DCA=.1000000000
+        147        TRAY-SIZE 1 2 5 SIEVE
+        148        INTERNALS CS-2 STAGE1=6 STAGE2=31 P-UPDATE=NO  &
+        149            TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+        150            OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+        151            DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=138.4000000 <mm>  &
+        152            DC-WBOT-SIDE=138.4000000 <mm> HOLE-DIAM=12.70000000 <mm>  &
+        153            HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+        154            DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+        155            AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+        156            MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+        157            MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+        158            MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+        159        TRAY-SIZE 2 6 31 SIEVE
+        160        UTILITIES COND-UTIL=REFRIG4 REB-UTIL=LP
+        161
+        162    BLOCK RADFRAC2 RADFRAC
+        163        SUBOBJECTS INTERNALS = CS-1 CS-2
+        164        PARAM NSTAGE=37 ALGORITHM=STANDARD HYDRAULIC=NO MAXOL=25  &
+        165            DAMPING=NONE
+        166        PARAM2 STATIC-DP=YES OLD-SULZER=NO
+        167        COL-CONFIG CONDENSER=TOTAL CA-CONFIG=INT-1
+        168        FEEDS B1 13
+        169        PRODUCTS B2 37 L / D2 1 L
+        170        P-SPEC 1 213. <kPa>
+        171        COL-SPECS D:F=0.89336402156 MOLE-RR=1.4787311621
+        172        REPORT NOHYDRAULIC
+        173        INTERNALS CS-1 STAGE1=2 STAGE2=26 P-UPDATE=NO  &
+        174            TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+        175            OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+        176            DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=131.3579200 <mm>  &
+        177            DC-WBOT-SIDE=131.3579200 <mm> HOLE-DIAM=12.70000000 <mm>  &
+        178            HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+        179            DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+        180            AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+        181            MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+        182            MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+        183            MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+        184        TRAY-SIZE 1 2 26 SIEVE
+        185        INTERNALS CS-2 STAGE1=27 STAGE2=36 P-UPDATE=NO  &
+        186            TRAYTYPE=SIEVE NPASS=1 SYSFAC=1.000000000  &
+        187            OVER-DESIGN=1.000000000 WEIR-HT=50.80000000 <mm>  &
+        188            DC-CLEAR=38.10000000 <mm> DC-WTOP-SIDE=126.2597047 <mm>  &
+        189            DC-WBOT-SIDE=126.2597047 <mm> HOLE-DIAM=12.70000000 <mm>  &
+        190            HOLE-AREA=.1000000000 FLOOD-METH=GLITSCH6  &
+        191            DECK-THICK=0.134 <IN> PCT-FLOOD-FA=80.00000000  &
+        192            AER-PARAM-M=1.000000000 MAX-DC-LOAD=GLITSCH  &
+        193            MAX-ACC-DP=.0250000000 MAX-PCT-DCB=100.0000000  &
+        194            MAX-PCT-ENT=10.00000000 MIN-WEIR-LD=4.470981863  &
+        195            MAX-WEIR-LD=117.3721131 MIN-PCT-DCA=.1000000000
+        196        TRAY-SIZE 2 27 36 SIEVE
+        197        UTILITIES COND-UTIL=REFRIG1 REB-UTIL=LP
+        198
+        199    UTILITY HP GENERAL
+        200        DESCRIPTION  &
+        201            'High Pressure Steam, Inlet Temp=250 C, Outlet Temp=249 C, Pres=572 psia'
+        202        COST ENERGY-PRICE=2.5E-06 <$/kJ>
+        203        PARAM UTILITY-TYPE=STEAM TIN=250. TOUT=249. VFRAC=1.  &
+        204            VFR-OUT=0. CALOPT=FLASH MIN-TAPP=10. CALCCO2=YES  &
+        205            FACTORSOURCE="US-Title40-Part98" FUELSOURCE="Natural_gas"  &
+        206            CO2FACTOR=2.10554172E-7 EFFICIENCY=0.85  &
+        207            HTC=0.0216 <GJ/hr-sqm-C>
+        208
+        209    UTILITY LP GENERAL
+        210        DESCRIPTION  &
+        211            'Low Pressure Steam, Inlet Temp=125 C, Outlet Temp=124 C'
+        212        COST ENERGY-PRICE=1.9E-06 <$/kJ>
+        213        PARAM UTILITY-TYPE=STEAM TIN=125. TOUT=124. VFRAC=1.  &
+        214            VFR-OUT=0. CALOPT=FLASH MIN-TAPP=10. CALCCO2=YES  &
+        215            FACTORSOURCE="US-Title40-Part98" FUELSOURCE="Natural_gas"  &
+        216            CO2FACTOR=2.10554172E-7 EFFICIENCY=0.85  &
+        217            HTC=0.0216 <GJ/hr-sqm-C>
+        218
+        219    UTILITY MP GENERAL
+        220        DESCRIPTION  &
+        221            'Medium Pressure Steam, Inlet Temp=175 C, Outlet Temp=174 C, Pres=127 psia'
+        222        COST ENERGY-PRICE=2.2E-06 <$/kJ>
+        223        PARAM UTILITY-TYPE=STEAM TIN=175. TOUT=174. VFRAC=1.  &
+        224            VFR-OUT=0. CALOPT=FLASH MIN-TAPP=10. CALCCO2=YES  &
+        225            FACTORSOURCE="US-Title40-Part98" FUELSOURCE="Natural_gas"  &
+        226            CO2FACTOR=2.10554172E-7 EFFICIENCY=0.85  &
+        227            HTC=0.0216 <GJ/hr-sqm-C>
+        228
+        229    UTILITY REFRIG1 GENERAL
+        230        DESCRIPTION  &
+        231            'Refrigerant 1, Inlet Temp=-25 C, Outlet Temp=-24 C'
+        232        COST ENERGY-PRICE=2.74E-06 <$/kJ>
+        233        PARAM UTILITY-TYPE=REFRIGERATIO COOLING-VALU=-4. <kJ/kg>  &
+        234            TIN=-25. TOUT=-24. MIN-TAPP=3. CALCCO2=YES FACTORSOURCE= &
+        235            "US-Title40-Part98" FUELSOURCE="Natural_gas"  &
+        236            CO2FACTOR=2.10554172E-7 EFFICIENCY=1.  &
+        237            HTC=0.00468 <GJ/hr-sqm-C>
+        238
+        239    UTILITY REFRIG4 GENERAL
+        240        DESCRIPTION  &
+        241            'Very Low Temperature, Inlet Temp=-270 C, Outlet Temp=-269 C'
+        242        COST ENERGY-PRICE=8.9E-06 <$/kJ>
+        243        PARAM UTILITY-TYPE=REFRIGERATIO COOLING-VALU=-1.341 <kJ/kg>  &
+        244            TIN=-270. TOUT=-269. MIN-TAPP=2. CALCCO2=YES  &
+        245            FACTORSOURCE="US-Title40-Part98" FUELSOURCE="Natural_gas"  &
+        246            CO2FACTOR=2.10554172E-7 EFFICIENCY=1.  &
+        247            HTC=0.00468 <GJ/hr-sqm-C>
+        248
+        249    UTILITY WATER GENERAL
+        250        DESCRIPTION 'Cooling Water, Inlet Temp=20 C, Outlet Temp=25 C'
+        251        COST ENERGY-PRICE=2.12E-07 <$/kJ>
+        252        PARAM UTILITY-TYPE=WATER PRES=1. <atm> PRES-OUT=1. <atm>  &
+        253            TIN=20. TOUT=25. CALOPT=FLASH MIN-TAPP=5.  &
+        254            HTC=0.0135 <GJ/hr-sqm-C>
+        255
+        256    EO-CONV-OPTI
+        257
+        258    STREAM-REPOR MOLEFLOW
+        259
+        260    PROPERTY-REP PCES NOPROP-DATA NODFMS
+        261    ;
+        262    ;
+        263    ;
+        264    ;
+        265    ;
+
+   SIMULATION STARTED     MODULE USED: apmain  
+   LOCATED IN:C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\\xeq

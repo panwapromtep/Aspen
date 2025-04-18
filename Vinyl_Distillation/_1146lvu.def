@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _1146lvu.inm
+MODNAME: apmain
+RUNID: _1146lvu
+NEW_RUNID: _1146lvu
+OLD_RUNID: _1146lvu
+PDF: _1146lvu.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+DBCONN: _1146lvu.ads

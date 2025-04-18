@@ -3132,14 +3132,17 @@ class Simulation():
 
     #! This gets you column diameter in meters
     def BLK_RADFRAC_Get_Diameter(self, Blockname:str) -> float:
-        return self.BLK.Elements(Blockname).Elements("Subobjects").Elements("Column Internals").Elements("INT-1").Elements("Input").Elements("CA_DIAM").Elements("INT-1").Elements("CS-1").Value
+        diam1 = self.BLK.Elements(Blockname).Elements("Subobjects").Elements("Column Internals").Elements("INT-1").Elements("Input").Elements("CA_DIAM").Elements("INT-1").Elements("CS-1").Value
+        diam2 = self.BLK.Elements(Blockname).Elements("Subobjects").Elements("Column Internals").Elements("INT-1").Elements("Input").Elements("CA_DIAM").Elements("INT-1").Elements("CS-2").Value
+        average_diam = (diam1 + diam2) / 2
+        return average_diam
         #return self.BLK.Elements(Blockname).Elements("Subobjects").Elements("Column Internals").Elements("INT-1").Elements("Output").Elements("CA_DIAM6").Elements("INT-1").Elements("CS-1").Value
 
     #! This gets you column height in meters
     def BLK_RADFRAC_Get_Height(self, Blockname:str) -> float:
         num_stages = self.BLK_RADFRAC_Get_NSTAGE(Blockname)
         #I verified and this is correct
-        return (num_stages-2) * 0.6096 #convert to meters
+        return (num_stages-2) * 0.6096 * 1.2 #convert to meters
     
     #! This gets you the utility cost in $/hour
     def Get_Utility_Cost(self, Utilityname:str) -> float:

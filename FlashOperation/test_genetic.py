@@ -68,22 +68,6 @@ def main():
     # Print total execution time
     print("Total execution time: %.2f seconds" % (end_time - start_time))
     
-    # Plot CPU and memory usage over time
-    fig, ax1 = plt.subplots()
-
-    ax1.set_xlabel('Time (s)')
-    ax1.set_ylabel('CPU Usage (%)', color='tab:blue')
-    ax1.plot(assSim.timestamps, assSim.cpu_usage, color='tab:blue', label='CPU Usage')
-    ax1.tick_params(axis='y', labelcolor='tab:blue')
-
-    ax2 = ax1.twinx()
-    ax2.set_ylabel('Memory Usage (MB)', color='tab:green')
-    ax2.plot(assSim.timestamps, assSim.memory_usage, color='tab:green', label='Memory Usage')
-    ax2.tick_params(axis='y', labelcolor='tab:green')
-
-    fig.tight_layout()
-    plt.title('Genetic Algos CPU and Memory Usage Over Time')
-    plt.show()
     
     # Plot the convergence
     
@@ -98,17 +82,6 @@ def main():
         min_obj_values.append(np.min(F))
         min_design_space_values.append(X[np.argmin(F)])
     
-    # Create a DataFrame
-    df = pd.DataFrame({
-        'Generation': range(1, len(avg_obj_values) + 1),
-        'Average Objective Value': avg_obj_values,
-        'Minimum Objective Value': min_obj_values,
-        'Minimum Design Space Value': min_design_space_values,
-        'Total Execution Time (s)': [total_exec_time] * len(avg_obj_values)  # Add total execution time to the DataFrame
-    })
-    
-    # Save the DataFrame to an Excel file
-    df.to_excel('results.xlsx', index=False, sheet_name='Results')
     
     # Get the final minimum objective value and corresponding design space values
     final_min_obj_value = res.F[0]

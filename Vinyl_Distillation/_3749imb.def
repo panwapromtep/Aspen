@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _3749imb.inm
+MODNAME: apmain
+RUNID: _3749imb
+NEW_RUNID: _3749imb
+OLD_RUNID: _3749imb
+PDF: _3749imb.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+DBCONN: _3749imb.ads

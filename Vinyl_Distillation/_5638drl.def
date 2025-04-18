@@ -1,0 +1,10 @@
+SLAVE:
+INPUT: _5638drl.inm
+MODNAME: apmain
+RUNID: _5638drl
+NEW_RUNID: _5638drl
+OLD_RUNID: _5638drl
+PDF: _5638drl.appdf
+USERNAME: wsangpa1
+XMOD: C:\Program Files\AspenTech\Aspen Plus V14.0\Engine\xeq\apmain
+DBCONN: _5638drl.ads
