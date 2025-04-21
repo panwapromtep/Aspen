@@ -51,7 +51,7 @@ def main():
                                    )
     
     problem = AspenProblem(assSim)
-    algorithm = GA(pop_size = 25, eliminate_duplicates=True)
+    algorithm = GA(pop_size = 20, eliminate_duplicates=True)
     
     start_time = time.time()  # Add this line to record the start time
     res = minimize(problem,
@@ -65,10 +65,6 @@ def main():
     
     
     print("Best solution found: %s" % res.X)
-    x_eval = {
-        "Flash2": {'FLASH1': [res.X[0]], 'FLASH2': [res.X[1]]}
-        }
-    assSim.run_obj(x_eval)
     print("Function value: %s" % res.F)
     print("Constraint violation: %s" % res.CV)
     print("Execution time: %s seconds" % total_exec_time)
@@ -79,16 +75,28 @@ def main():
     
     # Plot the convergence
     
-    # Extract average and minimum objective values for each generation
+    # Extract average and minimum objective values for valid inputs
     avg_obj_values = []
     min_obj_values = []
     population_data = []  # Store population data for each generation
     for gen_idx, gen in enumerate(res.history):
         F = gen.pop.get("F")
+        G = gen.pop.get("G")  # Get constraint violations
         X = gen.pop.get("X")  # Get design variables for the generation
-        avg_obj_values.append(np.mean(F))
-        min_obj_values.append(np.min(F))
-        population_data.append({"Generation": gen_idx + 1, "Population": X.tolist()})
+
+        # Filter valid inputs (G <= 0 for all constraints)
+        valid_indices = np.where(np.all(G <= 0, axis=1))[0]
+        valid_F = F[valid_indices]
+        valid_X = X[valid_indices]
+
+        if len(valid_F) > 0:
+            avg_obj_values.append(np.mean(valid_F))
+            min_obj_values.append(np.min(valid_F))
+        else:
+            avg_obj_values.append(None)  # No valid inputs for this generation
+            min_obj_values.append(None)
+
+        population_data.append({"Generation": gen_idx + 1, "Population": valid_X.tolist()})
 
     # Calculate Aspen calls for each generation
     aspen_calls = []
@@ -112,39 +120,38 @@ def main():
         pickle.dump(population_data, f)
     print(f"Saved population distribution over iterations to '{population_pickle_filename}'.")
 
-    # Get the final minimum objective value and corresponding design space values
-    final_min_obj_value = res.F[0]
-    final_design_space_values = res.X
-    
-    
-    #plot number of aspen calls vs objective function value
+    # Plot number of Aspen calls vs objective function value for valid inputs
     plt.figure(figsize=(10, 6))
-    plt.plot(aspen_calls, avg_obj_values, marker='o', label='Average Objective Value')
-    plt.plot(aspen_calls, min_obj_values, marker='o', label='Minimum Objective Value')
+    plt.plot(aspen_calls, avg_obj_values, marker='o', label='Average Objective Value (Valid Inputs)', color='blue')
+    plt.plot(aspen_calls, min_obj_values, marker='s', label='Minimum Objective Value (Valid Inputs)', color='green')
     plt.xlabel('Number of Aspen Calls')
     plt.ylabel('Objective Value')
-    plt.title('Objective Value vs. Number of Aspen Calls')
+    plt.title('Objective Value vs. Number of Aspen Calls (Valid Inputs)')
     plt.legend()
     plt.grid(True)
     plt.show()
+
+    # Get the final minimum objective value and corresponding design space values
+    final_min_obj_value = res.F[0]
+    final_design_space_values = res.X
     
     # Add text to the graph
     textstr = f'Final Min Obj Value: {final_min_obj_value:.4f}\n Design Space Values: {final_design_space_values}'
     plt.gcf().text(0.15, 0.75, textstr, fontsize=9, bbox=dict(facecolor='white', alpha=0.5))
     plt.show()
     
-    # Plot average and minimum objective values vs. generation
+    # Plot average and minimum objective values vs. generation for valid inputs
     plt.figure(figsize=(10, 6))
     generations = range(1, len(avg_obj_values) + 1)
-    plt.plot(generations, avg_obj_values, marker='o', label='Average Objective Value', color='blue')
-    plt.plot(generations, min_obj_values, marker='s', label='Minimum Objective Value', color='green')
+    plt.plot(generations, avg_obj_values, marker='o', label='Average Objective Value (Valid Inputs)', color='blue')
+    plt.plot(generations, min_obj_values, marker='s', label='Minimum Objective Value (Valid Inputs)', color='green')
     plt.xlabel('Generation')
     plt.ylabel('Objective Value')
-    plt.title('Objective Value vs. Generation')
+    plt.title('Objective Value vs. Generation (Valid Inputs)')
     plt.legend()
     plt.grid(True)
     plt.show()
-    
+
     # Plot the population distribution over iterations
     plt.figure(figsize=(10, 6))
     colors = plt.cm.viridis(np.linspace(0, 1, len(res.history)))  # Generate a color for each generation

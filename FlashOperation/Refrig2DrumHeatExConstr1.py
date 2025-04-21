@@ -75,10 +75,10 @@ class Refrig2DrumConstraintHeatExConstr(Refrig2Drum2Comp):
     def costFunc(self, results):
         FLOW_1 = results["OUTF1_MF"] # kmol/hr
         FLOW_2 = results["OUTF2_MF"] # kmol/hr
-        OUTCOMP1 = results["OUTCOMP1_H"] # cal/mol
-        OUTF1 = results["OUTF1_H"] # cal/mol
-        OUTCOMP2 = results["OUTCOMP2_H"] # cal/mol
-        OUTF2 = results["OUTF2_H"] # cal/mol
+        OUTCOMP1 = results["OUTCOMP1_H"] #cal/sec
+        OUTF1 = results["OUTF1_H"]  #cal/sec
+        OUTCOMP2 = results["OUTCOMP2_H"]  #cal/sec
+        OUTF2 = results["OUTF2_H"] #cal/sec
         TEMPOUT = results["TEMPOUT"] # Celcius
         
         if FLOW_1 == 0:
@@ -87,7 +87,7 @@ class Refrig2DrumConstraintHeatExConstr(Refrig2Drum2Comp):
             OUTF2 = OUTCOMP2 = 0
 
         cost = (1000 * FLOW_1 * ((OUTCOMP1 - OUTF1) / 0.65) + \
-            1000 * FLOW_2 * ((OUTCOMP2 - OUTF2) / 0.65))/4184 
+            1000 * FLOW_2 * ((OUTCOMP2 - OUTF2) / 0.65))/4184
                 
         print(f"TEMPOUT: {TEMPOUT}")
         return cost
@@ -106,7 +106,7 @@ def main():
     
     # Example parameters to run the simulation
     x_eval = {
-        "Flash2": {'FLASH1': [11.7601], 'FLASH2': [5]}
+        "Flash2": {'FLASH1': [11.9745], 'FLASH2': [4.25107]}
     }
     
     results = assSim.runSim(x_eval)
