@@ -102,13 +102,17 @@ def train_model_nsga(model,
     for epoch in range(epochs):
         total_loss = 0
         for data_point in dataloader:
+            print("data_point:", data_point)
             optimizer.zero_grad()
             loss = MSELossFunction(data_point, model, device=device)
+            print(loss)
             loss.backward()
+            break
             optimizer.step()
             total_loss += loss.item()
         if print_loss and epoch % 50 == 0:
             print(f"Epoch {epoch}: Total Loss={total_loss:.4f}")
+        break
     return model
         
 def generate_new_samples_nsga(res, scaler, assSim, new_data_size=10):
@@ -149,67 +153,70 @@ def generate_new_samples_nsga(res, scaler, assSim, new_data_size=10):
 
 
 
+import numpy as np
+import torch
+
 def generate_new_samples_ga(res, model, scaler, assSim, new_data_size=10, device='cpu'):
     """
     Select top candidates from the GA population based on the surrogate's 
-    prediction of the *first* objective (or only one if single-output),
-    then evaluate them with the true simulator and return scaled samples.
+    prediction of the *first* objective, evaluate them with the true simulator,
+    and return scaled samples [X_scaled | Y_scaled].
 
+    Args:
+        res            : pymoo optimization result (res.pop.get("X"))
+        model          : surrogate model (batch input -> batch output)
+        scaler         : TorchMinMaxScaler (scale_y=True)
+        assSim         : true simulation object with run_obj & unflatten_params
+        new_data_size  : number of new samples to generate
+        device         : 'cpu' or 'cuda'
     Returns:
-        np.ndarray of shape (new_data_size, n_var + n_obj)
+        np.ndarray shape (new_data_size, n_var + n_obj)
     """
-    # 1) Extract the GA population (scaled decision vars)
-    X_scaled = np.array(res.pop.get("X"))           # (pop_size, n_var)
+
+    # 1) Get GA population in surrogate-scaled space
+    X_scaled = np.array(res.pop.get("X"))               # (pop_size, n_var)
     pop_size, n_var = X_scaled.shape
 
-    # 2) Prepare tensors for scaling
-    X_t = torch.tensor(X_scaled, dtype=torch.float32, device=device)
-    # Determine number of objectives for dummy y
-    if scaler.scale_y:
-        n_obj = scaler.min_y.shape[0]
-    else:
-        n_obj = 1
-    y_dummy = torch.zeros((pop_size, n_obj), dtype=torch.float32, device=device)
+    # 2) Torch tensor for model
+    X_scaled_t = torch.tensor(X_scaled, dtype=torch.float32, device=device)
 
-    # 3) Scale inputs to surrogate space
-    X_scaled_t, _ = scaler.transform(X_t, y_dummy)
-
-    # 4) Surrogate prediction (batch)
+    # 3) Predict scaled objectives
     model.eval()
     with torch.no_grad():
-        Y_scaled_pred = model(X_scaled_t.to(device))    # (pop_size, n_obj)
+        Y_scaled_pred_t = model(X_scaled_t)             # (pop_size, n_obj)
 
-    # 5) Inverse-transform to real objective values
-    _, Y_pred_real_t = scaler.inverse_transform(X_scaled_t.cpu(), Y_scaled_pred.cpu())
-    Y_pred_real = Y_pred_real_t.numpy()               # (pop_size, n_obj)
+    # 4) Inverse-scale outputs to real objective values
+    #    Only need dummy for X, since inverse_transform requires X input
+    X_dummy_t = X_scaled_t.cpu()
+    _, Y_pred_real_t = scaler.inverse_transform(X_dummy_t, Y_scaled_pred_t.cpu())
+    Y_pred_real = Y_pred_real_t.numpy()                # (pop_size, n_obj)
 
-    # 6) Rank by the first objective
-    scores = Y_pred_real[:, 0]
-    top_idx = np.argsort(scores)[:new_data_size]
+    # 5) Rank by first objective
+    top_idx = np.argsort(Y_pred_real[:, 0])[:new_data_size]
+    X_top_scaled = X_scaled[top_idx]                   # (new_data_size, n_var)
+    X_top_scaled_t = torch.tensor(X_top_scaled, dtype=torch.float32)
 
-    # 7) Inverse-scale top inputs to real space
-    X_top_scaled_t = X_scaled_t[top_idx]
-    y_dummy_top = torch.zeros((new_data_size, n_obj), dtype=torch.float32)
-    X_top_real_t, _ = scaler.inverse_transform(X_top_scaled_t.cpu(), y_dummy_top)
-    X_top_real = X_top_real_t.numpy()                # (new_data_size, n_var)
+    # 6) Inverse-scale top inputs to real space for true sim
+    X_top_real_t = scaler.inverse_transform(X_top_scaled_t.cpu())  # returns X_real_t
+    X_top_real = X_top_real_t.numpy()                            # (new_dataSize, n_var)
 
-    # 8) Evaluate true simulation on real inputs
+    # 7) Evaluate true simulator
     Y_true = []
     for x in X_top_real:
-        val = assSim.run_obj(assSim.unflatten_params(x))
-        # if scalar return, wrap into list
-        Y_true.append(val if isinstance(val, (list, tuple, np.ndarray)) else [val])
-    Y_true = np.array(Y_true, dtype=float)           # (new_data_size, n_obj)
+        y = assSim.run_obj(assSim.unflatten_params(x))
+        arr = np.atleast_1d(y)
+        Y_true.append(arr)
+    Y_true = np.vstack(Y_true)                      # (new_data_size, n_obj)
 
-    # 9) Re-scale selected inputs and true outputs
+    # 8) Re-scale real inputs and true outputs
     X_real_t = torch.tensor(X_top_real, dtype=torch.float32)
-    Y_real_t = torch.tensor(Y_true, dtype=torch.float32)
+    Y_real_t = torch.tensor(Y_true,    dtype=torch.float32)
     X_sel_scaled_t, Y_sel_scaled_t = scaler.transform(X_real_t, Y_real_t)
 
-    # 10) Return concatenated scaled [X | Y]
-    X_sel_scaled = X_sel_scaled_t.numpy()
-    Y_sel_scaled = Y_sel_scaled_t.numpy()
-    return np.hstack([X_sel_scaled, Y_sel_scaled])
+    # 9) Return concatenated [X_scaled | Y_scaled]
+    X_sel = X_sel_scaled_t.numpy()
+    Y_sel = Y_sel_scaled_t.numpy()
+    return np.hstack([X_sel, Y_sel])
 
 
 def optimize_surr_nsga(
