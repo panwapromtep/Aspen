@@ -189,8 +189,8 @@ class Refrig2Drumproblem(Problem):
         dummy_y = np.array([[0, -28.9]])
         _, _hold = scaler.transform(dummy_x,dummy_y).numpy()
         #second element of _hold is the threshold
-        threshold = _hold[1]
-        self.temp_threshold = threshold
+        threshold = _hold.squeeze()[1]
+        self.temp_threshold = threshold.numpy()
     def _evaluate(self, X, out, *args, **kwargs):
         X_tensor = torch.tensor(X, dtype=torch.float32)
         with torch.no_grad():
