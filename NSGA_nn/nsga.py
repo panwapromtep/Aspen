@@ -102,10 +102,8 @@ def train_model_nsga(model,
     for epoch in range(epochs):
         total_loss = 0
         for data_point in dataloader:
-            print("data_point:", data_point)
             optimizer.zero_grad()
             loss = MSELossFunction(data_point, model, device=device)
-            print(loss)
             loss.backward()
             optimizer.step()
             total_loss += loss.item()
