@@ -102,11 +102,7 @@ def train_model_nsga(model,
     for epoch in range(epochs):
         total_loss = 0
         for data_point in dataloader:
-            #print dimensions of data_point
-            # print("data_point.shape:", data_point.shape)
             optimizer.zero_grad()
-            # print("data_point[0].shape:", data_point[0].shape)
-            # print("data_point[1].shape:", data_point[1].shape)
             loss = MSELossFunction(data_point, model, device=device)
             loss.backward()
             optimizer.step()
@@ -181,6 +177,7 @@ def optimize_surr_nsga(
     assSim_call_count = 0
 
     populations = []
+    all_res = []
     current_pop = None
 
     for it in range(iter):
@@ -202,12 +199,17 @@ def optimize_surr_nsga(
         )
 
         # set up NSGA-II with resume or LHS
-        if current_pop is not None:
-            #print(f"Using previous population of size {len(current_pop)}")
-            #sampling = ResumeFromPopulation(current_pop)
-            algorithm = NSGA2(pop_size=pop_size, sampling=LHS(), eliminate_duplicates=True)
+        if current_pop is not None and len(current_pop) > 0:
+            sampling = ResumeFromPopulation(current_pop)
         else:
-           algorithm = NSGA2(pop_size=pop_size, sampling=LHS(), eliminate_duplicates=True)
+            # you can keep your original pop_size here
+            sampling = LHS()
+
+        algorithm = NSGA2(
+            pop_size=pop_size,
+            sampling=sampling,
+            eliminate_duplicates=True
+        )
 
         res = minimize(
             problem,
@@ -216,6 +218,8 @@ def optimize_surr_nsga(
             verbose=True,
             save_history=True
         )
+        
+        all_res.append(res)
 
         # store for next iteration
         current_pop = res.pop.get("X")
@@ -283,7 +287,7 @@ def optimize_surr_nsga(
             "iteration": it,
             "time_sec": elapsed,
             "assSim_calls": assSim_call_count,
-            "x": inputs_evaluated,
+            "x": optim_input,
             "y": y_vals
         })
 
@@ -297,5 +301,114 @@ def optimize_surr_nsga(
         'dataset': dataset,
         'assSim_call_count': assSim_call_count,
         'populations': populations,
+        'iteration_log': iteration_log,
+        'all_result': all_res
+    }
+
+
+
+
+def optimize_surr_ga(
+    model,
+    dataset,
+    assSim,
+    problem,
+    algo_factory,
+    lrs={'first':1e-4, 'others':1e-5},
+    epochs={'first':1000, 'others':100},
+    batch_size=256,
+    scaler=None,
+    device="cpu",
+    iter=10,
+    pop_size=10,
+    n_gen=3,
+    new_data_size=10,
+    print_loss=False,
+    print_it_data=False
+):    
+    """
+    Surrogate‐assisted GA optimization loop using a user‐provided algorithm factory.
+    """
+
+    iteration_log = []
+    x_path, y_path = [], []
+    assSim_call_count = 0
+
+    current_pop = None
+
+    for it in range(iter):
+        start_time = time.time()
+        
+        # select learning rate and epochs
+        if it == 0:
+            lr = lrs['first']
+            epoch = epochs['first']
+        else:
+            lr = lrs['others']
+            epoch = epochs['others']
+
+        # train surrogate
+        print(f"Iteration {it}: Training surrogate model...")
+        model = train_model_nsga(
+            model, dataset, device=device,
+            epochs=epoch, lr=lr,
+            print_loss=print_loss
+        )
+
+        # get algorithm instance from factory
+        algorithm = algo_factory(it, current_pop)
+
+        # run GA
+        res = minimize(
+            problem,
+            algorithm,
+            ('n_gen', n_gen),
+            verbose=True,
+            save_history=True
+        )
+
+        # update population
+        current_pop = res.pop.get("X")
+
+        # evaluate best solution
+        optim_input_scaled = res.X
+        optim_input_tensor = torch.tensor(optim_input_scaled, dtype=torch.float32)
+        optim_input = scaler.inverse_transform(optim_input_tensor).numpy()
+
+        y_val = assSim.run_obj(assSim.unflatten_params(optim_input))
+        assSim_call_count += 1
+        elapsed = time.time() - start_time
+
+        iteration_log.append({
+            "iteration": it,
+            "time_sec": elapsed,
+            "assSim_calls": assSim_call_count,
+            "x": optim_input,
+            "y": y_val
+        })
+
+        # scale and add new samples
+        optim_input_scaled, y_scaled = scaler.transform(optim_input, np.array([[y_val]]))
+        new_samples = [np.concatenate([optim_input_scaled.flatten(), y_scaled.flatten()])]
+
+        additional = generate_new_samples_nsga(
+            res, scaler, assSim, new_data_size=new_data_size
+        )
+        new_samples.extend(additional)
+        assSim_call_count += new_data_size
+
+        dataset.add_samples(np.stack(new_samples))
+        x_path.append(optim_input)
+        y_path.append(y_val)
+
+        if print_it_data:
+            print(f"Iteration {it}: Optimal input {optim_input}, output {y_val}, dataset size {dataset.data.shape}")
+
+    return {
+        'model': model,
+        'x_path': x_path,
+        'y_path': y_path,
+        'dataset': dataset,
+        'assSim_call_count': assSim_call_count,
         'iteration_log': iteration_log
     }
