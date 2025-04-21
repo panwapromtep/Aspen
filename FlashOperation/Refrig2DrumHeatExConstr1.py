@@ -8,6 +8,7 @@ import os
 import numpy as np
 import psutil
 import time
+import torch
 
 # Get the parent directory
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -173,7 +174,24 @@ class Refrig2DrumConstraintHeatExConstrforNN(Refrig2Drum2Comp):
         cost = self.costFunc(results)
         return [cost, results["TEMPOUT"]]
     
-    
+from pymoo.core.problem import Problem
+class Refrig2Drumproblem(Problem):
+    def __init__(self, model, scaler):
+        # n_var = 8 input variables, n_obj = 2 objectives.
+        # Set vectorized=True so that _evaluate receives a matrix of solutions.
+        super().__init__(n_var=2, n_obj=1, n_ieq_constr = 1,xl=[-1]*2, xu=[1]*2, vectorized=True)
+        self.model = model
+        threshold = scaler.transform(torch.tensor([-28.9])).numpy()
+        self.temp_threshold = threshold
+    def _evaluate(self, X, out, *args, **kwargs):
+        X_tensor = torch.tensor(X, dtype=torch.float32)
+        with torch.no_grad():
+            # Run the model and get the output
+            y = self.model(X_tensor).numpy()
+        f = y[:, 0]
+        g = y[:, 1] - self.temp_threshold # y should be lower than the threshold
+        out["F"] = f
+        out["G"] = g
     
 def main():
     print("Starting Refrig2DrumConstraintHeatExConstr simulation.")
