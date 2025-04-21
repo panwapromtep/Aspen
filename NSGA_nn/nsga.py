@@ -405,6 +405,7 @@ def optimize_surr_ga(
     iteration_log = []
     x_path, y_path = [], []
     assSim_call_count = 0
+    all_res = []
 
     current_pop = None
 
@@ -438,6 +439,7 @@ def optimize_surr_ga(
             verbose=True,
             save_history=True
         )
+        all_res.append(res)
 
         # update population
         current_pop = res.pop.get("X")
@@ -482,5 +484,6 @@ def optimize_surr_ga(
         'y_path': y_path,
         'dataset': dataset,
         'assSim_call_count': assSim_call_count,
-        'iteration_log': iteration_log
+        'iteration_log': iteration_log,
+        'all_result': all_res
     }
