@@ -403,7 +403,7 @@ def optimize_surr_ga(
     iteration_log = []
     x_path, y_path = [], []
     assSim_call_count = 0
-    all_res = []
+    res_data_list = []
 
     current_pop = None
 
@@ -437,8 +437,21 @@ def optimize_surr_ga(
             verbose=True,
             save_history=True
         )
-        all_res.append(res)
-
+        # Extract only the pieces you need from res
+        res_data = {
+            'final_X':    res.X.tolist(),
+            'final_F':    res.F.tolist(),
+            'final_CV':   res.CV.tolist() if hasattr(res, 'CV') else None,
+            'history': [
+                {
+                    'X': gen.pop.get("X").tolist(),
+                    'F': gen.pop.get("F").tolist(),
+                    'G': gen.pop.get("G").tolist()
+                }
+                for gen in res.history
+            ]
+        }
+        res_data_list.append(res_data)
         # update population
         current_pop = res.pop.get("X")
 
@@ -483,5 +496,5 @@ def optimize_surr_ga(
         'dataset': dataset,
         'assSim_call_count': assSim_call_count,
         'iteration_log': iteration_log,
-        'all_result': all_res
+        'res_data_list':     res_data_list
     }
