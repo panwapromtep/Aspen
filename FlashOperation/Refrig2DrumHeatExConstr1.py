@@ -181,7 +181,12 @@ class Refrig2Drumproblem(Problem):
         # Set vectorized=True so that _evaluate receives a matrix of solutions.
         super().__init__(n_var=2, n_obj=1, n_ieq_constr = 1,xl=[-1]*2, xu=[1]*2, vectorized=True)
         self.model = model
-        threshold = scaler.transform(torch.tensor([-28.9])).numpy()
+        #scaler takes in x and y
+        dummy_x = np.array([[0, 0]])
+        dummy_y = np.array([[0, -28.9]])
+        _, _hold = scaler.transform(dummy_x,dummy_y).numpy()
+        #second element of _hold is the threshold
+        threshold = _hold[1]
         self.temp_threshold = threshold
     def _evaluate(self, X, out, *args, **kwargs):
         X_tensor = torch.tensor(X, dtype=torch.float32)
