@@ -21,10 +21,9 @@ from FlashOperation.Refrig2Drum2Comp import Refrig2Drum2Comp
 
 #overload only the cost function to include the constraint on temperature
 class Refrig2DrumConstraintHeatExConstr(Refrig2Drum2Comp):
-    def __init__(self, AspenFile, wdpath, visibility = False, Penalty = 1e5):
+    def __init__(self, AspenFile, wdpath, visibility = False):
         super().__init__(AspenFile, wdpath, visibility)
         self.open_simulation()
-        self.Penalty = Penalty
         self.cpu_usage = []
         self.memory_usage = []
         self.timestamps = []
@@ -82,20 +81,13 @@ class Refrig2DrumConstraintHeatExConstr(Refrig2Drum2Comp):
         OUTF2 = results["OUTF2_H"] # cal/mol
         TEMPOUT = results["TEMPOUT"] # Celcius
         
-        Penalty = self.Penalty
-        
         if FLOW_1 == 0:
             OUTF1 = OUTCOMP1 = 0
         if FLOW_2 == 0:
             OUTF2 = OUTCOMP2 = 0
 
-        if TEMPOUT < -28.9:
-            cost = (1000 * FLOW_1 * ((OUTCOMP1 - OUTF1) / 0.65) + \
-                1000 * FLOW_2 * ((OUTCOMP2 - OUTF2) / 0.65))/4184 
-        else:
-            cost = (1000 * FLOW_1 * ((OUTCOMP1 - OUTF1) / 0.65) + \
-                1000 * FLOW_2 * ((OUTCOMP2 - OUTF2) / 0.65))/4184 + \
-                Penalty * (TEMPOUT + 28.9)**2
+        cost = (1000 * FLOW_1 * ((OUTCOMP1 - OUTF1) / 0.65) + \
+            1000 * FLOW_2 * ((OUTCOMP2 - OUTF2) / 0.65))/4184 
                 
         print(f"TEMPOUT: {TEMPOUT}")
         return cost
@@ -103,5 +95,25 @@ class Refrig2DrumConstraintHeatExConstr(Refrig2Drum2Comp):
     def run_obj(self, x_dict):
         results = self.runSim(x_dict)
         cost = self.costFunc(results)
-        print("The cost is {:.2f}".format(cost))
         return cost
+    
+    
+def main():
+    print("Starting Refrig2DrumConstraintHeatExConstr simulation.")
+    assSim = Refrig2DrumConstraintHeatExConstr(AspenFile="FlashOperation.bkp", 
+                                               wdpath="../FlashOperation", 
+                                               visibility=False)
+    
+    # Example parameters to run the simulation
+    x_eval = {
+        "Flash2": {'FLASH1': [11.7601], 'FLASH2': [5]}
+    }
+    
+    results = assSim.runSim(x_eval)
+    cost = assSim.costFunc(results)
+    
+    print(f"Simulation results: {results}")
+    print(f"Cost: {cost:.4f}")
+    
+if __name__ == "__main__":
+    main()
