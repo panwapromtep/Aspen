@@ -107,12 +107,10 @@ def train_model_nsga(model,
             loss = MSELossFunction(data_point, model, device=device)
             print(loss)
             loss.backward()
-            break
             optimizer.step()
             total_loss += loss.item()
         if print_loss and epoch % 50 == 0:
             print(f"Epoch {epoch}: Total Loss={total_loss:.4f}")
-        break
     return model
         
 def generate_new_samples_nsga(res, scaler, assSim, new_data_size=10):
