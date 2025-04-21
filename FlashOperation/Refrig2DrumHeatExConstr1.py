@@ -166,12 +166,15 @@ class Refrig2DrumConstraintHeatExConstrforNN(Refrig2Drum2Comp):
         cost = (1000 * FLOW_1 * ((OUTCOMP1 - OUTF1) / 0.65) + \
             1000 * FLOW_2 * ((OUTCOMP2 - OUTF2) / 0.65))/4184
                 
-        print(f"TEMPOUT: {TEMPOUT}")
+        # print(f"TEMPOUT: {TEMPOUT}")
         return cost
 
     def run_obj(self, x_dict):
         results = self.runSim(x_dict)
         cost = self.costFunc(results)
+        #if tempout is nan, set it to 30
+        if np.isnan(results["TEMPOUT"]):
+            results["TEMPOUT"] = 30
         return [cost, results["TEMPOUT"]]
     
 from pymoo.core.problem import Problem
