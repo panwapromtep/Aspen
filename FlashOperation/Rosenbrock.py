@@ -18,13 +18,12 @@ sys.path.append(parent_dir)
 
 from AspenSim import AspenSim
 
-class Refrig2DrumConstraintHeatExConstDummy:
-    def __init__(self, AspenFile=None, wdpath=None, visibility=False, Penalty=1e4):
+class Rosenbrock(AspenSim):
+    def __init__(self, AspenFile=None, wdpath=None, visibility=False):
         """
         Dummy that replaces an Aspen run with the Rosenbrock function.
         Signature matches your real AspenSim class.
         """
-        self.Penalty = Penalty
         print("⚠️  Dummy Mode: Rosenbrock function in place of AspenSim.")
 
     @staticmethod

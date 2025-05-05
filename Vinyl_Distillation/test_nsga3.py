@@ -10,10 +10,15 @@ import numpy as np
 from pymoo.optimize import minimize
 from pymoo.core.problem import ElementwiseProblem
 from pymoo.algorithms.moo.nsga3 import NSGA3
+from pymoo.operators.sampling.lhs import LHS
+from pymoo.operators.crossover.sbx import SBX
+from pymoo.operators.mutation.pm import PM
+from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.util.ref_dirs import get_reference_directions
 import time  # Import the time module
 import pandas as pd  # Import pandas for saving results to Excel
 import pickle  # Import pickle for saving data
+from datetime import datetime  # Import datetime for timestamping files
 
 # Get the parent directory
 parent_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -31,7 +36,7 @@ class AspenProblem(ElementwiseProblem):
 
     def _evaluate(self, x, out, *args, **kwargs):  
         # punish solutions where feed stage is greater than number of stages
-        if x[1] > x[0] or x[5] > x[4]:
+        if round(x[1]) > round(x[0]) or round(x[5]) > round(x[4]):
             out["F"] = np.array([1E3, 1E3])
             out["G"] = np.array([1E3, 1E3])
             return
@@ -41,16 +46,19 @@ class AspenProblem(ElementwiseProblem):
         
         # Objectives        
         cost = self.assSim.costFunc(results)
-        print("Cost:", cost)
-        out["F"] = np.array([cost[2], cost[3]])  # TAC and CO2 emission as objectives
-
+        
+        # Normalize objectives
+        normalized_tac = cost[2] / 1e6  # Normalize TAC to the range of millions
+        normalized_co2 = cost[3] / 1e4  # Normalize CO2 emissions to the range of thousands
+        
         # Constraints
         acetylene_purity = results["ACETYLENE_PURITY"]
         vinyl_chloride_purity = results["VC_PURITY"]
-        out["G"] = np.array([
-            acetylene_purity - 0.005,  # Ensure acetylene purity < 0.005
-            0.99 - vinyl_chloride_purity  # Ensure vinyl chloride purity > 0.99
-        ])
+        g1 = acetylene_purity - 0.00005  # Ensure acetylene purity < 0.005
+        g2 = 0.9999 - vinyl_chloride_purity  # Ensure vinyl chloride purity > 0.99
+    
+        out["F"] = np.array([normalized_tac, normalized_co2])  # Use normalized objectives
+        out["G"] = np.array([g1, g2])
     
 def main():
     print("Starting NSGAIII optimization with VCDistillation.")
@@ -59,22 +67,34 @@ def main():
                              visibility=False)
     
     problem = AspenProblem(assSim)
-    ref_dirs = get_reference_directions("das-dennis", 2, n_partitions=10)  # Use pymoo's ref_dirs
-    algorithm = NSGA3(pop_size=10, ref_dirs=ref_dirs)
+    ref_dirs = get_reference_directions("das-dennis", 2, n_partitions=30)  # Use pymoo's ref_dirs
+    pop_size = len(ref_dirs)
+    n_gen = 30
+    algorithm = NSGA3(
+        pop_size=len(ref_dirs),               # match ref_dirs for full coverage
+        ref_dirs=ref_dirs,
+        sampling=LHS(),                       # better initial diversity
+        crossover=SBX(prob=0.9, eta=15),
+        mutation=PM(prob=0.3, eta=5),         # stronger mutation = more exploration
+        eliminate_duplicates=True
+        )
+    #algorithm = NSGA2(pop_size=pop_size)
     
     start_time = time.time()
     res = minimize(problem,
                    algorithm,
-                   ('n_gen', 15),
+                   ('n_gen', n_gen),
                    verbose=True,
                    save_history=True)
-    
     
     end_time = time.time()
     
     print("Optimization completed.")
     print("Execution time: %.2f seconds" % (end_time - start_time))
     
+    # Generate a timestamp for filenames
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
     # Extract the best TAC, CO2 emissions, and parameters from the last generation
     last_gen = res.history[-1]
     last_gen_F = last_gen.pop.get("F")
@@ -108,27 +128,10 @@ def main():
                 "CO2 Emissions (Objective 2)": F[i, 1]
             })
     
-    with open("all_generations_data.pkl", "wb") as f:
+    pickle_filename = f"{pop_size}pop_{n_gen}gen+.pkl"  # Update filename to reflect population and generations
+    with open(pickle_filename, "wb") as f:
         pickle.dump(all_generations_data, f)
-    print("All generations data saved to 'all_generations_data.pkl'.")
-
-    # Plot the objective value vectors [TAC, CO2 Emissions] for each generation
-    plt.figure(figsize=(10, 6))
-    colors = plt.cm.viridis(np.linspace(0, 1, len(res.history)))  # Generate a color for each generation
-
-    for gen_idx, gen in enumerate(res.history):
-        F = gen.pop.get("F")  # Get objective values for the generation
-        plt.scatter(F[:, 0], F[:, 1], color=colors[gen_idx], label=f"Generation {gen_idx + 1}")
-
+    print(f"All generations data saved to '{pickle_filename}'.")
     
-    plt.xlabel("Total Annual Cost (TAC)")
-    plt.ylabel("CO2 Emissions")
-    plt.title("Objective Values Across Generations")
-    plt.legend()
-    plt.grid(True)
-    plt.show()
-    plt.savefig("objective_values_across_generations.png")  # Save the plot as a PNG file
-    print("Plot saved as 'objective_values_across_generations.png'.")
-
 if __name__ == "__main__":
     main()
