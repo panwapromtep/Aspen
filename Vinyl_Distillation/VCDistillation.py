@@ -80,64 +80,78 @@ class VCDistillation(AspenSim):
 
      
     def runSim(self, x):
-        self.open_simulation()
-    
-        for blockname, params in x["RadFrac"].items():
-            # integer stage values
-            nstage    = int(params[0])
-            feed_pos  = int(params[1][0])
-            feed_port = params[1][1]
-    
-            # round the continuous knobs to 4 decimals
-            reflux   = round(float(params[2]), 4)
-            dist2feed = round(float(params[3]), 4)
+        try:
+            self.open_simulation()
+        
+            for blockname, params in x["RadFrac"].items():
+                print(blockname, params)
+                # integer stage values
+                nstage    = round(params[0])
+                feed_pos  = round(params[1][0])
+                feed_port = params[1][1]
+        
+                # round the continuous knobs to 4 decimals
+                reflux   = round(float(params[2]), 4)
+                dist2feed = round(float(params[3]), 4)
 
-            # -- commpute cs1 bound
-            cs1_start = 2
-            cs1_end = feed_pos - 1 if feed_pos > cs1_start else cs1_start
+                # -- commpute cs1 bound
+                cs1_start = 2
+                cs1_end = feed_pos - 1 if feed_pos > cs1_start else cs1_start
 
-            # --compute cs2 bound
-            cs2_start = cs1_end + 1
-            cs2_end = nstage - 1
+                # --compute cs2 bound
+                cs2_start = cs1_end + 1
+                cs2_end = nstage - 1
 
-            # debug print
-            print(f"{blockname}:")
-            print(f"  CS1 stage range: {cs1_start} → {cs1_end}")
-            print(f"  CS2 stage range: {cs2_start} → {cs2_end}")
-    
-            # apply to Aspen
-            self.sim.BLK_RADFRAC_Set_NSTAGE(blockname, nstage)
-            self.set_sectioncs1_value(blockname, cs1_end)
-            self.set_sectioncs2_value_start(blockname, cs2_start)
-            self.set_sectioncs2_value(blockname, cs2_end)
-    
-            # the rest of your block settings…
-            self.sim.BLK_RADFRAC_Set_FeedStage(blockname, feed_pos, feed_port)
-            self.sim.BLK_RADFRAC_Set_Refluxratio(blockname, reflux)
-            self.sim.BLK_RADFRAC_Set_DistillateToFeedRatio(blockname, dist2feed)
-    
-        self.sim.DialogSuppression(True)
-        time.sleep(2)
-        self.sim.Run()
-    
-        results = {
-             "COL_1_DIAM": self.sim.BLK_RADFRAC_Get_Diameter("RADFRAC1"),
-             "COL_2_DIAM": self.sim.BLK_RADFRAC_Get_Diameter("RADFRAC2"),
-             "COL_1_HEIGHT": self.sim.BLK_RADFRAC_Get_Height("RADFRAC1"),
-             "COL_2_HEIGHT": self.sim.BLK_RADFRAC_Get_Height("RADFRAC2"),
-             "COL_1_HEAT_UTIL": self.sim.Get_Utility_Cost("LP"),
-             "COL_2_HEAT_UTIL": self.sim.Get_Utility_Cost("LP"),
-             "COL_1_COOL_UTIL": self.sim.Get_Utility_Cost("REFRIG4"),
-             "COL_2_COOL_UTIL": self.sim.Get_Utility_Cost("REFRIG1"),
-             "COL_1_REBOILER_DUTY": self.sim.BLK_RADFRAC_Get_ReboilerDuty("RADFRAC1"),
-             "COL_2_REBOILER_DUTY": self.sim.BLK_RADFRAC_Get_ReboilerDuty("RADFRAC2"),
-             "ACETYLENE_PURITY": self.sim.get_acetylene_purity("B1"),
-             "VC_PURITY": self.sim.get_vc_purity("D2"),
-        }
-        return results
-    
-    
-
+        
+                # apply to Aspen
+                self.sim.BLK_RADFRAC_Set_NSTAGE(blockname, nstage)
+                self.set_sectioncs1_value(blockname, cs1_end)
+                
+                self.set_sectioncs2_value(blockname, cs1_start, cs2_end)
+        
+                # the rest of your block settings…
+                self.sim.BLK_RADFRAC_Set_FeedStage(blockname, feed_pos, feed_port)
+                self.sim.BLK_RADFRAC_Set_Refluxratio(blockname, reflux)
+                self.sim.BLK_RADFRAC_Set_DistillateToFeedRatio(blockname, dist2feed)
+        
+            self.sim.DialogSuppression(True)
+            time.sleep(2)
+            self.sim.Run()
+        
+            results = {
+                "COL_1_DIAM": self.sim.BLK_RADFRAC_Get_Diameter("RADFRAC1"),
+                "COL_2_DIAM": self.sim.BLK_RADFRAC_Get_Diameter("RADFRAC2"),
+                "COL_1_HEIGHT": self.sim.BLK_RADFRAC_Get_Height("RADFRAC1"),
+                "COL_2_HEIGHT": self.sim.BLK_RADFRAC_Get_Height("RADFRAC2"),
+                "COL_1_HEAT_UTIL": self.sim.Get_Utility_Cost("LP"),
+                "COL_2_HEAT_UTIL": self.sim.Get_Utility_Cost("LP"),
+                "COL_1_COOL_UTIL": self.sim.Get_Utility_Cost("REFRIG4"),
+                "COL_2_COOL_UTIL": self.sim.Get_Utility_Cost("REFRIG1"),
+                "COL_1_REBOILER_DUTY": self.sim.BLK_RADFRAC_Get_ReboilerDuty("RADFRAC1"),
+                "COL_2_REBOILER_DUTY": self.sim.BLK_RADFRAC_Get_ReboilerDuty("RADFRAC2"),
+                "ACETYLENE_PURITY": self.sim.get_acetylene_purity("B1"),
+                "VC_PURITY": self.sim.get_vc_purity("D2"),
+            }
+            
+            self.close_simulation()
+            return results
+        except Exception as e:
+            print(f"Error during Aspen simulation: {e}")
+            # Return penalty values for objectives and constraints
+            return {
+                "COL_1_DIAM": 1e6,  # Large penalty values
+                "COL_2_DIAM": 1e6,
+                "COL_1_HEIGHT": 1e6,
+                "COL_2_HEIGHT": 1e6,
+                "COL_1_HEAT_UTIL": 1e6,
+                "COL_2_HEAT_UTIL": 1e6,
+                "COL_1_COOL_UTIL": 1e6,
+                "COL_2_COOL_UTIL": 1e6,
+                "COL_1_REBOILER_DUTY": 1e6,
+                "COL_2_REBOILER_DUTY": 1e6,
+                "ACETYLENE_PURITY": 0.5,  # Invalid purity values
+                "VC_PURITY": 0.5,
+            }
     
     def costFunc(self, results):
         tac = self.calc_tac(results)
@@ -178,43 +192,38 @@ class VCDistillation(AspenSim):
         )
         node = self.sim.AspenSimulation.Tree.FindNode(path)
         node.Value = new_value
-
-
-
-    def set_sectioncs2_value(self, blockname: str, new_value):
+        
+    def set_sectioncs2_value(self, blockname: str, new_start, new_end):
         """
-        Set the INT‑1 → CS‑2 section value under Column Internals for the given block.
+        Set the INT‑1 → CS‑2 ‘start stage’ value (CA_STAGE1) and CS-2 'end stage' value (CA_STAGE2) under Column Internals for the given block.
+        This method also checks to make sure start stage is less than end stage and protects against invalid values.
         """
-        path = (
-            f"\\Data\\Blocks\\{blockname}"
-            "\\Subobjects\\Column Internals\\INT-1"
-            "\\Subobjects\\Sections\\CS-2"
-            "\\Input\\CA_STAGE2\\INT-1\\CS-2"
-        )
-        node = self.sim.AspenSimulation.Tree.FindNode(path)
-        node.Value = new_value
-
-
-    def set_sectioncs2_value_start(self, blockname: str, new_value):
-        """
-        Set the INT‑1 → CS‑2 ‘start stage’ value (CA_STAGE1) 
-        under Column Internals for the given block.
-        """
-        path = (
+        start_path = (
             f"\\Data\\Blocks\\{blockname}"
             "\\Subobjects\\Column Internals\\INT-1"
             "\\Subobjects\\Sections\\CS-2"
             "\\Input\\CA_STAGE1\\INT-1\\CS-2"
         )
-        node = self.sim.AspenSimulation.Tree.FindNode(path)
-        node.Value = new_value
-
-
         
-      
+        end_path = (
+            f"\\Data\\Blocks\\{blockname}"
+            "\\Subobjects\\Column Internals\\INT-1"
+            "\\Subobjects\\Sections\\CS-2"
+            "\\Input\\CA_STAGE2\\INT-1\\CS-2"
+        )
+        start_node = self.sim.AspenSimulation.Tree.FindNode(start_path)
+        end_node = self.sim.AspenSimulation.Tree.FindNode(end_path)
+        
+        if (new_end < start_node.Value): #if the new end is less than the prev start, then change the start first
+            start_node.Value = new_start
+            end_node.Value = new_end
+        else:
+            end_node.Value = new_end
+            start_node.Value = new_start
+
+
     def run_obj(self, x):
         res = self.runSim(x)
-        print("Results:", res)
         return self.costFunc(res)     
     
 
@@ -270,14 +279,15 @@ def main():
                           wdpath="../Vinyl_Distillation", 
                           visibility=False)
     
-    #? The order of the paremeters in the dicitonary is as follows:
+    #? The order of the paremeters in the dictionary is as follows:
     #? [number of stages, [feed stage, feed stream name], reflux ratio, distillate to feed ratio]
     # these values are based off the ranges give in the paper
     
     x = {
-        'RadFrac': {'RADFRAC1': [32, [15,'FEED'], 1.0, 0.47],
-                     'RADFRAC2': [39, [17,'B1'], 1.0, 0.9]},
+        'RadFrac': {'RADFRAC1': [32.85437159720812, [32.51295556835407, 'FEED'], 1.14998209356873, 0.4489752914540106],
+                     'RADFRAC2': [44.77891153287981, [34.44278350177228,'B1'], 1.3823604710569735, 0.7064783109609141]},
     }
+
     
     a = {
         'RadFrac': {'RADFRAC1': [39, [19,'FEED'], 0.7140, 0.4620],
@@ -294,8 +304,13 @@ def main():
                      'RADFRAC2': [41, [9,'B1'], 0.3903, 0.8930]},
     }
     
+    d = {
+        'RadFrac': {'RADFRAC1': [38, [23,'FEED'], 0.6915, 0.4623],
+                     'RADFRAC2': [40, [27,'B1'], 0.3248, 0.9023]},
+    }
     
-    res = assSim.run_obj(a)
+    res = assSim.run_obj(d)
+    
     print("TAC:", res[2])
     print("CO2 Emission:", res[3])
     

@@ -10,10 +10,6 @@ import numpy as np
 from pymoo.optimize import minimize
 from pymoo.core.problem import ElementwiseProblem
 from pymoo.algorithms.moo.nsga3 import NSGA3
-from pymoo.operators.sampling.lhs import LHS
-from pymoo.operators.crossover.sbx import SBX
-from pymoo.operators.mutation.pm import PM
-from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.util.ref_dirs import get_reference_directions
 import time  # Import the time module
 import pandas as pd  # Import pandas for saving results to Excel
@@ -47,17 +43,14 @@ class AspenProblem(ElementwiseProblem):
         # Objectives        
         cost = self.assSim.costFunc(results)
         
-        # Normalize objectives
-        normalized_tac = cost[2] / 1e6  # Normalize TAC to the range of millions
-        normalized_co2 = cost[3] / 1e4  # Normalize CO2 emissions to the range of thousands
-        
         # Constraints
         acetylene_purity = results["ACETYLENE_PURITY"]
         vinyl_chloride_purity = results["VC_PURITY"]
         g1 = acetylene_purity - 0.00005  # Ensure acetylene purity < 0.005
         g2 = 0.9999 - vinyl_chloride_purity  # Ensure vinyl chloride purity > 0.99
     
-        out["F"] = np.array([normalized_tac, normalized_co2])  # Use normalized objectives
+        
+        out["F"] = np.array([cost[2], cost[3]])  # Add penalty to TAC
         out["G"] = np.array([g1, g2])
     
 def main():
@@ -67,25 +60,16 @@ def main():
                              visibility=False)
     
     problem = AspenProblem(assSim)
-    ref_dirs = get_reference_directions("das-dennis", 2, n_partitions=30)  # Use pymoo's ref_dirs
-    pop_size = len(ref_dirs)
-    n_gen = 30
-    algorithm = NSGA3(
-        pop_size=len(ref_dirs),               # match ref_dirs for full coverage
-        ref_dirs=ref_dirs,
-        sampling=LHS(),                       # better initial diversity
-        crossover=SBX(prob=0.9, eta=15),
-        mutation=PM(prob=0.3, eta=5),         # stronger mutation = more exploration
-        eliminate_duplicates=True
-        )
-    #algorithm = NSGA2(pop_size=pop_size)
+    #ref_dirs = get_reference_directions("das-dennis", 2, n_partitions=10)  # Use pymoo's ref_dirs
+    algorithm = NSGA3(pop_size=15)
     
     start_time = time.time()
     res = minimize(problem,
                    algorithm,
-                   ('n_gen', n_gen),
+                   ('n_gen', 20),
                    verbose=True,
                    save_history=True)
+    
     
     end_time = time.time()
     
@@ -128,10 +112,11 @@ def main():
                 "CO2 Emissions (Objective 2)": F[i, 1]
             })
     
-    pickle_filename = f"{pop_size}pop_{n_gen}gen+.pkl"  # Update filename to reflect population and generations
+    pickle_filename = f"data_100gen"
     with open(pickle_filename, "wb") as f:
         pickle.dump(all_generations_data, f)
     print(f"All generations data saved to '{pickle_filename}'.")
-    
+
+
 if __name__ == "__main__":
     main()

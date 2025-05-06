@@ -3174,8 +3174,9 @@ class Simulation():
         Qr = self.BLK_RADFRAC_Get_Reboiler_HeatDuty(blockname) * 0.00419 #convert cal/sec to kW
         Qc = self.BLK_RADFRAC_Get_Condenser_HeatingDuty(blockname) * 0.00419 #convert cal/sec to kW
         Uc = 0.852 #kW / (m^2 * K)
+        Ur = 0.568 #kW / (m^2 * K)
         
-        Ar = abs(Qr / (Uc * delta_T_hot))
+        Ar = abs(Qr / (Ur * delta_T_hot))
         Ac = abs(Qc / (Uc * delta_T_cool))
                 
         c = 7296 * (Ar**0.65 + Ac**0.65) 
@@ -3183,7 +3184,11 @@ class Simulation():
         return c
 
     def get_delta_T(self, blockname:str, utilityname: str) -> float:
-        Tc = self.get_condensation_temp(blockname)
+        if (utilityname == 'LP'):
+            Tc = self.get_reboiler_temp(blockname)
+        else:
+            Tc = self.get_condensation_temp(blockname)
+            
         Tin = self.get_inlet_temp(utilityname)
         Tout = self.get_outlet_temp(utilityname)
 
