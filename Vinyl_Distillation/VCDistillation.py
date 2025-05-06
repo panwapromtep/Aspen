@@ -226,7 +226,7 @@ class VinylDistillationNNProblem(Problem):
         # Set vectorized=True so that _evaluate receives a matrix of solutions.
         super().__init__(n_var=8, n_obj=2, n_ieq_constr = 2,xl=[-1]*8, xu=[1]*8, vectorized=True)
         self.model = model
-        thresholds = scaler.transform(torch.tensor([0.0005, 0.9999], dtype=torch.float32)).numpy()
+        thresholds = scaler.transform(torch.tensor([0.00005, 0.9999], dtype=torch.float32)).numpy()
         acetyl_threshold, vc_threshold = thresholds[0], thresholds[1]
         print("acetyl_threshold", acetyl_threshold)
         print("vc_threshold", vc_threshold)
